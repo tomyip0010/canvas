@@ -16,7 +16,7 @@ abc
   * Rounded rectangle
   * Ellipse (**draw-ellipse.js**)
   * Circle (**draw-circle.js**; can be merged into Ellipse as the event when shift key is down)
-  * Triangle (**draw-triangle.js**>)
+  * Triangle (**draw-triangle.js**)
   * Polygon
 3. Textbox
 4. Color picker (ref: https://www.webdesignerdepot.com/2013/03/how-to-create-a-color-picker-with-html5-canvas/)
