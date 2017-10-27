@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+        <link href="style/style.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <div class="canvas-container">
+            <canvas id="canvas-draft" class="canvas" width='640' height='480'></canvas>
+            <canvas id="canvas-real" class="canvas" width='640' height='480'>Your browser does not support canvas.</canvas>
+        </div>
+        <div class="feature-group">
+            <button id="btn-straight-line" type="button">Straight Line</button>
+            <button id="btn-circle" type="button">Circle</button>
+            <button id="btn-ellipse" type="button">Ellipse</button>
+        </div>
+        <div class="option-group">
+            <div class="strokewidth">
+                Stroke width: 
+                <input name="strokewidth" type="number" min="0" max="100" step="0.1" value="1">
+            </div>
+            <div class="strokedash">
+                Stroke dash: 
+                <button type="button">Solid</button>
+                <button type="button">Dash</button>
+            </div>
+            <div class="colorstroke">
+                Stroke color: 
+                <button type="button" value="black" style="background: black;"></button>
+                <button type="button" value="white" style="background: white;"></button>
+                <button type="button" value="red" style="background: red;"></button>
+                <button type="button" value="yellow" style="background: yellow;"></button> 
+                <button type="button" value="blue" style="background: blue;"></button>
+            </div>
+            <div class="colorfill">
+                Fill color: 
+                <button type="button" value="black" style="background: black;"></button>
+                <button type="button" value="white" style="background: white;"></button>
+                <button type="button" value="red" style="background: red;"></button>
+                <button type="button" value="yellow" style="background: yellow;"></button> 
+                <button type="button" value="blue" style="background: blue;"></button>
+            </div>
+        </div>
+
+        <script src="js/canvas-common.js"></script>
+        
+        <script src="js/draw-straight-line.js"></script>
+        <script src="js/draw-circle.js"></script>
+        <script src="js/draw-ellipse.js"></script>
+        
+        <script>
+            $(function(){
+
+                //Stroke width selection
+                let strokeWidth = 1;
+                $('.strokewidth input').change(function(){
+                    strokeWidth = $(this).val();
+                    currentFunction.changeStrokeWidth(strokeWidth);
+                })
+
+                // Stroke dash
+                let strokeDash = [];
+                $('.strokedash button').click(function(){
+                    strokeDash = $(this).val();
+                    currentFunction.changeStrokeDash(strokeDash);
+                })
+
+                // Color selection
+                let colorStroke = "black"
+                $('.colorstroke button').click(function(){
+                    colorStroke = $(this).val();
+                    currentFunction.changeStrokeColor(colorStroke);
+                })
+                let colorFill = "white";
+                $('.colorfill button').click(function(){
+                    colorfill = $(this).val();
+                    currentFunction.changeFillColor(colorfill);
+                })
+                
+
+                // Default feature
+                currentFunction = new DrawStraightLine(contextReal, contextDraft, colorStroke, strokeWidth, strokeDash);
+
+                // Feature selection
+                $('#btn-straight-line').click(function(){
+                    currentFunction = new DrawStraightLine(contextReal, contextDraft, colorStroke, strokeWidth, strokeDash);
+                })
+                $('#btn-circle').click(function(){
+                    currentFunction = new DrawCircle(contextReal, contextDraft);
+                })
+                $('#btn-ellipse').click(function(){
+                    currentFunction = new DrawEllipse(contextReal, contextDraft, colorStroke, colorFill);
+                })
+
+            })
+            
+        </script>
+
+    </body>
+
+</html>
+
