@@ -1,14 +1,19 @@
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 
 <canvas style="position: absolute" id="canvas-real" class="canvas" width='1366px' height='768px'></canvas>
+<!-- new added guide canvas -->
+<canvas style="position: absolute" id="canvas-guide" class="canvas" width='1366px' height='768px'></canvas>
 <canvas style="position: absolute" id="canvas-draft" class="canvas" width='1366px' height='768px'></canvas>
 
 <script src="js/canvas-common.js"></script>
 
 <script src="js/draw-straight-line.js"></script>
+<script src="js/draw-curve.js"></script>
 <script src="js/draw-circle.js"></script>
 <script src="js/draw-ellipse.js"></script>
+<script src="js/draw-triangle.js"></script>
+<script src="js/draw-polygon.js"></script>
 
 <script>    
-    currentFunction = new DrawEllipse(contextReal, contextDraft);
+    currentFunction = new DrawPolygon(contextReal, contextDraft);
 </script>
