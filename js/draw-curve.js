@@ -42,6 +42,8 @@ class DrawCurve extends PaintFunction {
             this.index ++;
         } else if (this.index === 2) {
             this.drawCurve(coord[0], coord[1], this.contextReal);
+            //Add the following code when you draw on canvas real for undo
+            saveCanvas();
             this.index = 0;
         }
     }

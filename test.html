@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+        <link href="style/style.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <div class="canvas-container">
+            <canvas style="position: absolute" id="canvas-guide" class="canvas" width='640' height='480'></canvas>
+            <canvas style="border: 0;" id="canvas-draft" class="canvas" width='640' height='480'></canvas>
+            <canvas id="canvas-real" class="canvas" width='640' height='480'>Your browser does not support canvas.</canvas>
+        </div>
+        <div class="undo-redo">
+            <button id="undo" type="button">Undo</button>
+            <button id="redo" type="button">Redo</button>
+        </div>
+        <div class="feature-group">
+            <button id="btn-straight-line" type="button">Straight Line</button>
+            <button id="btn-circle" type="button">Circle</button>
+            <button id="btn-ellipse" type="button">Ellipse</button>
+            <button id="btn-curve" type="button">Curve Line</button>
+            <button id="btn-polygon" type="button">Polygon</button>
+            <button id="btn-triangle" type="button">Triangle</button>
+            <button id="btn-text" type="button">Textbox</button>
+        </div>
+        <div class="option-group">
+            <div class="strokewidth">
+                Stroke width: 
+                <input name="strokewidth" type="number" min="0" max="100" step="0.1" value="1">
+            </div>
+            <div class="strokedash">
+                Stroke dash: 
+                <button type="button" value="">Solid</button>
+                <button type="button" value="5,15">Dash</button>
+            </div>
+            <div class="colorstroke">
+                <input class="color" value="rgb(162, 63, 3)" data-colormode="rgb" readonly="" style="background-color: rgb(162, 63, 3); color: rgb(221, 221, 221);">
+                Stroke color: 
+                <button type="button" value="black" style="background: black;"></button>
+                <button type="button" value="white" style="background: white;"></button>
+                <button type="button" value="red" style="background: red;"></button>
+                <button type="button" value="yellow" style="background: yellow;"></button> 
+                <button type="button" value="blue" style="background: blue;"></button>
+            </div>
+            <div class="colorfill">
+                Fill color: 
+                <button type="button" value="black" style="background: black;"></button>
+                <button type="button" value="white" style="background: white;"></button>
+                <button type="button" value="red" style="background: red;"></button>
+                <button type="button" value="yellow" style="background: yellow;"></button> 
+                <button type="button" value="blue" style="background: blue;"></button>
+            </div>
+        </div>
+
+        <script src="js/canvas-common.js"></script>
+        <script src="js/draw-straight-line.js"></script>
+        <script src="js/draw-curve.js"></script>
+        <script src="js/draw-circle.js"></script>
+        <script src="js/draw-ellipse.js"></script>
+        <script src="js/draw-triangle.js"></script>
+        <script src="js/draw-polygon.js"></script>
+        <script src="js/draw-text.js"></script>
+        <script src="js/undo-redo.js"></script>
+        <!--
+        <script src="js/colorpicker/colors.js"></script>
+        <script src="js/colorpicker/colorPicker.js"></script>
+        <script src="js/colorpicker/colorPicker.data.js"></script>
+        <script src="js/colorpicker/jsColorPicker.min.js"></script>
+        -->
+
+        <script>
+            $(function(){
+                /* Color picker
+                jsColorPicker('input.color', {
+                    klass: window.ColorPicker,
+                    input: elm,
+                    patch: elm,
+                    init: function(elm, colors){}, // initialization callback (before colorPicker gets initialized though)
+                    // animationSpeed: 200, will be supported soon
+                    // draggable: true,
+                    multipleInstances: false,
+                    margin: {left: -1, top: 2},
+                    initStyle: 'display: none',
+                    mode: 'hsv-h',
+                    size: 1,
+                    renderCallback: renderCallback
+                    // and all other options from color and colorPicker
+                });*/
+
+                //Stroke width selection
+                let strokeWidth = 1;
+                $('.strokewidth input').change(function(){
+                    strokeWidth = $(this).val();
+                    currentFunction.changeStrokeWidth(strokeWidth);
+                })
+
+                // Stroke dash
+                let strokeDash = [];
+                $('.strokedash button').click(function(){
+                    strokeDash = $(this).val().split(',');
+                    currentFunction.changeStrokeDash(strokeDash);
+                })
+
+                // Color selection
+                let colorStroke = "black"
+                $('.colorstroke button').click(function(){
+                    colorStroke = $(this).val();
+                    currentFunction.changeStrokeColor(colorStroke);
+                })
+                let colorFill = "white";
+                $('.colorfill button').click(function(){
+                    colorfill = $(this).val();
+                    currentFunction.changeFillColor(colorfill);
+                })
+                
+
+                // Default feature
+                currentFunction = new DrawStraightLine(contextReal, contextDraft, colorStroke, strokeWidth, strokeDash);
+
+                // Feature selection
+                $('#btn-straight-line').click(function(){
+                    currentFunction = new DrawStraightLine(contextReal, contextDraft, colorStroke, strokeWidth, strokeDash);
+                })
+                $('#btn-circle').click(function(){
+                    currentFunction = new DrawCircle(contextReal, contextDraft);
+                })
+                $('#btn-ellipse').click(function(){
+                    currentFunction = new DrawEllipse(contextReal, contextDraft, colorStroke, colorFill);
+                })
+                $('#btn-curve').click(function(){
+                    currentFunction = new DrawCurve(contextReal, contextDraft);
+                })
+                $('#btn-polygon').click(function(){
+                    currentFunction = new DrawPolygon(contextReal, contextDraft);
+                })
+                $('#btn-text').click(function(){
+                    currentFunction = new DrawText(contextReal, contextDraft);
+                })
+                $('#btn-triangle').click(function(){
+                    currentFunction = new DrawTriangle(contextReal, contextDraft);
+                })
+
+
+            })
+            
+        </script>
+
+    </body>
+
+</html>
+

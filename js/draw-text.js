@@ -56,6 +56,8 @@ class DrawText extends PaintFunction{
         this.contextReal.textAlign = 'left';
         this.contextReal.font = "14px serif";
         this.contextReal.fillText(txt, x - 4, y - 4);
+        //Add the following code when you draw on canvas real for undo
+        saveCanvas();
     }
 }
 

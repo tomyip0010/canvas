@@ -63,6 +63,8 @@ class DrawCircle extends PaintFunction{
         this.contextReal.arc(this.centerX, this.centerY, this.radius, 0, 2*Math.PI);
         this.contextReal.fill();
         this.contextReal.stroke();
+        //Add the following code when you draw on canvas real for undo
+        saveCanvas();
     }
     onMouseLeave(){}
     onMouseEnter(){}

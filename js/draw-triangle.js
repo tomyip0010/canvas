@@ -36,9 +36,8 @@ class DrawTriangle extends PaintFunction {
             this.contextGuide.setLineDash([15, 10]);
             this.contextGuide.beginPath();
             this.contextGuide.moveTo(this.midX, this.midY);
-            this.contextGuide.lineTo(this.origX, this.origY);
             this.contextGuide.lineTo(mouseX, mouseY);
-            this.contextGuide.closePath();
+            this.contextGuide.lineTo(this.origX, this.origY);
             this.contextGuide.stroke();
             this.contextGuide.moveTo(mouseX, mouseY);
         } else {
@@ -56,6 +55,8 @@ class DrawTriangle extends PaintFunction {
             this.contextDraft.clearRect(0, 0, this.contextDraft.canvas.width, this.contextDraft.canvas.height);
             this.contextReal.beginPath();
             this.draw(this.midX, this.midY, this.contextReal, coord[0], coord[1]);
+            //Add the following code when you draw on canvas real for undo
+            saveCanvas();
             this.index = 0;
         }
     }

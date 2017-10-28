@@ -1,31 +1,26 @@
-//Current undo and redo function only record the canvas real image*******
+//Current undo and redo function only record the canvas real image*******,
 
 let imgArr = [];
-let arrIndex = 1;
-let curIndex;
+let counter = -1;
 
 //default
 saveCanvas();
 
 //Undo
 $('#undo').click(function(e) {
-    curIndex = imgArr.length - arrIndex;
-    if (curIndex > 0) {
-        arrIndex += 1;
+    if (counter > 0) {
         contextDraft.clearRect(0, 0, contextDraft.canvas.width, contextDraft.canvas.height);
-        contextReal.putImageData(imgArr[curIndex - 1], 0,0,0,0,1366,768);
+        counter -= 1;
+        contextReal.putImageData(imgArr[counter], 0,0,0,0,1366,768);
     }
 })
 
 //Redo
 $('#redo').click(function(e) {
-    if(curIndex >= 0) {
-        curIndex = imgArr.length - arrIndex;
-        if (curIndex < imgArr.length - 1) {
-            arrIndex -= 1;
-            contextDraft.clearRect(0, 0, contextDraft.canvas.width, contextDraft.canvas.height);
-            contextReal.putImageData(imgArr[curIndex + 1], 0,0,0,0,1366,768);
-        }
+    if(counter >= 0 && counter < imgArr.length - 1) {         
+        contextDraft.clearRect(0, 0, contextDraft.canvas.width, contextDraft.canvas.height);
+        counter += 1;
+        contextReal.putImageData(imgArr[counter], 0,0,0,0,1366,768);
     }
 })
 
@@ -34,5 +29,13 @@ function saveCanvas() {
     if (imgArr.length >= 20) {
         imgArr.shift();
     } 
-    imgArr.push(contextReal.getImageData(0,0,contextReal.canvas.width, contextReal.canvas.height));
+
+    if (counter != imgArr.length - 1) {
+        imgArr.splice(counter+1);
+        imgArr.push(contextReal.getImageData(0,0,contextReal.canvas.width, contextReal.canvas.height));
+        counter = imgArr.length - 1;
+    } else {
+        imgArr.push(contextReal.getImageData(0,0,contextReal.canvas.width, contextReal.canvas.height));
+        counter = counter + 1;  
+    }
 }

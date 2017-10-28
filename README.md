@@ -18,11 +18,11 @@ abc
   * Circle (**draw-circle.js**; can be merged into Ellipse as the event when shift key is down)
   * Triangle (**draw-triangle.js**)
   * Polygon (**draw-polygon.js**)
-3. Textbox
+3. Textbox (**draw-text.js**)
 4. Color picker (ref: https://www.webdesignerdepot.com/2013/03/how-to-create-a-color-picker-with-html5-canvas/)
 5. Emoji
 6. Import and export
-7. Undo and redo
+7. Undo and redo (**undo-redo.js**)
 
 ### Options
 1. Stroke

@@ -1,14 +1,30 @@
 class DrawStraightLine extends PaintFunction{
-    constructor(contextReal, contextDraft){
+    constructor(contextReal, contextDraft, colorStroke, strokeWidth, strokeDash){
         super();
         this.contextReal = contextReal;
-        this.contextDraft = contextDraft; 
+        this.contextDraft = contextDraft;
+        this.colorStroke = colorStroke;
+        this.strokeWidth = strokeWidth;
+        this.strokeDash = strokeDash;
+    }
+    changeStrokeColor(newStrokeColor) {
+        this.colorStroke = newStrokeColor;
+    }
+    changeStrokeWidth(newStrokeWidth) {
+        this.strokeWidth = newStrokeWidth;
+    }
+    changeStrokeDash(newStrokeDash) {
+        this.strokeDash = newStrokeDash;
     }
     onMouseDown(coord){
         this.origX = coord[0];
         this.origY = coord[1];
-        //this.contextReal.strokeStyle = "red";
-        //this.contextDraft.strokeStyle = "blue";
+        this.contextReal.setLineDash(this.strokeDash);
+        this.contextDraft.setLineDash(this.strokeDash);
+        this.contextReal.lineWidth = this.strokeWidth;
+        this.contextDraft.lineWidth = this.strokeWidth;
+        this.contextReal.strokeStyle = this.colorStroke
+        this.contextDraft.strokeStyle = this.colorStroke;
         this.contextReal.beginPath();
     }
     onDragging(coord){
@@ -24,6 +40,8 @@ class DrawStraightLine extends PaintFunction{
         this.contextDraft.clearRect(0,0,canvasDraft.width,canvasDraft.height);
         this.contextReal.lineTo(coord[0], coord[1]);
         this.contextReal.stroke();
+        //Add the following code when you draw on canvas real for undo
+        saveCanvas();
     }
     onMouseLeave(){}
     onMouseEnter(){}
