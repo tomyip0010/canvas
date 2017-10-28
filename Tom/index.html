@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <button id="undo">Undo</button>
+        <button id="redo">Redo</button>
+        <canvas style="position: absolute" id="canvas-real" class="canvas" width='1366px' height='768px'></canvas>
+        <!-- new added guide canvas -->
+        <canvas style="position: absolute" id="canvas-guide" class="canvas" width='1366px' height='768px'></canvas>
+        <canvas style="position: absolute" id="canvas-draft" class="canvas" width='1366px' height='768px'></canvas>
+        
+        <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+        <script src="js/canvas-common.js"></script>
+        
+        <script src="js/draw-straight-line.js"></script>
+        <script src="js/draw-curve.js"></script>
+        <script src="js/draw-circle.js"></script>
+        <script src="js/draw-ellipse.js"></script>
+        <script src="js/draw-triangle.js"></script>
+        <script src="js/draw-polygon.js"></script>
+        <script src="js/draw-text.js"></script>
+        <script src="js/undo-redo.js"></script>
+        
+        <script>    
+            currentFunction = new DrawPolygon(contextReal, contextDraft);
+        </script>
+</body>
+</html>

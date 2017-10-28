@@ -9,14 +9,9 @@ class DrawCurve extends PaintFunction {
     }
 
     onMouseDown(coord, event) {
-        if(this.index < 1) {
+        if(this.index === 0) {
             this.origX = coord[0];
             this.origY = coord[1];
-            this.index ++;
-        } else {
-            this.ctrlX = coord[0];
-            this.ctrlY = coord[1];
-            this.finish = true;
             this.index ++;
         } 
     }
@@ -25,12 +20,18 @@ class DrawCurve extends PaintFunction {
         if (this.index === 1) {
             this.draw(coord[0],coord[1], this.contextDraft);
         } else if (this.index === 2){
-            this.contextDraft.clearRect(0, 0, this.contextDraft.canvas.width, this.contextDraft.canvas.height);
             this.drawCurve(coord[0], coord[1], this.contextDraft);
         } 
     }
 
-    onMouseMove(coord, event) {
+    onMouseMove(e, sub) {
+        let mouseX = e.pageX - sub.offsetLeft;
+        let mouseY = e.pageY - sub.offsetTop;
+        if (this.index > 1) {
+            this.ctrlX = mouseX;
+            this.ctrlY = mouseY;
+            this.drawCurve(this.ctrlX, this.ctrlY, this.contextDraft);
+        }
     }
 
     onMouseUp(coord, event){
@@ -38,9 +39,8 @@ class DrawCurve extends PaintFunction {
             this.endX = coord[0];
             this.endY = coord[1];
             this.draw(this.endX, this.endY, this.contextDraft);
-            this.curve = true;
+            this.index ++;
         } else if (this.index === 2) {
-            this.contextDraft.clearRect(0, 0, this.contextDraft.canvas.width, this.contextDraft.canvas.height);
             this.drawCurve(coord[0], coord[1], this.contextReal);
             this.index = 0;
         }
@@ -51,7 +51,7 @@ class DrawCurve extends PaintFunction {
     onMouseEnter(){}
 
     draw(x,y,context) {
-        context.clearRect(0, 0, this.contextDraft.canvas.width, this.contextDraft.canvas.height);
+        this.contextDraft.clearRect(0, 0, this.contextDraft.canvas.width, this.contextDraft.canvas.height);
         context.beginPath();
         context.moveTo(this.origX, this.origY);
         context.lineTo(x,y);
@@ -61,6 +61,7 @@ class DrawCurve extends PaintFunction {
     }
 
     drawCurve(x,y, context) {
+        this.contextDraft.clearRect(0, 0, this.contextDraft.canvas.width, this.contextDraft.canvas.height);
         context.beginPath();
         context.moveTo(this.origX, this.origY);
         context.quadraticCurveTo(x, y, this.endX, this.endY);

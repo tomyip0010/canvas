@@ -48,6 +48,8 @@ class DrawPolygon extends PaintFunction {
             this.endY = coord[1];
             this.index ++;
         }
+        //Add the following code when you draw on canvas real for undo
+        saveCanvas();
     }
     
     onMouseLeave(){}

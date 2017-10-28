@@ -6,6 +6,7 @@ let canvasGuide = document.getElementById('canvas-guide');   //new added guide c
 let contextGuide = canvasGuide.getContext('2d');
 let currentFunction;
 let dragging = false;
+let hasInput = false;   //tracking if there is input
 
 $('#canvas-draft').mousedown(function(e){
     let mouseX = e.pageX - this.offsetLeft;
@@ -39,6 +40,13 @@ $('#canvas-draft').mouseenter(function(e){
     let mouseY = e.pageY - this.offsetTop;
     currentFunction.onMouseEnter([mouseX,mouseY],e);
 });
+
+$('body').keydown(function() {         //For text drawing
+    if (hasInput) {
+        var formElement = document.getElementById("text");
+        formElement.addEventListener('keyup', currentFunction.handleEnter);
+    }
+})
 
 class PaintFunction{
     constructor(){}
