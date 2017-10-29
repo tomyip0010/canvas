@@ -29,29 +29,26 @@
         <div class="option-group">
             <div class="strokewidth">
                 Stroke width: 
-                <input name="strokewidth" type="number" min="0" max="100" step="0.1" value="1">
+                <input name="strokewidth" type="number" min="-1" max="100" step="0.1" value="1">
             </div>
             <div class="strokedash">
                 Stroke dash: 
                 <button type="button" value="">Solid</button>
                 <button type="button" value="5,15">Dash</button>
             </div>
+            <div class="brush">
+                Brush (under development):
+                <button type="button" value="round">Round</button>
+                <button type="button" value="thick">Thick</button>
+                <button type="button" value="fur">Fur</button>
+            </div>
             <div class="colorstroke">
-                <input class="color" value="rgb(162, 63, 3)" data-colormode="rgb" readonly="" style="background-color: rgb(162, 63, 3); color: rgb(221, 221, 221);">
                 Stroke color: 
-                <button type="button" value="black" style="background: black;"></button>
-                <button type="button" value="white" style="background: white;"></button>
-                <button type="button" value="red" style="background: red;"></button>
-                <button type="button" value="yellow" style="background: yellow;"></button> 
-                <button type="button" value="blue" style="background: blue;"></button>
+                <input class="color" value="rgb(0, 0, 0)" data-colormode="rgb" readonly="">
             </div>
             <div class="colorfill">
                 Fill color: 
-                <button type="button" value="black" style="background: black;"></button>
-                <button type="button" value="white" style="background: white;"></button>
-                <button type="button" value="red" style="background: red;"></button>
-                <button type="button" value="yellow" style="background: yellow;"></button> 
-                <button type="button" value="blue" style="background: blue;"></button>
+                <input class="color" value="rgb(255, 255, 255)" data-colormode="rgb" readonly="">
             </div>
         </div>
 
@@ -64,31 +61,28 @@
         <script src="js/draw-polygon.js"></script>
         <script src="js/draw-text.js"></script>
         <script src="js/undo-redo.js"></script>
-        <!--
+        
         <script src="js/colorpicker/colors.js"></script>
         <script src="js/colorpicker/colorPicker.js"></script>
         <script src="js/colorpicker/colorPicker.data.js"></script>
         <script src="js/colorpicker/jsColorPicker.min.js"></script>
-        -->
+        
 
         <script>
             $(function(){
-                /* Color picker
-                jsColorPicker('input.color', {
-                    klass: window.ColorPicker,
-                    input: elm,
-                    patch: elm,
-                    init: function(elm, colors){}, // initialization callback (before colorPicker gets initialized though)
-                    // animationSpeed: 200, will be supported soon
-                    // draggable: true,
-                    multipleInstances: false,
-                    margin: {left: -1, top: 2},
-                    initStyle: 'display: none',
-                    mode: 'hsv-h',
-                    size: 1,
-                    renderCallback: renderCallback
-                    // and all other options from color and colorPicker
-                });*/
+
+                // Color picker
+                let colors = jsColorPicker('input.color', {
+                    customBG: '#222',
+                    readOnly: true,
+                    // patch: false,
+                    init: function(elm, colors) { // colors is a different instance (not connected to colorPicker)
+                        elm.style.backgroundColor = elm.value;
+                        elm.style.color = colors.rgbaMixCustom.luminance > 0.22 ? '#222' : '#ddd';
+                    },
+                    // appendTo: document.querySelector('.samples')
+                });
+
 
                 //Stroke width selection
                 let strokeWidth = 1;
@@ -104,25 +98,22 @@
                     currentFunction.changeStrokeDash(strokeDash);
                 })
 
-                // Color selection
-                let colorStroke = "black"
-                $('.colorstroke button').click(function(){
-                    colorStroke = $(this).val();
+                // After option selection
+                let colorStroke = "rgb(0, 0, 0)"
+                let colorFill = "rgb(255, 255, 255)";
+                $(document).click(function(){
+                    colorStroke = $('.colorstroke input').val();
                     currentFunction.changeStrokeColor(colorStroke);
-                })
-                let colorFill = "white";
-                $('.colorfill button').click(function(){
-                    colorfill = $(this).val();
+                    colorfill = $('.colorfill input').val();
                     currentFunction.changeFillColor(colorfill);
                 })
                 
-
                 // Default feature
-                currentFunction = new DrawStraightLine(contextReal, contextDraft, colorStroke, strokeWidth, strokeDash);
+                currentFunction = new DrawStraightLine(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
 
                 // Feature selection
                 $('#btn-straight-line').click(function(){
-                    currentFunction = new DrawStraightLine(contextReal, contextDraft, colorStroke, strokeWidth, strokeDash);
+                    currentFunction = new DrawStraightLine(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
                 })
                 $('#btn-circle').click(function(){
                     currentFunction = new DrawCircle(contextReal, contextDraft);
