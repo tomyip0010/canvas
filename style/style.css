@@ -63,11 +63,12 @@ body {
 
 .canvas-container {
     position: relative;
-    width: fit-content;
+	width: fit-content;
+	border: #888 solid 0.5px;
 }
 
-#canvas-draft {
-    border: #888 solid 0.5px;
+#canvas-draft,
+#canvas-guide {
     position: absolute;
     top: 0;
 }
