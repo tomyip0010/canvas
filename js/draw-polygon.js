@@ -1,13 +1,38 @@
 class DrawPolygon extends PaintFunction {
-    constructor(contextReal,contextDraft) {
+    constructor(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash) {
         super();
         this.contextDraft = contextDraft;
         this.contextReal = contextReal;
+        this.colorStroke = colorStroke;
+        this.colorFill = colorFill;
+        this.strokeWidth = strokeWidth;
+        this.strokeDash = strokeDash;
         this.finish = false;    //tracking if the polygon complete
         this.index = 0;
     }
 
+    changeStrokeColor(newStrokeColor) {
+        this.colorStroke = newStrokeColor;
+    }
+    changeFillColor(newFillColor) { // Added to avoid error
+        this.colorFill = newFillColor;
+    }
+    changeStrokeWidth(newStrokeWidth) {
+        this.strokeWidth = newStrokeWidth;
+    }
+    changeStrokeDash(newStrokeDash) {
+        this.strokeDash = newStrokeDash;
+    }
+
     onMouseDown(coord, event) {
+        this.contextReal.setLineDash(this.strokeDash);
+        this.contextDraft.setLineDash(this.strokeDash);
+        this.contextReal.lineWidth = this.strokeWidth;
+        this.contextDraft.lineWidth = this.strokeWidth;
+        this.contextReal.strokeStyle = this.colorStroke;
+        this.contextDraft.strokeStyle = this.colorStroke;
+        this.contextReal.fillStyle = this.colorFill;
+        this.contextDraft.fillStyle = this.colorFill;
         if (this.index === 0) {
             this.origX = coord[0];
             this.origY = coord[1];
@@ -17,7 +42,7 @@ class DrawPolygon extends PaintFunction {
 
     onDragging(coord, event) {
         if (!(this.finish)) {
-            this.contextDraft.strokeStyle = 'black';   //restore black for draft canvas
+            //this.contextDraft.strokeStyle = 'black';   <-- deactivated
             this.draw(coord[0], coord[1], this.contextDraft);
         }
     }
@@ -66,6 +91,8 @@ class DrawPolygon extends PaintFunction {
         }
         context.lineTo(x, y);
         context.moveTo(this.endX, this.endY);
+        context.closePath();
+        context.fill();
         context.stroke();
     }
 }
