@@ -1,8 +1,21 @@
 class DrawText extends PaintFunction{
-    constructor(contextReal,contextDraft) {
+    constructor(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash) {
         super();
         this.contextDraft = contextDraft;
         this.contextReal = contextReal;
+    }
+
+    changeStrokeColor(newStrokeColor) {
+        this.colorStroke = newStrokeColor;
+    }
+    changeFillColor(newFillColor) { // Added to avoid error
+        this.colorFill = newFillColor;
+    }
+    changeStrokeWidth(newStrokeWidth) { // Added to avoid error
+        this.strokeWidth = newStrokeWidth;
+    }
+    changeStrokeDash(newStrokeDash) { // Added to avoid error
+        this.strokeDash = newStrokeDash;
     }
 
     onMouseDown(coord, event) {
@@ -36,6 +49,7 @@ class DrawText extends PaintFunction{
         input.style.position = 'fixed';
         input.style.left = x + 'px';
         input.style.top = y+ 'px';
+        input.style.color = this.colorStroke;
         
         document.body.appendChild(input);
 
@@ -49,6 +63,7 @@ class DrawText extends PaintFunction{
             document.body.removeChild(this);
             hasInput = false;
         }
+        document.body.style.cursor = "crosshair";
     }
     
     drawText(txt, x, y) {           //drawing the text to real canvas
