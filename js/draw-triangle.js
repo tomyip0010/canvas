@@ -1,15 +1,40 @@
 class DrawTriangle extends PaintFunction {
-    constructor(contextReal,contextDraft) {
+    constructor(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash) {
         super();
         this.contextReal = contextReal;
         this.contextDraft = contextDraft;
         this.contextGuide = contextGuide;
+        this.colorStroke = colorStroke;
+        this.colorFill = colorFill;
+        this.strokeWidth = strokeWidth;
+        this.strokeDash = strokeDash;
         this.index = 0; //index increase on each click
                         //user will first dragging out a baseline
                         //draw triangle at index 2
     }
 
+    changeStrokeColor(newStrokeColor) {
+        this.colorStroke = newStrokeColor;
+    }
+    changeFillColor(newFillColor) {
+        this.colorFill = newFillColor;
+    }
+    changeStrokeWidth(newStrokeWidth) {
+        this.strokeWidth = newStrokeWidth;
+    }
+    changeStrokeDash(newStrokeDash) {
+        this.strokeDash = newStrokeDash;
+    }
+
     onMouseDown(coord, event) {
+        this.contextReal.setLineDash(this.strokeDash);
+        this.contextDraft.setLineDash(this.strokeDash);
+        this.contextReal.lineWidth = this.strokeWidth;
+        this.contextDraft.lineWidth = this.strokeWidth;
+        this.contextReal.strokeStyle = this.colorStroke;
+        this.contextDraft.strokeStyle = this.colorStroke;
+        this.contextReal.fillStyle = this.colorFill;
+        this.contextDraft.fillStyle = this.colorFill;
         if (this.index === 0) {
             this.origX = coord[0];
             this.origY = coord[1];
@@ -71,6 +96,7 @@ class DrawTriangle extends PaintFunction {
             context.lineTo(x,y);
             context.moveTo(x,y);
             context.stroke();
+            context.fill();
         } else if (this.index > 1) {  //To complete the whole triangle
             context.beginPath();
             context.moveTo(this.origX, this.origY);
@@ -79,6 +105,7 @@ class DrawTriangle extends PaintFunction {
             context.closePath();
             context.moveTo(a,b);
             context.stroke();
+            context.fill();
         }
     }
 }

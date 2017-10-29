@@ -9,8 +9,8 @@
 
     <body>
         <div class="canvas-container">
-            <canvas style="position: absolute" id="canvas-guide" class="canvas" width='640' height='480'></canvas>
-            <canvas style="border: 0;" id="canvas-draft" class="canvas" width='640' height='480'></canvas>
+            <canvas id="canvas-guide" class="canvas" width='640' height='480'></canvas>
+            <canvas id="canvas-draft" class="canvas" width='640' height='480'></canvas>
             <canvas id="canvas-real" class="canvas" width='640' height='480'>Your browser does not support canvas.</canvas>
         </div>
         <div class="undo-redo">
@@ -19,7 +19,6 @@
         </div>
         <div class="feature-group">
             <button id="btn-straight-line" type="button">Straight Line</button>
-            <button id="btn-circle" type="button">Circle</button>
             <button id="btn-ellipse" type="button">Ellipse</button>
             <button id="btn-curve" type="button">Curve Line</button>
             <button id="btn-polygon" type="button">Polygon</button>
@@ -29,12 +28,12 @@
         <div class="option-group">
             <div class="strokewidth">
                 Stroke width: 
-                <input name="strokewidth" type="number" min="-1" max="100" step="0.1" value="1">
+                <input name="strokewidth" type="number" min="0" max="100" step="0.5" value="1">
             </div>
             <div class="strokedash">
                 Stroke dash: 
                 <button type="button" value="">Solid</button>
-                <button type="button" value="5,15">Dash</button>
+                <button type="button" value="5,5">Dash</button>
             </div>
             <div class="brush">
                 Brush (under development):
@@ -50,12 +49,15 @@
                 Fill color: 
                 <input class="color" value="rgb(255, 255, 255)" data-colormode="rgb" readonly="">
             </div>
+            <div class="colorbackground">
+                Background color: 
+                <input class="color" value="rgb(255, 255, 255)" data-colormode="rgb" readonly="">
+            </div>
         </div>
 
         <script src="js/canvas-common.js"></script>
         <script src="js/draw-straight-line.js"></script>
         <script src="js/draw-curve.js"></script>
-        <script src="js/draw-circle.js"></script>
         <script src="js/draw-ellipse.js"></script>
         <script src="js/draw-triangle.js"></script>
         <script src="js/draw-polygon.js"></script>
@@ -102,36 +104,39 @@
                 let colorStroke = "rgb(0, 0, 0)"
                 let colorFill = "rgb(255, 255, 255)";
                 $(document).click(function(){
+                    // Stroke
                     colorStroke = $('.colorstroke input').val();
                     currentFunction.changeStrokeColor(colorStroke);
+                    // Fill
                     colorfill = $('.colorfill input').val();
                     currentFunction.changeFillColor(colorfill);
+                    // Background
+                    $('#canvas-real').css({
+                        'background': $('.colorbackground input').val()
+                    })
                 })
                 
-                // Default feature
+                // Default feature: should be pencil
                 currentFunction = new DrawStraightLine(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
 
                 // Feature selection
                 $('#btn-straight-line').click(function(){
                     currentFunction = new DrawStraightLine(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
                 })
-                $('#btn-circle').click(function(){
-                    currentFunction = new DrawCircle(contextReal, contextDraft);
-                })
                 $('#btn-ellipse').click(function(){
-                    currentFunction = new DrawEllipse(contextReal, contextDraft, colorStroke, colorFill);
+                    currentFunction = new DrawEllipse(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
                 })
                 $('#btn-curve').click(function(){
-                    currentFunction = new DrawCurve(contextReal, contextDraft);
+                    currentFunction = new DrawCurve(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
                 })
                 $('#btn-polygon').click(function(){
-                    currentFunction = new DrawPolygon(contextReal, contextDraft);
+                    currentFunction = new DrawPolygon(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
                 })
                 $('#btn-text').click(function(){
-                    currentFunction = new DrawText(contextReal, contextDraft);
+                    currentFunction = new DrawText(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
                 })
                 $('#btn-triangle').click(function(){
-                    currentFunction = new DrawTriangle(contextReal, contextDraft);
+                    currentFunction = new DrawTriangle(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
                 })
 
 

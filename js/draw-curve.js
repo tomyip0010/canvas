@@ -1,14 +1,36 @@
 class DrawCurve extends PaintFunction {
-    constructor(contextReal,contextDraft) {
+    constructor(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash) {
         super();
         this.contextReal = contextReal;
-        this.contextDraft = contextDraft;     
+        this.contextDraft = contextDraft;
+        this.colorStroke = colorStroke;
+        this.strokeWidth = strokeWidth;
+        this.strokeDash = strokeDash;     
         this.index = 0; //index increase on each click
                         //user will define the curvature at index 2
                         //draw new line at index 3 
     }
 
+    changeStrokeColor(newStrokeColor) {
+        this.colorStroke = newStrokeColor;
+    }
+    changeFillColor(newFillColor) { // Added to avoid error
+        this.colorFill = newFillColor;
+    }
+    changeStrokeWidth(newStrokeWidth) {
+        this.strokeWidth = newStrokeWidth;
+    }
+    changeStrokeDash(newStrokeDash) {
+        this.strokeDash = newStrokeDash;
+    }
+
     onMouseDown(coord, event) {
+        this.contextReal.setLineDash(this.strokeDash);
+        this.contextDraft.setLineDash(this.strokeDash);
+        this.contextReal.lineWidth = this.strokeWidth;
+        this.contextDraft.lineWidth = this.strokeWidth;
+        this.contextReal.strokeStyle = this.colorStroke
+        this.contextDraft.strokeStyle = this.colorStroke;
         if(this.index === 0) {
             this.origX = coord[0];
             this.origY = coord[1];

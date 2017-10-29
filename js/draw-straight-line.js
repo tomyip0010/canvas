@@ -1,5 +1,5 @@
 class DrawStraightLine extends PaintFunction{
-    constructor(contextReal, contextDraft, colorStroke, strokeWidth, strokeDash){
+    constructor(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash){
         super();
         this.contextReal = contextReal;
         this.contextDraft = contextDraft;
@@ -9,6 +9,9 @@ class DrawStraightLine extends PaintFunction{
     }
     changeStrokeColor(newStrokeColor) {
         this.colorStroke = newStrokeColor;
+    }
+    changeFillColor(newFillColor) { // Added to avoid error
+        this.colorFill = newFillColor;
     }
     changeStrokeWidth(newStrokeWidth) {
         this.strokeWidth = newStrokeWidth;
