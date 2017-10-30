@@ -2,165 +2,191 @@
 
 <html>
 
-    <head>
-        <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-        <link href="style/style.css" rel="stylesheet">
-    </head>
+<head>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <link href="style/style.css" rel="stylesheet">
+</head>
 
-    <body>
-        <div class="canvas-container">
-            <canvas id="canvas-guide" class="canvas" width='640' height='480'></canvas>
-            <canvas id="canvas-draft" class="canvas" width='640' height='480'></canvas>
-            <canvas id="canvas-real" class="canvas" width='640' height='480'>Your browser does not support canvas.</canvas>
+<body>
+    <div class="canvas-container">
+        <canvas id="canvas-guide" class="canvas" width='640' height='480'></canvas>
+        <canvas id="canvas-draft" class="canvas" width='640' height='480'></canvas>
+        <canvas id="canvas-real" class="canvas" width='640' height='480'>Your browser does not support canvas.</canvas>
+    </div>
+    <div class="undo-redo">
+        <button id="undo" type="button">Undo</button>
+        <button id="redo" type="button">Redo</button>
+    </div>
+    <div class="feature-group">
+        <button id="btn-straight-line" type="button">Straight Line</button>
+        <button id="btn-ellipse" type="button">Ellipse</button>
+        <button id="btn-curve" type="button">Curve Line</button>
+        <button id="btn-polygon" type="button">Polygon</button>
+        <button id="btn-triangle" type="button">Triangle</button>
+        <button id="btn-text" type="button">Textbox</button>
+        <button id="btn-getcolor" type="button">Get color</button>
+        <button id="btn-rectangle" type="button">Rectangle</button>
+        <button id="btn-roundedRect" type="button">Rounded Rectangle</button>
+
+    </div>
+    <div class="option-group">
+        <div class="strokewidth">
+            Stroke width:
+            <input name="strokewidth" type="number" min="0" max="100" step="0.5" value="1">
         </div>
-        <div class="undo-redo">
-            <button id="undo" type="button">Undo</button>
-            <button id="redo" type="button">Redo</button>
+        <div class="strokedash">
+            Stroke dash:
+            <button type="button" value="">Solid</button>
+            <button type="button" value="5,5">Dash</button>
         </div>
-        <div class="feature-group">
-            <button id="btn-straight-line" type="button">Straight Line</button>
-            <button id="btn-ellipse" type="button">Ellipse</button>
-            <button id="btn-curve" type="button">Curve Line</button>
-            <button id="btn-polygon" type="button">Polygon</button>
-            <button id="btn-triangle" type="button">Triangle</button>
-            <button id="btn-text" type="button">Textbox</button>
-            <button id="btn-getcolor" type="button">Get color</button>
+        <div class="brush">
+            Brush (under development):
+            <button type="button" value="round">Round</button>
+            <button type="button" value="thick">Thick</button>
+            <button type="button" value="fur">Fur</button>
         </div>
-        <div class="option-group">
-            <div class="strokewidth">
-                Stroke width: 
-                <input name="strokewidth" type="number" min="0" max="100" step="0.5" value="1">
-            </div>
-            <div class="strokedash">
-                Stroke dash: 
-                <button type="button" value="">Solid</button>
-                <button type="button" value="5,5">Dash</button>
-            </div>
-            <div class="brush">
-                Brush (under development):
-                <button type="button" value="round">Round</button>
-                <button type="button" value="thick">Thick</button>
-                <button type="button" value="fur">Fur</button>
-            </div>
-            <div class="colorstroke">
-                Stroke color: 
-                <input class="color" value="rgb(0, 0, 0)" data-colormode="rgb" readonly="">
-            </div>
-            <div class="colorfill">
-                Fill color: 
-                <input class="color" value="rgb(255, 255, 255)" data-colormode="rgb" readonly="">
-            </div>
-            <div class="colorbackground">
-                Background color: 
-                <input class="color" value="rgb(255, 255, 255)" data-colormode="rgb" readonly="">
-            </div>
+        <div class="colorstroke">
+            Stroke color:
+            <input class="color" value="rgb(0, 0, 0)" data-colormode="rgb" readonly="">
         </div>
+        <div class="colorfill">
+            Fill color:
+            <input class="color" value="rgb(255, 255, 255)" data-colormode="rgb" readonly="">
+        </div>
+        <div class="colorbackground">
+            Background color:
+            <input class="color" value="rgb(255, 255, 255)" data-colormode="rgb" readonly="">
+        </div>
+    </div>
 
-        <script src="js/canvas-common.js"></script>
-        <script src="js/draw-straight-line.js"></script>
-        <script src="js/draw-curve.js"></script>
-        <script src="js/draw-ellipse.js"></script>
-        <script src="js/draw-triangle.js"></script>
-        <script src="js/draw-polygon.js"></script>
-        <script src="js/draw-text.js"></script>
-        <script src="js/undo-redo.js"></script>
-        <script src="js/get-color.js"></script>
-        
-        <script src="js/colorpicker/colors.js"></script>
-        <script src="js/colorpicker/colorPicker.js"></script>
-        <script src="js/colorpicker/colorPicker.data.js"></script>
-        <script src="js/colorpicker/jsColorPicker.min.js"></script>
-        
+    <script src="js/canvas-common.js"></script>
+    <script src="js/draw-straight-line.js"></script>
+    <script src="js/draw-curve.js"></script>
+    <script src="js/draw-ellipse.js"></script>
+    <script src="js/draw-triangle.js"></script>
+    <script src="js/draw-polygon.js"></script>
+    <script src="js/draw-text.js"></script>
+    <script src="js/draw-rectangle.js"></script>
+    <script src="js/draw-roundedRect.js"></script>
+    <script src="js/undo-redo.js"></script>
+    <script src="js/get-color.js"></script>
 
-        <script>
-            $(function(){
-
-                // Color picker
-                let colors = jsColorPicker('input.color', {
-                    customBG: '#222',
-                    readOnly: true,
-                    // patch: false,
-                    init: function(elm, colors) { // colors is a different instance (not connected to colorPicker)
-                        elm.style.backgroundColor = elm.value;
-                        elm.style.color = colors.rgbaMixCustom.luminance > 0.22 ? '#222' : '#ddd';
-                    },
-                    // appendTo: document.querySelector('.samples')
-                });
+    <script src="js/colorpicker/colors.js"></script>
+    <script src="js/colorpicker/colorPicker.js"></script>
+    <script src="js/colorpicker/colorPicker.data.js"></script>
+    <script src="js/colorpicker/jsColorPicker.min.js"></script>
 
 
-                //Stroke width selection
-                let strokeWidth = 1;
-                $('.strokewidth input').change(function(){
-                    strokeWidth = $(this).val();
-                    currentFunction.changeStrokeWidth(strokeWidth);
-                })
+    <script>
+        $(function () {
 
-                // Stroke dash
-                let strokeDash = [];
-                $('.strokedash button').click(function(){
-                    strokeDash = $(this).val().split(',');
-                    currentFunction.changeStrokeDash(strokeDash);
-                })
-
-                // After option selection
-                let colorStroke = "rgb(0, 0, 0)"
-                let colorFill = "rgb(255, 255, 255)";
-                $(document).click(function(){
-                    // Stroke
-                    colorStroke = $('.colorstroke input').val();
-                    currentFunction.changeStrokeColor(colorStroke);
-                    // Fill
-                    colorfill = $('.colorfill input').val();
-                    currentFunction.changeFillColor(colorfill);
-                    // Background
-                    $('#canvas-real').css({
-                        'background': $('.colorbackground input').val()
-                    })
-                })
-
-                // Change field to either stroke or fill for get color function
-                $('.colorstroke input').click(function(){
-                    currentFunction.changeField('stroke');
-                });
-                $('.colorfill input').click(function(){
-                    currentFunction.changeField('fill');
-                });
-                $('.colorbackground input').click(function(){
-                    currentFunction.changeField('background');
-                });
-                
-                // Default feature: should be pencil
-                currentFunction = new DrawStraightLine(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
-
-                // Feature selection
-                $('#btn-straight-line').click(function(){
-                    currentFunction = new DrawStraightLine(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
-                })
-                $('#btn-ellipse').click(function(){
-                    currentFunction = new DrawEllipse(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
-                })
-                $('#btn-curve').click(function(){
-                    currentFunction = new DrawCurve(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
-                })
-                $('#btn-polygon').click(function(){
-                    currentFunction = new DrawPolygon(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
-                })
-                $('#btn-text').click(function(){
-                    currentFunction = new DrawText(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
-                })
-                $('#btn-triangle').click(function(){
-                    currentFunction = new DrawTriangle(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
-                })
-                $('#btn-getcolor').click(function(){
-                    currentFunction = new GetColor(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
-                })
+            // Color picker
+            let colors = jsColorPicker('input.color', {
+                customBG: '#222',
+                readOnly: true,
+                // patch: false,
+                init: function (elm, colors) { // colors is a different instance (not connected to colorPicker)
+                    elm.style.backgroundColor = elm.value;
+                    elm.style.color = colors.rgbaMixCustom.luminance > 0.22 ? '#222' : '#ddd';
+                },
+                // appendTo: document.querySelector('.samples')
+            });
 
 
+            //Stroke width selection
+            let strokeWidth = 1;
+            $('.strokewidth input').change(function () {
+                strokeWidth = $(this).val();
+                currentFunction.changeStrokeWidth(strokeWidth);
             })
-            
-        </script>
 
-    </body>
+            // Stroke dash
+            let strokeDash = [];
+            $('.strokedash button').click(function () {
+                strokeDash = $(this).val().split(',');
+                currentFunction.changeStrokeDash(strokeDash);
+            })
+
+            // After option selection
+            let colorStroke = "rgb(0, 0, 0)"
+            let colorFill = "rgb(255, 255, 255)";
+            $(document).click(function () {
+                // Stroke
+                colorStroke = $('.colorstroke input').val();
+                currentFunction.changeStrokeColor(colorStroke);
+                // Fill
+                colorfill = $('.colorfill input').val();
+                currentFunction.changeFillColor(colorfill);
+                // Background
+                $('#canvas-real').css({
+                    'background': $('.colorbackground input').val()
+                })
+            })
+
+            // After option selection
+            let colorStroke = "rgb(0, 0, 0)"
+            let colorFill = "rgb(255, 255, 255)";
+            $(document).click(function(){
+                // Stroke
+                colorStroke = $('.colorstroke input').val();
+                currentFunction.changeStrokeColor(colorStroke);
+                // Fill
+                colorfill = $('.colorfill input').val();
+                currentFunction.changeFillColor(colorfill);
+                // Background
+                $('#canvas-real').css({
+                    'background': $('.colorbackground input').val()
+                })
+            })
+
+            // Change field to either stroke or fill for get color function
+            $('.colorstroke input').click(function(){
+                currentFunction.changeField('stroke');
+            });
+            $('.colorfill input').click(function(){
+                currentFunction.changeField('fill');
+            });
+            $('.colorbackground input').click(function(){
+                currentFunction.changeField('background');
+            });
+            
+            // Default feature: should be pencil
+            currentFunction = new DrawStraightLine(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+
+            // Feature selection
+            $('#btn-straight-line').click(function () {
+                currentFunction = new DrawStraightLine(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+            $('#btn-ellipse').click(function () {
+                currentFunction = new DrawEllipse(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+            $('#btn-curve').click(function () {
+                currentFunction = new DrawCurve(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+            $('#btn-polygon').click(function () {
+                currentFunction = new DrawPolygon(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+            $('#btn-text').click(function () {
+                currentFunction = new DrawText(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+            $('#btn-triangle').click(function () {
+                currentFunction = new DrawTriangle(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+            $('#btn-rectangle').click(function () {
+                currentFunction = new DrawRectangle(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+            $('#btn-roundedRect').click(function () {
+                currentFunction = new DrawRoundedRect(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+            $('#btn-getcolor').click(function () {
+                currentFunction = new GetColor(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+
+
+        })
+
+    </script>
+
+</body>
 
 </html>
-
