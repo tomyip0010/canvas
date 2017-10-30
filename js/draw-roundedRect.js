@@ -39,14 +39,14 @@ class DrawRoundedRect extends PaintFunction {
     onDragging(coord, event) {
         this.contextDraft.clearRect(0, 0, canvasDraft.width, canvasDraft.height);
         this.contextDraft.strokeRect(this.origX + (this.cornerRadius / 2), this.origY + (this.cornerRadius / 2), (coord[0] - this.origX) - this.cornerRadius, (coord[1] - this.origY) - this.cornerRadius);
+        this.contextReal.fillRect(this.origX, this.origY, coord[0] - this.origX, coord[1] - this.origY)
     }
 
     onMouseMove() { }
     onMouseUp(coord) {
         this.contextDraft.clearRect(0, 0, canvasDraft.width, canvasDraft.height);
         this.contextReal.strokeRect(this.origX + (this.cornerRadius / 2), this.origY + (this.cornerRadius / 2), (coord[0] - this.origX) - this.cornerRadius, (coord[1] - this.origY) - this.cornerRadius);
-
-
+        this.contextReal.fillRect(this.origX, this.origY, coord[0] - this.origX, coord[1] - this.origY)        
     }
     onMouseLeave() { }
     onMouseEnter() { }
