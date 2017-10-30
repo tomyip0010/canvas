@@ -24,6 +24,7 @@
             <button id="btn-polygon" type="button">Polygon</button>
             <button id="btn-triangle" type="button">Triangle</button>
             <button id="btn-text" type="button">Textbox</button>
+            <button id="btn-getcolor" type="button">Get color</button>
         </div>
         <div class="option-group">
             <div class="strokewidth">
@@ -63,6 +64,7 @@
         <script src="js/draw-polygon.js"></script>
         <script src="js/draw-text.js"></script>
         <script src="js/undo-redo.js"></script>
+        <script src="js/get-color.js"></script>
         
         <script src="js/colorpicker/colors.js"></script>
         <script src="js/colorpicker/colorPicker.js"></script>
@@ -137,6 +139,9 @@
                 })
                 $('#btn-triangle').click(function(){
                     currentFunction = new DrawTriangle(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+                })
+                $('#btn-getcolor').click(function(){
+                    currentFunction = new GetColor(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
                 })
 
 
