@@ -110,22 +110,6 @@
             // After option selection
             let colorStroke = "rgb(0, 0, 0)"
             let colorFill = "rgb(255, 255, 255)";
-            $(document).click(function () {
-                // Stroke
-                colorStroke = $('.colorstroke input').val();
-                currentFunction.changeStrokeColor(colorStroke);
-                // Fill
-                colorfill = $('.colorfill input').val();
-                currentFunction.changeFillColor(colorfill);
-                // Background
-                $('#canvas-real').css({
-                    'background': $('.colorbackground input').val()
-                })
-            })
-
-            // After option selection
-            let colorStroke = "rgb(0, 0, 0)"
-            let colorFill = "rgb(255, 255, 255)";
             $(document).click(function(){
                 // Stroke
                 colorStroke = $('.colorstroke input').val();
