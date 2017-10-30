@@ -56,4 +56,21 @@ class PaintFunction{
     onMouseUp(){}
     onMouseLeave(){}
     onMouseEnter(){}
+
+    changeField(newField){
+        this.field = newField;
+    }
+    changeStrokeColor(newStrokeColor) { 
+        this.colorStroke = newStrokeColor;
+    }
+    changeFillColor(newFillColor) {
+        this.colorFill = newFillColor;
+    }
+    changeStrokeWidth(newStrokeWidth) {
+        this.strokeWidth = newStrokeWidth;
+    }
+    changeStrokeDash(newStrokeDash) {
+        this.strokeDash = newStrokeDash;
+    }
+    
 }    

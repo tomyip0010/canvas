@@ -117,6 +117,17 @@
                         'background': $('.colorbackground input').val()
                     })
                 })
+
+                // Change field to either stroke or fill for get color function
+                $('.colorstroke input').click(function(){
+                    currentFunction.changeField('stroke');
+                });
+                $('.colorfill input').click(function(){
+                    currentFunction.changeField('fill');
+                });
+                $('.colorbackground input').click(function(){
+                    currentFunction.changeField('background');
+                });
                 
                 // Default feature: should be pencil
                 currentFunction = new DrawStraightLine(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
