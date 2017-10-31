@@ -53,8 +53,8 @@ class DrawTriangle extends PaintFunction {
     }
 
     onMouseMove(e, sub) {   // Drawing guideline
-        let mouseX = e.pageX - sub.offsetLeft;
-        let mouseY = e.pageY - sub.offsetTop;
+        let mouseX = e.pageX - sub.offsetLeft - ml;
+        let mouseY = e.pageY - sub.offsetTop - mt;
         if (this.index > 0 ) {
             this.contextGuide.clearRect(0, 0, this.contextDraft.canvas.width, this.contextDraft.canvas.height);
             this.contextGuide.strokeStyle = 'rgb(188,185,194)';
