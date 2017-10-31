@@ -23,6 +23,8 @@ class DrawRectangle extends PaintFunction {
     onMouseDown(coord, event) {
         this.origX = coord[0];
         this.origY = coord[1];
+        this.contextReal.lineJoin = 'miter';
+        this.contextDraft.lineJoin = 'miter';
         this.contextReal.setLineDash(this.strokeDash);
         this.contextDraft.setLineDash(this.strokeDash);
         this.contextReal.lineWidth = this.strokeWidth;

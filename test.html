@@ -19,6 +19,7 @@
     </div>
     <div class="feature-group">
         <button id="btn-straight-line" type="button">Straight Line</button>
+        <button id="btn-pencil" type="button">Pencil</button>
         <button id="btn-ellipse" type="button">Ellipse</button>
         <button id="btn-curve" type="button">Curve Line</button>
         <button id="btn-polygon" type="button">Polygon</button>
@@ -70,7 +71,8 @@
     <script src="js/draw-roundedRect.js"></script>
     <script src="js/undo-redo.js"></script>
     <script src="js/get-color.js"></script>
-
+    <script src="js/draw-pencil.js"></script>
+    
     <script src="js/colorpicker/colors.js"></script>
     <script src="js/colorpicker/colorPicker.js"></script>
     <script src="js/colorpicker/colorPicker.data.js"></script>
@@ -165,7 +167,10 @@
             $('#btn-getcolor').click(function () {
                 currentFunction = new GetColor(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
             })
-
+            $('#btn-pencil').click(function () {
+                currentFunction = new DrawPencil(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+           
 
         })
 
