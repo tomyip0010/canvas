@@ -7,37 +7,39 @@ let contextGuide = canvasGuide.getContext('2d');
 let currentFunction;
 let dragging = false;
 let hasInput = false;   //tracking if there is input
+let ml = parseInt($('.canvas-container').css('margin-left'));
+let mt = parseInt($('.canvas-container').css('margin-top'));
 
 $('#canvas-draft').mousedown(function(e){
-    let mouseX = e.pageX - this.offsetLeft;
-    let mouseY = e.pageY - this.offsetTop;
+    let mouseX = e.pageX - this.offsetLeft - ml;
+    let mouseY = e.pageY - this.offsetTop - mt;
     currentFunction.onMouseDown([mouseX,mouseY],e);
     dragging = true;
 });
 $('#canvas-draft').mousemove(function(e){
     if(dragging){
-        let mouseX = e.pageX - this.offsetLeft;
-        let mouseY = e.pageY - this.offsetTop;
+        let mouseX = e.pageX - this.offsetLeft - ml;
+        let mouseY = e.pageY - this.offsetTop - mt;
         currentFunction.onDragging([mouseX,mouseY],e);
     }
     currentFunction.onMouseMove(e,this);
 });
 $('#canvas-draft').mouseup(function(e){
     dragging = false;
-    let mouseX = e.pageX - this.offsetLeft;
-    let mouseY = e.pageY - this.offsetTop;
+    let mouseX = e.pageX - this.offsetLeft - ml;
+    let mouseY = e.pageY - this.offsetTop - mt;
     currentFunction.onMouseUp([mouseX,mouseY],e);
 });
 $('#canvas-draft').mouseleave(function(e){
     dragging = false;
-    let mouseX = e.pageX - this.offsetLeft;
-    let mouseY = e.pageY - this.offsetTop;
+    let mouseX = e.pageX - this.offsetLeft - ml;
+    let mouseY = e.pageY - this.offsetTop - mt;
     currentFunction.onMouseLeave([mouseX,mouseY],e);
 });
 
 $('#canvas-draft').mouseenter(function(e){
-    let mouseX = e.pageX - this.offsetLeft;
-    let mouseY = e.pageY - this.offsetTop;
+    let mouseX = e.pageX - this.offsetLeft - ml;
+    let mouseY = e.pageY - this.offsetTop - mt;
     currentFunction.onMouseEnter([mouseX,mouseY],e);
 });
 
