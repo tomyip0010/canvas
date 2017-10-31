@@ -7,8 +7,13 @@ let contextGuide = canvasGuide.getContext('2d');
 let currentFunction;
 let dragging = false;
 let hasInput = false;   //tracking if there is input
-let ml = parseInt($('.canvas-container').css('margin-left'));
-let mt = parseInt($('.canvas-container').css('margin-top'));
+let ml; 
+let mt; 
+
+$(document).mousemove(function(e){  // For updating ml and mt
+    ml = parseInt($('.canvas-container').css('margin-left'));
+    mt = parseInt($('.canvas-container').css('margin-top'));
+})
 
 $('#canvas-draft').mousedown(function(e){
     let mouseX = e.pageX - this.offsetLeft - ml;
