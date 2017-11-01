@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <link href="style/styleGUI.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Background -->
+    <div class="full-wh flexbox flex-vc flex-hc bg posabs">
+        <div class="flexbox flex-hc">
+            <img class="drawing-board posabs" src="style/assets/export/drawing-board.svg" alt="Drawing board">
+        </div>
+    </div>
+
+    <!-- Canvas -->
+    <div class="canvas-container">
+        <canvas id="canvas-guide" class="canvas" width='594' height='420'></canvas>
+        <canvas id="canvas-draft" class="canvas" width='594' height='420'></canvas>
+        <canvas id="canvas-real" class="canvas" width='594' height='420'>Your browser does not support canvas.</canvas>
+    </div>
+
+    <!-- Glass tiles -->
+    <div id="line-drawing1" class="posabs">
+        <div class="hang-line" id="hl1"></div>
+        <svg class="glass-tile" id="btn-straight-line"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 75 75"><rect width="75" height="75" rx="12" ry="12" style="fill:#f4f0eb;opacity:0.9"/><path d="M25.08,5.51c-.08-4,37.88-2.45,42.85,0C72,7.51,71,12,69,12c-3,0-2.89-3-5-3.74C59.41,6.58,46.22,7.14,41.1,7.2,37.08,7.25,25.13,8.07,25.08,5.51Z" style="fill:#fff"/><path d="M69.41,49c4.05,0,2.59,17.71,0,20.73-2,2.32-13.41,4-13.41.72,0-3,9.11-2.51,9.89-3.53,1.7-2.22,1.85-7.7,1.79-10.17C67.64,54.8,66.8,49,69.41,49Z" style="fill:#fff"/><path d="M20,6c0,1.38-1.46,2-4.5,2S10,6.88,10,5.5,14,3,17,3,20,4.62,20,6Z" style="fill:#fff"/><line x1="16.5" y1="58.5" x2="58.5" y2="16.5" style="fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:4.71872111220391px"/></svg>
+        <div class="hang-line" id="hl2"></div>
+        <svg class="glass-tile" id="btn-curve"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 75 75"><rect width="75" height="75" rx="12" ry="12" style="fill:#f4f0eb;opacity:0.9"/><path d="M25.08,5.51c-.08-4,37.88-2.45,42.85,0C72,7.51,71,12,69,12c-3,0-2.89-3-5-3.74C59.41,6.58,46.22,7.14,41.1,7.2,37.08,7.25,25.13,8.07,25.08,5.51Z" style="fill:#fff"/><path d="M69.41,49c4.05,0,2.59,17.71,0,20.73-2,2.32-13.41,4-13.41.72,0-3,9.11-2.51,9.89-3.53,1.7-2.22,1.85-7.7,1.79-10.17C67.64,54.8,66.8,49,69.41,49Z" style="fill:#fff"/><path d="M20,6c0,1.38-1.46,2-4.5,2S10,6.88,10,5.5,14,3,17,3,20,4.62,20,6Z" style="fill:#fff"/><path d="M16,63.5c0-24.32,19.23-44,43-44" style="fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:4.71872111220391px"/></svg>
+    </div>
+
+    <div id="line-drawing2" class="posabs">
+        <div class="hang-line" id="hl3"></div>
+        <svg class="glass-tile" id="btn-text" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 75 75"><rect width="75" height="75" rx="12" ry="12" style="fill:#f4f0eb;opacity:0.9"/><path d="M25.08,5.51c-.08-4,37.88-2.45,42.85,0C72,7.51,71,12,69,12c-3,0-2.89-3-5-3.74C59.41,6.58,46.22,7.14,41.1,7.2,37.08,7.25,25.13,8.07,25.08,5.51Z" style="fill:#fff"/><path d="M69.41,49c4.05,0,2.59,17.71,0,20.73-2,2.32-13.41,4-13.41.72,0-3,9.11-2.51,9.89-3.53,1.7-2.22,1.85-7.7,1.79-10.17C67.64,54.8,66.8,49,69.41,49Z" style="fill:#fff"/><path d="M51.4,19.16V29.55h-.83a18.73,18.73,0,0,0-1.64-5.17,6.81,6.81,0,0,0-2.47-2.51,6.58,6.58,0,0,0-3.07-.51H41.05V51a14.74,14.74,0,0,0,.27,3.68,2.74,2.74,0,0,0,1,1.29,3.57,3.57,0,0,0,2.11.55h1v1H29.12v-1h1a3.69,3.69,0,0,0,2.19-.59,2.63,2.63,0,0,0,.95-1.36A14.23,14.23,0,0,0,33.55,51V21.37H31.29q-3.16,0-4.59,1.64a12,12,0,0,0-2.54,6.54h-.88V19.16Z"/><path d="M20,6c0,1.38-1.46,2-4.5,2S10,6.88,10,5.5,14,3,17,3,20,4.62,20,6Z" style="fill:#fff"/></svg>
+    </div>
+
+    <div id="shape-drawing1" class="posabs">
+        <div class="hang-line" id="hl4"></div>
+        <svg class="glass-tile" id="rectangle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 56"><rect width="90" height="56" style="fill:#f4f0eb;opacity:0.9"/><path d="M26,5c-.08-4,57.08-3.92,61,0,1,1,1,10-2,10s-1.89-6.23-4-7c-4.59-1.68-18.78-.86-23.9-.8C53.08,7.25,26.05,7.57,26,5Z" style="fill:#fff"/><path d="M84.41,30c4.05,0,2.59,17.71,0,20.73-2,2.32-13.41,4-13.41.72,0-3,9.11-2.51,9.89-3.53,1.7-2.22,1.85-7.7,1.79-10.17C82.64,35.8,81.8,30,84.41,30Z" style="fill:#fff"/><path d="M17,6c0,1.38-1.46,2-4.5,2S7,6.88,7,5.5,11,3,14,3,17,4.62,17,6Z" style="fill:#fff"/></svg>
+        <div class="hang-line" id="hl5"></div>
+    </div>
+    
+    <div class="undo-redo">
+        <button id="undo" type="button">Undo</button>
+        <button id="redo" type="button">Redo</button>
+    </div>
+    <div class="feature-group">
+        <button id="btn-pencil" type="button">Pencil</button>
+        <button id="btn-ellipse" type="button">Ellipse</button>
+        <button id="btn-polygon" type="button">Polygon</button>
+        <button id="btn-triangle" type="button">Triangle</button>
+        <button id="btn-getcolor" type="button">Get color</button>
+        <button id="btn-rectangle" type="button">Rectangle</button>
+        <button id="btn-roundedRect" type="button">Rounded Rectangle</button>
+
+    </div>
+    <div class="option-group">
+        <div class="strokewidth">
+            Stroke width:
+            <input name="strokewidth" type="number" min="0" max="100" step="0.5" value="1">
+        </div>
+        <div class="strokedash">
+            Stroke dash:
+            <button type="button" value="">Solid</button>
+            <button type="button" value="5,5">Dash</button>
+        </div>
+        <div class="brush">
+            Brush (under development):
+            <button type="button" value="round">Round</button>
+            <button type="button" value="thick">Thick</button>
+            <button type="button" value="fur">Fur</button>
+        </div>
+        <div class="colorstroke">
+            Stroke color:
+            <input class="color" value="rgb(0, 0, 0)" data-colormode="rgb" readonly="">
+        </div>
+        <div class="colorfill">
+            Fill color:
+            <input class="color" value="rgb(255, 255, 255)" data-colormode="rgb" readonly="">
+        </div>
+        <div class="colorbackground">
+            Background color:
+            <input class="color" value="rgb(255, 255, 255)" data-colormode="rgb" readonly="">
+        </div>
+    </div>
+
+    <script src="js/canvas-common.js"></script>
+    <script src="js/draw-straight-line.js"></script>
+    <script src="js/draw-curve.js"></script>
+    <script src="js/draw-ellipse.js"></script>
+    <script src="js/draw-triangle.js"></script>
+    <script src="js/draw-polygon.js"></script>
+    <script src="js/draw-text.js"></script>
+    <script src="js/draw-rectangle.js"></script>
+    <script src="js/draw-roundedRect.js"></script>
+    <script src="js/undo-redo.js"></script>
+    <script src="js/get-color.js"></script>
+    <script src="js/draw-pencil.js"></script>
+    
+    <script src="js/colorpicker/colors.js"></script>
+    <script src="js/colorpicker/colorPicker.js"></script>
+    <script src="js/colorpicker/colorPicker.data.js"></script>
+    <script src="js/colorpicker/jsColorPicker.min.js"></script>
+
+    <script>
+        $(function () {
+
+            // Color picker
+            let colors = jsColorPicker('input.color', {
+                customBG: '#222',
+                readOnly: true,
+                // patch: false,
+                init: function (elm, colors) { // colors is a different instance (not connected to colorPicker)
+                    elm.style.backgroundColor = elm.value;
+                    elm.style.color = colors.rgbaMixCustom.luminance > 0.22 ? '#222' : '#ddd';
+                },
+                // appendTo: document.querySelector('.samples')
+            });
+
+
+            //Stroke width selection
+            let strokeWidth = 1;
+            $('.strokewidth input').change(function () {
+                strokeWidth = $(this).val();
+                currentFunction.changeStrokeWidth(strokeWidth);
+            })
+
+            // Stroke dash
+            let strokeDash = [];
+            $('.strokedash button').click(function () {
+                strokeDash = $(this).val().split(',');
+                currentFunction.changeStrokeDash(strokeDash);
+            })
+
+            // After option selection
+            let colorStroke = "rgb(0, 0, 0)"
+            let colorFill = "rgb(255, 255, 255)";
+            $(document).click(function(){
+                // Stroke
+                colorStroke = $('.colorstroke input').val();
+                currentFunction.changeStrokeColor(colorStroke);
+                // Fill
+                colorfill = $('.colorfill input').val();
+                currentFunction.changeFillColor(colorfill);
+                // Background
+                $('#canvas-real').css({
+                    'background': $('.colorbackground input').val()
+                })
+            })
+
+            // Change field to either stroke or fill for get color function
+            $('.colorstroke input').click(function(){
+                currentFunction.changeField('stroke');
+            });
+            $('.colorfill input').click(function(){
+                currentFunction.changeField('fill');
+            });
+            $('.colorbackground input').click(function(){
+                currentFunction.changeField('background');
+            });
+            
+            // Default feature: should be pencil
+            currentFunction = new DrawPencil(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+
+            // Feature selection
+            $('#btn-straight-line').click(function () {
+                currentFunction = new DrawStraightLine(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+            $('#btn-ellipse').click(function () {
+                currentFunction = new DrawEllipse(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+            $('#btn-curve').click(function () {
+                currentFunction = new DrawCurve(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+            $('#btn-polygon').click(function () {
+                currentFunction = new DrawPolygon(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+            $('#btn-text').click(function () {
+                currentFunction = new DrawText(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+            $('#btn-triangle').click(function () {
+                currentFunction = new DrawTriangle(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+            $('#btn-rectangle').click(function () {
+                currentFunction = new DrawRectangle(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+            $('#btn-roundedRect').click(function () {
+                currentFunction = new DrawRoundedRect(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+            $('#btn-getcolor').click(function () {
+                currentFunction = new GetColor(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+            $('#btn-pencil').click(function () {
+                currentFunction = new DrawPencil(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+           
+
+        })
+
+    </script>
+
+</body>
+
+</html>
