@@ -131,6 +131,9 @@ class Resize extends PaintFunction {
             this.contextReal.restore();
         } 
       
+         //Add the following code when you draw on canvas real for undo
+         saveCanvas();
+
         this.translate = false;
         this.scale = false;
         this.contextReal.setTransform(1,0,0,1,0,0);

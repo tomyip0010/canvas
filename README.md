@@ -21,8 +21,9 @@ abc
 3. Textbox (**draw-text.js**)
 4. Color picker (ref: https://www.webdesignerdepot.com/2013/03/how-to-create-a-color-picker-with-html5-canvas/)
 5. Emoji
-6. Import and export
+6. Import and export (**import-export.js**)
 7. Undo and redo (**undo-redo.js**)
+8. Selection Box (**resize.js**)
 
 ### Options
 1. Stroke
