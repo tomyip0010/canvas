@@ -24,7 +24,12 @@
             <button id="btn-polygon" type="button">Polygon</button>
             <button id="btn-triangle" type="button">Triangle</button>
             <button id="btn-text" type="button">Textbox</button>
+            <button id="btn-resize" type="button">Resize</button>
         </div>
+        <div class="import-export">
+            <input type="file" id="image" accept="image/*">
+            <a id="save" download="image.png"><button id="btn-export" onClick="download()">Save</button></a>
+        </div> 
         <div class="option-group">
             <div class="strokewidth">
                 Stroke width: 
@@ -63,6 +68,8 @@
         <script src="js/draw-polygon.js"></script>
         <script src="js/draw-text.js"></script>
         <script src="js/undo-redo.js"></script>
+        <script src="js/import-export.js"></script>
+        <script src="js/resize.js"></script>
         
         <script src="js/colorpicker/colors.js"></script>
         <script src="js/colorpicker/colorPicker.js"></script>
@@ -138,8 +145,9 @@
                 $('#btn-triangle').click(function(){
                     currentFunction = new DrawTriangle(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
                 })
-
-
+                $('#btn-resize').click(function(){
+                    currentFunction = new Resize(contextReal, contextDraft);
+                })
             })
             
         </script>
