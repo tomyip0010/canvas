@@ -47,8 +47,8 @@ class DrawCurve extends PaintFunction {
     }
 
     onMouseMove(e, sub) {
-        let mouseX = e.pageX - sub.offsetLeft;
-        let mouseY = e.pageY - sub.offsetTop;
+        let mouseX = e.pageX - sub.offsetLeft - ml;
+        let mouseY = e.pageY - sub.offsetTop - mt;
         if (this.index > 1) {
             this.ctrlX = mouseX;
             this.ctrlY = mouseY;

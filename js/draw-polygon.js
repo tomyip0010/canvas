@@ -48,8 +48,8 @@ class DrawPolygon extends PaintFunction {
     }
 
     onMouseMove(e, sub) {
-        let mouseX = e.pageX - sub.offsetLeft;
-        let mouseY = e.pageY - sub.offsetTop;
+        let mouseX = e.pageX - sub.offsetLeft - ml;
+        let mouseY = e.pageY - sub.offsetTop - mt;
         if(this.index > 0 && !(this.finish)) {
             let distance = Math.sqrt(Math.pow(this.origX-mouseX,2)+Math.pow(this.origY-mouseY,2));  //allowance for 5px error for closing the polygon
             if (distance <= 5) {

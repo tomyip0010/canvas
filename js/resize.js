@@ -24,7 +24,7 @@ class Resize extends PaintFunction {
     }
 
     onMouseDown(coord, event) {
-       
+        hasResize = true;
         if (this.index === 0) {
             this.contextReal.save();
             this.contextDraft.save();
@@ -134,6 +134,8 @@ class Resize extends PaintFunction {
          //Add the following code when you draw on canvas real for undo
          saveCanvas();
 
+        hasResize = false;
+        this.scaleArr = []
         this.translate = false;
         this.scale = false;
         this.contextReal.setTransform(1,0,0,1,0,0);
@@ -146,7 +148,7 @@ class Resize extends PaintFunction {
 }
 
 $('body').keydown(function(e) {
-    if(e.keyCode === 13) {
+    if(hasResize && e.keyCode === 13) {
         currentFunction.handleResize(e);
     }
 })
