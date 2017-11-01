@@ -74,6 +74,10 @@ body {
 	justify-content: center;
 }
 
+.flex-col {
+	flex-direction: column;
+}
+
 .bg {
 	background-image: url('assets/background_gausian8.jpg');
 	background-position: center bottom;
@@ -87,6 +91,11 @@ body {
 
 .m-auto {
 	margin: auto;
+}
+
+.fit-content {
+	width: fit-content;
+	height: fit-content;
 }
 
   /* ====================== */
@@ -124,39 +133,33 @@ body {
 
 .glass-tile {
 	width: 50px;
-	opacity: 0.8;
-	position: absolute;
+	opacity: 0.7;
+	cursor: pointer;
+}
+
+.lg-glass-tile {
+	width: 65px;
+	opacity: 0.7;
 	cursor: pointer;
 }
 
 .hang-line {
-	position: absolute;
 	width: 2px;
 	background: white;
 	opacity: 0.5;
 }
 
-#hl1,
-#hl4 {
-	left: 24px;
+.hl-short {
 	height: 50px;
 }
 
-#hl2 {
-	left: 24px;
-	top: 100px;
-	height: 50px;
+.hl-Vshort {
+	height: 33px;
 }
 
-#hl3 {
-	left: 24px;
+.hl-long {
 	height: 100px;
 }
-
-
-  /* ====================== */
- /* ==== Line drawing ==== */
-/* ====================== */
 
 #line-drawing1 {
 	left: 5%;
@@ -170,17 +173,15 @@ body {
 	right: 12%;
 }
 
-#btn-straight-line {
-	top: 50px;
-}
-
-#btn-curve {
-	top: 150px;
-}
-
-#btn-text {
-	top: 100px;
+#shape-drawing2 {
+	right: 4%;
 }
 
 
+  /* ====================== */
+ /* ====== Undo Redo ===== */
+/* ====================== */
 
+.undo-redo {
+
+}
