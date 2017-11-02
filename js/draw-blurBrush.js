@@ -44,7 +44,12 @@ class DrawBlurBrush extends PaintFunction {
     }
 
     onMouseMove() { }
-    onMouseUp() { }
+    onMouseUp() {
+        this.contextReal.globalAlpha = 1;
+        this.contextReal.shadowBlur = 0;
+        //Add the following code when you draw on canvas real for undo
+        saveCanvas();
+    }
     onMouseLeave() { }
     onMouseEnter() { }
 }
