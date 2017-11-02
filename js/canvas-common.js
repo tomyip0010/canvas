@@ -7,6 +7,8 @@ let contextGuide = canvasGuide.getContext('2d');
 let currentFunction;
 let dragging = false;
 let hasInput = false;   //tracking if there is input
+let hasScale = false;
+let hasTranslate = false;
 let ml; 
 let mt; 
 
@@ -53,7 +55,7 @@ $('body').keydown(function() {         //For text drawing
         var formElement = document.getElementById("text");
         formElement.addEventListener('keyup', currentFunction.handleEnter);
     }
-})
+});
 
 class PaintFunction{
     constructor(){}

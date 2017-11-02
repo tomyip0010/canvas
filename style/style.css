@@ -65,14 +65,14 @@ body {
     position: relative;
 	width: fit-content;
 	border: #888 solid 0.5px;
-	cursor: crosshair;
 }
 
 #canvas-draft,
 #canvas-guide {
     position: absolute;
-    top: 0;
+	top: 0;
 }
+
 
   /* ====================== */
  /* ======= Option ======= */

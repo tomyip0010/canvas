@@ -41,16 +41,16 @@ class DrawText extends PaintFunction{
     }
 
     text(x, y) {                         //create the html input element on body
-        var input = document.createElement('input'),
-        font = '14px sans-serif';
+        var input = document.createElement('textarea');
 
         input.id = "text";
-        input.type = 'text';
         input.style.position = 'fixed';
         input.style.left = x + 'px';
         input.style.top = y+ 'px';
-        input.style.color = this.colorStroke;
-        
+        input.rows = "2";
+        input.cols = "10";
+        $(input).css('font-size', Number($('select[name="font-size"]').val()));
+       
         document.body.appendChild(input);
 
         input.focus();
@@ -67,12 +67,30 @@ class DrawText extends PaintFunction{
     }
     
     drawText(txt, x, y) {           //drawing the text to real canvas
+        this.font_family = $('select[name="font-family"]').val();
+        this.font_size = $('select[name="font-size"]').val();
+        this.font_style = $('select[name="font-style"]').val();
         this.contextReal.textBaseline = 'top';
         this.contextReal.textAlign = 'left';
-        this.contextReal.font = "14px serif";
+        this.contextReal.font = this.font_style + " " + this.font_size+"px "+this.font_family;
+        this.contextReal.fillStyle = this.colorStroke;
         this.contextReal.fillText(txt, x - 4, y - 4);
         //Add the following code when you draw on canvas real for undo
         saveCanvas();
     }
 }
+
+
+$(document).ready(function() {
+    //adding font size to html
+    for(var i = 1; i <= 100; i ++) {
+        $("select#font-size").append($(`<option value="${i}">${i}</option>`));
+    }
+    $('option[value="18"]').attr('selected',true);
+
+    $('select[name="font-size"]').change(function() {
+        console.log("OP");
+        $("textarea").css('font-size', Number(this.font_size));
+    })
+})
 

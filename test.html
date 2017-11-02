@@ -5,6 +5,7 @@
 <head>
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <link href="style/style.css" rel="stylesheet">
+    <script src="https://twemoji.maxcdn.com/2/twemoji.min.js?2.3.1"></script>
 </head>
 
 <body>
@@ -28,8 +29,15 @@
         <button id="btn-getcolor" type="button">Get color</button>
         <button id="btn-rectangle" type="button">Rectangle</button>
         <button id="btn-roundedRect" type="button">Rounded Rectangle</button>
-
+        <button id="btn-translate" type="button">Translate</button>
+        <button id="btn-scale" type="button">Scale</button>
+        <button id="btn-emoji" type="button">Emoji</button>
+        <button id="btn-painter" type="button">Painter</button>
     </div>
+    <div class="import-export">
+        <input type="file" id="image" accept="image/*">
+        <a id="save" download="image.png"><button id="btn-export" onClick="download()">Save</button></a>
+    </div> 
     <div class="option-group">
         <div class="strokewidth">
             Stroke width:
@@ -46,16 +54,46 @@
             <button type="button" value="thick">Thick</button>
             <button type="button" value="fur">Fur</button>
         </div>
+        <div class="font">
+            Font Family:
+            <select name="font-family" id="font-family">
+                <option value="Andale Mono" selected>Andale Mono</option>
+                <option value="Arial">Arial</option>
+                <option value="Arial Black">Arial Black</option>
+                <option value="Comic Sans MS">Comic Sans MS</option>
+                <option value="Courier New">Courier New</option>
+                <option value="Impact">Impact</option>
+                <option value="Symbol">Symbol</option>
+                <option value="serif">serif</option>
+                <option value="Times New Roman">Times New Roman</option>
+                <option value="Trebuchet MS">Trebuchet MS</option>
+                <option value="Verdana">Verdana</option>
+                <option value="Webdings">Webdings</option>
+            </select>
+
+            Font Size:
+            <select name="font-size" id="font-size">
+            </select>
+
+            Font Style:
+            <select name="font-style" id="font-style">
+                <option value="normal" selected>normal</option>
+                <option value="italic">italic</option>
+                <option value="bold">bold</option>
+                <option value="bold italic">bold italic</option>
+            </select>
+            
+            Emoji:
+            <select name="emoji">
+               
+            </select>
+        </div>
         <div class="colorstroke">
-            Stroke color:
+            Stroke color: 
             <input class="color" value="rgb(0, 0, 0)" data-colormode="rgb" readonly="">
         </div>
         <div class="colorfill">
-            Fill color:
-            <input class="color" value="rgb(255, 255, 255)" data-colormode="rgb" readonly="">
-        </div>
-        <div class="colorbackground">
-            Background color:
+            Fill color: 
             <input class="color" value="rgb(255, 255, 255)" data-colormode="rgb" readonly="">
         </div>
     </div>
@@ -72,7 +110,12 @@
     <script src="js/undo-redo.js"></script>
     <script src="js/get-color.js"></script>
     <script src="js/draw-pencil.js"></script>
-    
+    <script src="js/translate.js"></script>
+    <script src="js/scale.js"></script>
+    <script src="js/import-export.js"></script>
+    <script src="js/emoji.js"></script>
+    <script src="js/painter.js"></script>
+
     <script src="js/colorpicker/colors.js"></script>
     <script src="js/colorpicker/colorPicker.js"></script>
     <script src="js/colorpicker/colorPicker.data.js"></script>
@@ -119,10 +162,6 @@
                 // Fill
                 colorfill = $('.colorfill input').val();
                 currentFunction.changeFillColor(colorfill);
-                // Background
-                $('#canvas-real').css({
-                    'background': $('.colorbackground input').val()
-                })
             })
 
             // Change field to either stroke or fill for get color function
@@ -131,9 +170,6 @@
             });
             $('.colorfill input').click(function(){
                 currentFunction.changeField('fill');
-            });
-            $('.colorbackground input').click(function(){
-                currentFunction.changeField('background');
             });
             
             // Default feature: should be pencil
@@ -170,10 +206,19 @@
             $('#btn-pencil').click(function () {
                 currentFunction = new DrawPencil(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
             })
-           
-
+            $('#btn-translate').click(function(){
+                currentFunction = new Translate(contextReal, contextDraft);
+            })
+            $('#btn-scale').click(function(){
+                currentFunction = new Scale(contextReal, contextDraft);
+            })
+            $("#btn-emoji").click(function() {
+                currentFunction = new Emoji(contextReal, contextDraft);
+            })
+            $("#btn-painter").click(function() {
+                currentFunction = new Painter(contextReal, contextDraft);
+            })
         })
-
     </script>
 
 </body>

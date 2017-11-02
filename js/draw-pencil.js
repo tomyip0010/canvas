@@ -40,7 +40,10 @@ class DrawPencil extends PaintFunction {
     }
 
     onMouseMove() { }
-    onMouseUp() {}
+    onMouseUp() {
+        //Add the following code when you draw on canvas real for undo
+        saveCanvas();
+    }
     onMouseLeave() { }
     onMouseEnter() { }
 }
