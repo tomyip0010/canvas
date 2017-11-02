@@ -52,7 +52,8 @@ $('#canvas-draft').mouseenter(function(e){
 
 $('body').keydown(function() {         //For text drawing
     if (hasInput) {
-        var formElement = document.getElementById("text");
+        var formElement = document.getElementsByClassName("text");
+        formElement = formElement[formElement.length - 1];
         formElement.addEventListener('keyup', currentFunction.handleEnter);
     }
 });
