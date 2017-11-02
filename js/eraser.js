@@ -40,7 +40,9 @@ class Eraser extends PaintFunction {
     }
 
     onMouseMove() { }
-    onMouseUp() { }
+    onMouseUp() {
+        this.contextReal.globalCompositeOperation = 'source-over'
+    }
     onMouseLeave() { }
     onMouseEnter() { }
 }
