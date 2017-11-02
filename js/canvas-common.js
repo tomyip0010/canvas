@@ -7,7 +7,8 @@ let contextGuide = canvasGuide.getContext('2d');
 let currentFunction;
 let dragging = false;
 let hasInput = false;   //tracking if there is input
-let hasResize = false;
+let hasScale = false;
+let hasTranslate = false;
 let ml; 
 let mt; 
 

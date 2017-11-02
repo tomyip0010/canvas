@@ -17,21 +17,8 @@ function upload(input, contextDraft, contextReal) {
 
 //export 
 function download() {
-    //capture canvas real's image
-    let img = new Image();
-    console.log($('.colorbackground input').val());
-    //draw the background color and canvas real's image to canvas draft for download
-    let bgColor = $('.colorbackground input').val();
-    contextDraft.fillStyle = bgColor;
-    contextDraft.fillRect(0,0,contextDraft.canvas.width, contextDraft.canvas.height);
-
-    img.onload = ()=>{
-        contextDraft.drawImage(img, 0, 0);
-        $("#save").attr("href", document.getElementById("canvas-draft").toDataURL());
-        $("#btn-export").html("Download");
-        contextDraft.clearRect(0,0,contextDraft.canvas.width, contextDraft.canvas.height);
-    }
-    img.src = contextReal.canvas.toDataURL();
+    $("#save").attr("href", document.getElementById("canvas-real").toDataURL());
+    $("#btn-export").html("Download");
 }
 
 

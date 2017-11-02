@@ -3,12 +3,14 @@ class DrawPolygon extends PaintFunction {
         super();
         this.contextDraft = contextDraft;
         this.contextReal = contextReal;
+        this.contextGuide = contextGuide;
         this.colorStroke = colorStroke;
         this.colorFill = colorFill;
         this.strokeWidth = strokeWidth;
         this.strokeDash = strokeDash;
         this.finish = false;    //tracking if the polygon complete
         this.index = 0;
+        this.pointArr = [];
     }
 
     changeStrokeColor(newStrokeColor) {
@@ -25,12 +27,16 @@ class DrawPolygon extends PaintFunction {
     }
 
     onMouseDown(coord, event) {
+        this.contextGuide.setLineDash(this.strokeDash);
         this.contextReal.setLineDash(this.strokeDash);
         this.contextDraft.setLineDash(this.strokeDash);
+        this.contextGuide.lineWidth = this.strokeWidth;
         this.contextReal.lineWidth = this.strokeWidth;
         this.contextDraft.lineWidth = this.strokeWidth;
+        this.contextGuide.strokeStyle = this.colorStroke;
         this.contextReal.strokeStyle = this.colorStroke;
         this.contextDraft.strokeStyle = this.colorStroke;
+        this.contextGuide.fillStyle = this.colorFill;
         this.contextReal.fillStyle = this.colorFill;
         this.contextDraft.fillStyle = this.colorFill;
         if (this.index === 0) {
@@ -63,18 +69,20 @@ class DrawPolygon extends PaintFunction {
 
     onMouseUp(coord, event){
         let distance = Math.sqrt(Math.pow(this.origX-coord[0],2)+Math.pow(this.origY-coord[1],2));  //allowance for 5px error for closing the polygon
+        this.pointArr.push(coord);
         if (distance <= 5) {
             this.finish = true;
+            this.contextGuide.clearRect(0,0,this.contextGuide.canvas.width, this.contextGuide.canvas.height);
             this.draw(this.origX, this.origY,this.contextReal);
+            this.pointArr = [];
+            this.origX = this.origY = undefined;
             this.index = 0;
         } else {
-            this.draw(coord[0], coord[1], this.contextReal);
+            this.draw(coord[0], coord[1], this.contextGuide);
             this.endX = coord[0];
             this.endY = coord[1];
             this.index ++;
         }
-        //Add the following code when you draw on canvas real for undo
-        saveCanvas();
     }
     
     onMouseLeave(){}
@@ -83,16 +91,27 @@ class DrawPolygon extends PaintFunction {
 
     draw(x,y,context) {
         this.contextDraft.clearRect(0, 0, this.contextDraft.canvas.width, this.contextDraft.canvas.height);
-        context.beginPath();
-        if (this.index === 0) {
-            context.moveTo(this.origX, this.origY);
-        } else {
+        if (!this.finish) {
+            context.beginPath();
+            if (this.index === 0) {
+                context.moveTo(this.origX, this.origY);
+            } else {
+                context.moveTo(this.endX, this.endY);
+            }
+            context.lineTo(x, y);
             context.moveTo(this.endX, this.endY);
+            context.stroke();
+        } else {
+            context.beginPath();
+            context.moveTo(this.origX, this.origY);
+            for(var i = 0; i < this.pointArr.length - 1; i++) {
+                context.lineTo(this.pointArr[i][0], this.pointArr[i][1]);
+            }
+            context.closePath();
+            context.stroke();
+            context.fill("evenodd");
+            //Add the following code when you draw on canvas real for undo
+            saveCanvas();
         }
-        context.lineTo(x, y);
-        context.moveTo(this.endX, this.endY);
-        context.closePath();
-        context.fill();
-        context.stroke();
     }
 }
