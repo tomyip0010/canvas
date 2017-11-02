@@ -43,7 +43,7 @@ class DrawText extends PaintFunction{
     text(x, y) {                         //create the html input element on body
         var input = document.createElement('textarea');
 
-        input.id = "text";
+        input.className = "text";
         input.style.position = 'fixed';
         input.style.left = x + 'px';
         input.style.top = y+ 'px';
@@ -90,7 +90,7 @@ $(document).ready(function() {
 
     $('select[name="font-size"]').change(function() {
         console.log("OP");
-        $("textarea").css('font-size', Number(this.font_size));
+        $(".text").last().css('font-size', Number($('select[name="font-size"]').val())+"px");
     })
 })
 
