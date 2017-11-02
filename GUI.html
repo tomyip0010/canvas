@@ -14,7 +14,7 @@
     <div class="full-wh bg posabs"></div>
     
     <!-- Drawing board and canvas -->
-    <div class="canvas-container-out flexbox flex-vc flex-col fit-content m-auto posrel">
+    <div class="canvas-container-out flexbox flex-vc flex-col m-auto posrel">
         <img class="drawing-board" src="style/assets/export/drawing-board-top.png" alt="Drawing board top">
         <div class="canvas-container">
             <canvas id="canvas-guide" class="canvas posabs" width='594' height='420'></canvas>
@@ -76,18 +76,26 @@
             </svg>
         </div>
 
-        <!--Stroke options-->
+        <!--Lower panel-->
         <div class="lower-panel">
-            <div class="lower-panel-box">
+            <div class="lower-panel-box stroke-option">
                 <img class="strokeicon" src="style/assets/export/stroke-width.svg" alt="Stroke width icon">
                 <input name="strokewidth" type="number" min="0" max="50" step="0.5" value="1">
-            </div>
-            <div class="lower-panel-box">
+            </div><!--
+            --><div class="lower-panel-box">
                 <img class="strokeicon" src="style/assets/export/stroke-dash.svg" alt="Stroke dash icon">
                 <label class="switch">
                     <input type="checkbox">
                     <span class="slider"></span>
                 </label>
+            </div><!--
+            --><div class="lower-panel-box colorstroke">
+                <img class="strokeicon" src="style/assets/export/stroke-color.svg" alt="Stroke color icon">
+                <input class="color" value="rgb(0, 0, 0)" data-colormode="rgb" readonly="">
+            </div><!--
+            --><div class="lower-panel-box colorfill">
+                <img class="paintericon" src="style/assets/export/painter-color.svg" alt="Painter color icon">
+                <input class="color" value="rgb(255, 255, 255)" data-colormode="rgb" readonly="">
             </div>
         </div>
         
@@ -100,7 +108,7 @@
         <div class="hang-line hl-Vshort"></div>
         <img class="glass-tile" id="btn-curve" src="style/assets/export/curve.svg" alt="Curve icon">
         <div class="hang-line hl-Vshort"></div>
-        <img class="glass-tile" id="btn-painter" src="style/assets/export/painter.png" alt="Painter icon">
+        <img class="glass-tile" id="btn-painter" src="style/assets/export/painter.svg" alt="Painter icon">
     </div>
 
     <div id="line-drawing2" class="posabs flexbox flex-col flex-vc">
@@ -129,18 +137,6 @@
         <div class="hang-line hl-Vshort"></div>
         <img class="lg-glass-tile" id="btn-roundedRect" src="style/assets/export/round-rectangle.svg" alt="Rounded rectangle icon">
     </div>
-
-    <!-- Palette -->
-    <div id="palette">
-        <img src="style/assets/export/palette.png" alt="Palette">
-        <svg class="posabs" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 251.46 139.46">
-            <path id="colorstroketarget" class="color" value="rgb(255, 255, 255)" data-colormode="rgb" readonly="true"d="M146.29,33.75C142.6,44.07,136.65,56.17,126.81,62c-7.19,4.23-17.59,3.77-25.42,3.77-8.89,0-9.93-8.55-14.21-13.92C82.54,46,75.11,43,78.05,33.75c2-6.32,11.13-10.73,16-15.8C103.26,8.46,110.89.5,123.38.5,132,.5,132.49,9,136.8,14,142,20.06,149.86,23.77,146.29,33.75Z" style="fill:red;stroke:#888;stroke-miterlimit:10"/>
-            <path id="colorfilltarget" class="color" value="rgb(255, 255, 255)" data-colormode="rgb" readonly="true"d="M32.46,82.21c10.95-3.06,24.09-5.3,30.68-.28C68,85.61,67.78,94.87,68,101.57c.26,7.54-8.8,13.29-14.29,19.85-5.87,7-8.57,14.61-18.1,17.18-6.4,1.73-11.22-3.2-16.46-4.42C9.41,131.9,1.3,130.06.53,120.12c-.54-6.94,7.67-12,12.36-18.36C18.69,93.88,22,85.13,32.46,82.21Z" style="fill:#fcee21;stroke:#888;stroke-miterlimit:10"/>
-            <path id="colorbackgroundtarget" class="color" value="rgb(255, 255, 255)" data-colormode="rgb" readonly="true" d="M215.75,21c11.72-3.3,25.62-5.71,31.87-.3,4.57,4,3.29,13.93,2.74,21.14-.61,8.11-10.69,14.3-17.14,21.34-6.9,7.53-10.6,15.69-20.76,18.45-6.84,1.86-11.25-3.44-16.54-4.75-9.85-2.44-18.05-4.42-17.7-15.1.25-7.46,9.34-12.91,14.95-19.75C200.1,33.52,204.59,24.09,215.75,21Z" style="fill:blue;stroke:#888;stroke-miterlimit:10"/>
-            <path d="M120.87,13.2c3.24.64,10.2,10.43,12.28,6.9,2.39-4-5-10-10.52-12.18-3-1.2-17,2.8-14.55,6.14C110.93,18,116,12.24,120.87,13.2Z" style="fill:#fff"/>
-            <path d="M232.74,28.11c6.46-.19,10.74,5.8,12.45,2.38,3.06-6.12-6-6.85-11.61-6.62-2.84.12-13.88,2.17-11.45,4.87C225,31.92,228.45,28.24,232.74,28.11Z" style="fill:#fff"/>
-            <path d="M49.74,89.11c6.46-.19,10.74,5.8,12.45,2.38,3.06-6.12-6-6.85-11.61-6.62C47.74,85,36.69,87,39.12,89.74,42,92.92,45.45,89.24,49.74,89.11Z" style="fill:#fff"/></svg>
-    </div>
     
     <!-- Pen holder -->
     <div class="pen-holder-group">
@@ -148,24 +144,11 @@
             <img id="holder-back" src="style/assets/export/holder-back.png" alt="Pen holder back">
             <img id="holder-front" src="style/assets/export/holder-front.png" alt="Pen holder front">
         </div>
-        <img id="btn-brush4" src="style/assets/export/brush4.png" alt="Brush4">
-        <img id="btn-brush3" src="style/assets/export/brush3.png" alt="Brush3">
+        <img id="btn-brush" src="style/assets/export/brush.png" alt="Brush">
+        <img id="btn-blur-brush" src="style/assets/export/blur-brush.png" alt="Blur brush">
         <img id="btn-pencil" src="style/assets/export/pencil.png" alt="Pencil">
         <img id="btn-getcolor" src="style/assets/export/dropper.png" alt="Dropper">
         <img id="btn-eraser" src="style/assets/export/eraser.png" alt="Eraser">
-    </div>
-
-
-    <div class="option-group">
-        
-        <div class="colorstroke">
-            Stroke color:
-            <input class="color" value="rgb(0, 0, 0)" data-colormode="rgb" readonly="">
-        </div>
-        <div class="colorfill">
-            Fill color:
-            <input class="color" value="rgb(255, 255, 255)" data-colormode="rgb" readonly="">
-        </div>
     </div>
 
     <script src="js/canvas-common.js"></script>
@@ -185,6 +168,9 @@
     <script src="js/import-export.js"></script>
     <script src="js/emoji.js"></script>
     <script src="js/painter.js"></script>
+    <script src="js/draw-brush.js"></script>
+    <script src="js/draw-blurBrush.js"></script>
+    <script src="js/eraser.js"></script>
     
     <script src="js/colorpicker/colors.js"></script>
     <script src="js/colorpicker/colorPicker.js"></script>
@@ -201,11 +187,13 @@
                 // patch: false,
                 init: function (elm, colors) { // colors is a different instance (not connected to colorPicker)
                     elm.style.backgroundColor = elm.value;
-                    elm.style.color = colors.rgbaMixCustom.luminance > 0.22 ? '#222' : '#ddd';
                 },
                 // appendTo: document.querySelector('.samples')
             });
 
+            // Give canvas initial white background
+            contextReal.fillStyle = 'white';
+            contextReal.fillRect(0,0,canvasReal.width,canvasReal.height);
 
             //Stroke width selection
             let strokeWidth = 1;
@@ -329,7 +317,16 @@
             })
             $("#btn-painter").click(function() {
                 currentFunction = new Painter(contextReal, contextDraft);
-            })         
+            })
+            $("#btn-brush").click(function() {
+                currentFunction = new DrawBrush(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+            $("#btn-blur-brush").click(function() {
+                currentFunction = new DrawBlurBrush(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+            $("#btn-eraser").click(function() {
+                currentFunction = new Eraser(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })                           
 
         })
 

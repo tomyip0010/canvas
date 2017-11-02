@@ -52,9 +52,13 @@ table {
  /* ==== Common style ==== */
 /* ====================== */
 
+html {
+	overflow: visible;
+}
+
 body {
+	height: 675px;
 	width: 100%;
-	height: 100vh;
 }
 
 .full-wh {
@@ -85,6 +89,7 @@ body {
 .bg {
 	background-image: url('assets/background_gausian8.jpg');
 	background-position: center bottom;
+	background-size: 120%;
 	z-index: -10;
 }
 
@@ -133,6 +138,9 @@ body {
 	background: white;
 }
 
+.canvas-container-out {
+	width: 594px;
+}
 
   /* ====================== */
  /* ===== Glass tile ===== */
@@ -345,8 +353,8 @@ body {
 	z-index: 10;
 }
 
-#btn-brush4,
-#btn-brush3,
+#btn-brush,
+#btn-blur-brush,
 #btn-pencil,
 #btn-getcolor,
 #btn-eraser {
@@ -355,13 +363,13 @@ body {
 	cursor: pointer;
 }
 
-#btn-brush4 {
+#btn-brush {
 	left: 130px;
 	bottom: 0;
 	transform: rotate(25deg);
 }
 
-#btn-brush3 {
+#btn-blur-brush {
 	left: 90px;
 	bottom: 0;
 }
@@ -383,12 +391,12 @@ body {
 	transform: rotate(-30deg);
 }
 
-#btn-brush4:hover {
+#btn-brush:hover {
 	transform: rotate(25deg) translateY(-20px) translateX(-10px);
 }
 
 #btn-pencil:hover,
-#btn-brush3:hover {
+#btn-blur-brush:hover {
 	transform: translateY(-20px);
 }
 
@@ -408,6 +416,8 @@ body {
 .lower-panel {
 	position: absolute;
 	top: 590px;
+	box-shadow: 0 0 10px #555;
+	border-radius: 5px;
 }
 
 .lower-panel * {
@@ -417,10 +427,12 @@ body {
 
 .lower-panel-box {
 	padding: 6px 10px;
-	border-radius: 5px;
-	box-shadow: 0 0 10px #555;
 	width: fit-content;
-	margin-right: 5px;
+	border-right: 1px solid #666;
+}
+
+.lower-panel-box:last-child {
+	border-right: none;
 }
 
 .strokeicon {
@@ -429,7 +441,13 @@ body {
 	margin-right: 5px;
 }
 
-.lower-panel-box input {
+.paintericon {
+	width: 26px;
+	vertical-align: middle;
+	margin-right: 5px;
+}
+
+.stroke-option input {
 	width: 45px;
 	height: 22px;
 	padding-left: 10px;
@@ -437,6 +455,20 @@ body {
 	border: none;
 	border-radius: 5px;
 	box-shadow: inset 0 0 10px #555;
+}
+
+.colorstroke input,
+.colorfill input {
+	width: 30px;
+	height: 22px;
+	border: none;
+	border-radius: 5px;
+	box-shadow: inset 0 0 10px #555;
+	color: rgba(0,0,0,0) !important;
+}
+
+.cp-app {
+	top: 415px !important;
 }
 
 .switch {
