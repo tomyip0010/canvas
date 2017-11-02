@@ -61,11 +61,16 @@ class Translate extends PaintFunction {
     }
 
     onMouseMove(e, sub) {
-        let coord = [e.pageX - sub.offsetLeft, e.pageY - sub.offsetTop];
+        
+        let coord = [e.pageX - sub.offsetLeft - ml, e.pageY - sub.offsetTop - mt];
         if (this.contextDraft.isPointInPath(coord[0], coord[1])) {
-            document.body.style.cursor = "move";
+            $('.canvas-container').css({
+                'cursor': 'move'
+            })
         } else {
-            document.body.style.cursor = "default";
+            $('.canvas-container').css({
+                'cursor': 'crosshair'
+            })
         }
     }
 

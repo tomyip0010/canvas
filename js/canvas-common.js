@@ -13,8 +13,8 @@ let ml;
 let mt; 
 
 $(document).mousemove(function(e){  // For updating ml and mt
-    ml = parseInt($('.canvas-container').css('margin-left'));
-    mt = parseInt($('.canvas-container').css('margin-top'));
+    ml = parseInt($('.canvas-container-out').css('margin-left'));
+    mt = parseInt($('.canvas-container-out img:first-child').css('height'));
 })
 
 $('#canvas-draft').mousedown(function(e){
