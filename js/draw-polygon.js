@@ -31,7 +31,7 @@ class DrawPolygon extends PaintFunction {
         this.contextReal.setLineDash(this.strokeDash);
         this.contextDraft.setLineDash(this.strokeDash);
         this.contextGuide.lineWidth = this.strokeWidth;
-        this.contextReal.lineWidth = this.strokeWidth;
+        this.contextReal.lineWidth = this.strokeWidth*2;
         this.contextDraft.lineWidth = this.strokeWidth;
         this.contextGuide.strokeStyle = this.colorStroke;
         this.contextReal.strokeStyle = this.colorStroke;
