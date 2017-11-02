@@ -53,12 +53,13 @@ table {
 /* ====================== */
 
 html {
-	overflow: visible;
+	overflow: hidden;
 }
 
 body {
 	height: 675px;
 	width: 100%;
+	font-family: Arial, sans-serif
 }
 
 .full-wh {
@@ -68,6 +69,10 @@ body {
 
 .flexbox {
 	display: flex;
+}
+
+.flex-sb {
+	justify-content: space-between;
 }
 
 .flex-vc {
@@ -307,27 +312,36 @@ body {
 
 
   /* ====================== */
- /* ======= Palette ====== */
+ /* ======= Notepad ====== */
 /* ====================== */
 
-#palette {
+.notepad {
 	position: absolute;
 	right: 4%;
 	bottom: 0;
 }
 
-#palette img {
-	width: 200px;
+.font-options {
+	position: absolute;
+	left: 20%;
+	top: 20%;
+	color: #333;
 }
 
-#palette svg {
-	left: 15px;
-	top: 15px;
-	width: 170px;
+.font-options h3 {
+	font-weight: 700;
+	font-size: 45px;
+	margin-bottom: 10px;
 }
 
-.color {
-	cursor: pointer;
+.make-inlineb * {
+	display: inline-block;
+	margin-bottom: 15px;
+}
+
+.font-options h5 {
+	font-weight: 700;
+	font-size: 15px;
 }
 
 
@@ -370,12 +384,12 @@ body {
 }
 
 #btn-blur-brush {
-	left: 90px;
+	left: 80px;
 	bottom: 0;
 }
 
 #btn-pencil {
-	left: 120px;
+	left: 110px;
 	bottom: 0;
 }
 
@@ -465,6 +479,10 @@ body {
 	border-radius: 5px;
 	box-shadow: inset 0 0 10px #555;
 	color: rgba(0,0,0,0) !important;
+}
+
+.color {
+	cursor: pointer;
 }
 
 .cp-app {
