@@ -144,6 +144,11 @@ body {
 	cursor: pointer;
 }
 
+.lg-glass-tile:hover,
+.glass-tile:hover {
+	opacity: 1;
+}
+
 .hang-line {
 	width: 2px;
 	background: white;
@@ -178,6 +183,81 @@ body {
 	right: 4%;
 }
 
+  /* ====================== */
+ /* ==== Import Export === */
+/* ====================== */
+
+.import-export {
+	position: absolute;
+	top: 525px;
+	left: 7%;
+	width: fit-content;
+	margin: 0;
+}
+
+.import-export svg{
+	width: 80px;
+	overflow: visible;
+}
+
+#import,
+#export {
+	cursor: pointer;
+}
+
+.image-wrap {
+	position: absolute;
+	width: 36px;
+	height: 36px;
+	overflow: hidden;
+	right: 2px;
+	top: 5px;
+	cursor: pointer;
+	opacity: 0;
+}
+
+#image {
+	cursor: pointer;
+}
+
+#btn-export {
+	position: absolute;
+	width: 36px;
+	height: 36px;
+	overflow: hidden;
+	left: 2px;
+	top: 5px;
+	cursor: pointer;
+	opacity: 0;
+}
+
+
+  /* ====================== */
+ /* ===== Move Scale ===== */
+/* ====================== */
+
+.move-scale {
+	position: absolute;
+	top: 525px;
+	left: 43%;
+	width: fit-content;
+	margin: 0;
+}
+
+.move-scale svg{
+	width: 80px;
+	overflow: visible;
+}
+
+#move,
+#scale {
+	cursor: pointer;
+}
+
+#move:hover,
+#scale:hover {
+	transform: rotate(10deg) translateY(-10px);
+}
 
   /* ====================== */
  /* ====== Undo Redo ===== */
@@ -193,6 +273,7 @@ body {
 
 .undo-redo svg{
 	width: 80px;
+	overflow: visible;
 }
 
 #undo,
@@ -200,11 +281,12 @@ body {
 	cursor: pointer;
 }
 
-#undo path,
-#redo path {
-	fill: #333;
-	cursor: pointer;
+#undo:hover,
+#redo:hover {
+	transform: rotate(10deg) translateY(-10px);
 }
+
+
 
   /* ====================== */
  /* ======= Palette ====== */
@@ -228,4 +310,172 @@ body {
 
 .color {
 	cursor: pointer;
+}
+
+
+  /* ====================== */
+ /* ===== Pen holder ===== */
+/* ====================== */
+
+.pen-holder-group {
+	position: absolute;
+	left: 4%;
+	bottom: -30px;
+}
+
+.pen-holder {
+	position: absolute;
+	bottom: 150px;
+}
+
+#holder-front {
+	position: absolute;
+	top: 25px;
+	z-index: 10;
+}
+
+#btn-brush4,
+#btn-brush3,
+#btn-pencil,
+#btn-getcolor,
+#btn-eraser {
+	position: absolute;
+	z-index: 5;
+	cursor: pointer;
+}
+
+#btn-brush4 {
+	left: 130px;
+	bottom: 0;
+	transform: rotate(25deg);
+}
+
+#btn-brush3 {
+	left: 90px;
+	bottom: 0;
+}
+
+#btn-pencil {
+	left: 120px;
+	bottom: 0;
+}
+
+#btn-getcolor {
+	left: 25px;
+	bottom: 0;
+	transform: rotate(-10deg);
+}
+
+#btn-eraser {
+	left: 60px;
+	bottom: 80px;
+	transform: rotate(-30deg);
+}
+
+#btn-brush4:hover {
+	transform: rotate(25deg) translateY(-20px) translateX(-10px);
+}
+
+#btn-pencil:hover,
+#btn-brush3:hover {
+	transform: translateY(-20px);
+}
+
+#btn-eraser:hover {
+	transform: rotate(-30deg) translateY(-20px) translateX(10px);
+}
+
+#btn-getcolor:hover {
+	transform: rotate(-10deg) translateY(-20px) translateX(5px);
+}
+
+
+  /* ====================== */
+ /* ===== Lower Panel ==== */
+/* ====================== */
+
+.lower-panel {
+	position: absolute;
+	top: 590px;
+}
+
+.lower-panel * {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.lower-panel-box {
+	padding: 6px 10px;
+	border-radius: 5px;
+	box-shadow: 0 0 10px #555;
+	width: fit-content;
+	margin-right: 5px;
+}
+
+.strokeicon {
+	width: 25px;
+	vertical-align: middle;
+	margin-right: 5px;
+}
+
+.lower-panel-box input {
+	width: 45px;
+	height: 22px;
+	padding-left: 10px;
+	background: rgba(255, 255, 255, 0.5);
+	border: none;
+	border-radius: 5px;
+	box-shadow: inset 0 0 10px #555;
+}
+
+.switch {
+	position: relative;
+	display: inline-block;
+	width: 44px;
+	height: 24px;
+  }
+  
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	-webkit-transition: .4s;
+	transition: .4s;
+	box-shadow: inset 0 0 10px #555;
+	border-radius: 5px;
+}
+
+.slider:before {
+	position: absolute;
+	content: "";
+	height: 18px;
+	width: 18px;
+	left: 4px;
+	bottom: 3px;
+	border-radius: 5px;
+	background-color: white;
+	-webkit-transition: .4s;
+	transition: .4s;
+	box-shadow: 0 0 10px #555;
+}
+
+input:checked + .slider {
+	background-color: yellowgreen;
+}
+
+input:focus + .slider {
+	box-shadow: 0 0 1px yellowgreen;
+}
+
+input:checked + .slider:before {
+	-webkit-transform: translateX(18px);
+	-ms-transform: translateX(18px);
+	transform: translateX(18px);
 }

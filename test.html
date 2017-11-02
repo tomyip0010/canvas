@@ -94,6 +94,13 @@
         </div>
         <div class="colorfill">
             Fill color: 
+<<<<<<< Updated upstream
+=======
+            <input class="color" value="rgb(255, 255, 255)" data-colormode="rgb" readonly="">
+        </div>
+        <div class="colorbackground">
+            Background color: 
+>>>>>>> Stashed changes
             <input class="color" value="rgb(255, 255, 255)" data-colormode="rgb" readonly="">
         </div>
     </div>
@@ -110,12 +117,18 @@
     <script src="js/undo-redo.js"></script>
     <script src="js/get-color.js"></script>
     <script src="js/draw-pencil.js"></script>
+<<<<<<< Updated upstream
     <script src="js/translate.js"></script>
     <script src="js/scale.js"></script>
     <script src="js/import-export.js"></script>
     <script src="js/emoji.js"></script>
     <script src="js/painter.js"></script>
 
+=======
+    <script src="js/resize.js"></script>
+    <script src="js/import-export.js"></script>
+    
+>>>>>>> Stashed changes
     <script src="js/colorpicker/colors.js"></script>
     <script src="js/colorpicker/colorPicker.js"></script>
     <script src="js/colorpicker/colorPicker.data.js"></script>
@@ -162,6 +175,13 @@
                 // Fill
                 colorfill = $('.colorfill input').val();
                 currentFunction.changeFillColor(colorfill);
+<<<<<<< Updated upstream
+=======
+                // Background
+                $('#canvas-real').css({
+                    'background': $('.colorbackground input').val()
+                });
+>>>>>>> Stashed changes
             })
 
             // Change field to either stroke or fill for get color function
@@ -206,6 +226,7 @@
             $('#btn-pencil').click(function () {
                 currentFunction = new DrawPencil(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
             })
+<<<<<<< Updated upstream
             $('#btn-translate').click(function(){
                 currentFunction = new Translate(contextReal, contextDraft);
             })
@@ -217,6 +238,10 @@
             })
             $("#btn-painter").click(function() {
                 currentFunction = new Painter(contextReal, contextDraft);
+=======
+            $('#btn-resize').click(function(){
+                currentFunction = new Resize(contextReal, contextDraft);
+>>>>>>> Stashed changes
             })
         })
     </script>
