@@ -550,3 +550,77 @@ input:checked + .slider:before {
 	-ms-transform: translateX(18px);
 	transform: translateX(18px);
 }
+
+  /* ====================== */
+ /* ===== Media Rule ===== */
+/* ====================== */
+
+@media screen and (max-width: 1024px) {
+	.pen-holder-group {
+		left: 1%;
+	}
+
+	.notepad {
+		right: 1%;
+	}
+}
+
+@media screen and (max-width: 992px) {
+	body,
+	html {
+		height: 100vh;
+	}
+
+	.notepad,
+	#btn-text {
+		display: none;
+	}
+
+	.drawing-board {
+		width: 95%;
+	}
+
+	.canvas-container-out {
+		height: 100vh;
+	}
+
+	.canvas-container {
+		height: fit-content;
+	}
+
+	.import-export,
+	.move-scale,
+	.undo-redo {
+		top: 73%;
+	}
+
+	.lower-panel {
+		top: 86%;
+	}
+
+	#line-drawing1 {
+		left: 83%;
+		z-index: 20;
+	}
+
+	#line-drawing2 {
+		left: 90%;
+		z-index: 20;
+	}
+
+	#shape-drawing1 {
+		transform: rotate(180deg);
+		bottom: 0;
+		right: 11%;
+	}
+
+	#shape-drawing2 {
+		transform: rotate(180deg);
+		bottom: 0;
+	}
+
+	.cp-app {
+		top: 55% !important;
+	}
+
+}

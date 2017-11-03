@@ -102,7 +102,7 @@
     </div>
 
     <!-- Glass tiles -->
-    <div id="line-drawing1" class="posabs flexbox flex-col flex-vc">
+    <div id="line-drawing1" class="posabs flexbox flex-col flex-vc fit-content">
         <div class="hang-line hl-short"></div>
         <img class="glass-tile" id="btn-straight-line" src="style/assets/export/straight-line.svg" alt="Straight line icon">
         <div class="hang-line hl-Vshort"></div>
@@ -111,7 +111,7 @@
         <img class="glass-tile" id="btn-painter" src="style/assets/export/painter.svg" alt="Painter icon">
     </div>
 
-    <div id="line-drawing2" class="posabs flexbox flex-col flex-vc">
+    <div id="line-drawing2" class="posabs flexbox flex-col flex-vc fit-content">
         <div class="hang-line hl-long"></div>
 
         <img class="glass-tile" id="btn-text" src="style/assets/export/text.svg" alt="Text icon">
@@ -220,6 +220,15 @@
 
     <script>
         $(function () {
+
+            // Screen size changes canvas size, can't do via css
+            if (parseInt($('html').css('width')) <= 992) {
+                $('.canvas').attr('width', $('.canvas-container').css('width'));
+                $('.canvas').attr('height', '297');
+            } else {
+                $('.canvas').attr('width', '594');
+                $('.canvas').attr('height', '420');
+            }
 
             // Color picker
             let colors = jsColorPicker('.color', {
