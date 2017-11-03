@@ -1,0 +1,481 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+  /* ====================== */
+ /* ==== Common style ==== */
+/* ====================== */
+
+body {
+	width: 100%;
+	height: 100vh;
+}
+
+.full-wh {
+	width: 100%;
+	height: 100%;
+}
+
+.flexbox {
+	display: flex;
+}
+
+.flex-vc {
+	align-items: center;
+}
+
+.flex-hc {
+	justify-content: center;
+}
+
+.flex-col {
+	flex-direction: column;
+}
+
+.flex-end {
+	justify-content: flex-end;
+}
+
+.bg {
+	background-image: url('assets/background_gausian8.jpg');
+	background-position: center bottom;
+	z-index: -10;
+}
+
+.posabs {
+	position: absolute;
+	top: 0;
+}
+
+.posrel {
+	position: relative;
+}
+
+.m-auto {
+	margin: auto;
+}
+
+.fit-content {
+	width: fit-content;
+	height: fit-content;
+}
+
+  /* ====================== */
+ /* ==== Drawing board === */
+/* ====================== */
+
+.drawing-board {
+	width: 550px;
+}
+
+  /* ====================== */
+ /* ======= Canvas ======= */
+/* ====================== */
+
+.canvas-container {
+	position: relative;
+	cursor: crosshair;
+	margin: 0 auto;
+	width: fit-content;
+	height: fit-content;
+	background: white;
+}
+
+
+  /* ====================== */
+ /* ===== Glass tile ===== */
+/* ====================== */
+
+.glass-tile {
+	width: 50px;
+	opacity: 0.7;
+	cursor: pointer;
+}
+
+.lg-glass-tile {
+	width: 65px;
+	opacity: 0.7;
+	cursor: pointer;
+}
+
+.lg-glass-tile:hover,
+.glass-tile:hover {
+	opacity: 1;
+}
+
+.hang-line {
+	width: 2px;
+	background: white;
+	opacity: 0.5;
+}
+
+.hl-short {
+	height: 50px;
+}
+
+.hl-Vshort {
+	height: 33px;
+}
+
+.hl-long {
+	height: 100px;
+}
+
+#line-drawing1 {
+	left: 5%;
+}
+
+#line-drawing2 {
+	left: 12%;
+}
+
+#shape-drawing1 {
+	right: 12%;
+}
+
+#shape-drawing2 {
+	right: 4%;
+}
+
+  /* ====================== */
+ /* ==== Import Export === */
+/* ====================== */
+
+.import-export {
+	position: absolute;
+	top: 525px;
+	left: 7%;
+	width: fit-content;
+	margin: 0;
+}
+
+.import-export svg{
+	width: 80px;
+	overflow: visible;
+}
+
+#import,
+#export {
+	cursor: pointer;
+}
+
+.image-wrap {
+	position: absolute;
+	width: 36px;
+	height: 36px;
+	overflow: hidden;
+	right: 2px;
+	top: 5px;
+	cursor: pointer;
+	opacity: 0;
+}
+
+#image {
+	cursor: pointer;
+}
+
+#btn-export {
+	position: absolute;
+	width: 36px;
+	height: 36px;
+	overflow: hidden;
+	left: 2px;
+	top: 5px;
+	cursor: pointer;
+	opacity: 0;
+}
+
+
+  /* ====================== */
+ /* ===== Move Scale ===== */
+/* ====================== */
+
+.move-scale {
+	position: absolute;
+	top: 525px;
+	left: 43%;
+	width: fit-content;
+	margin: 0;
+}
+
+.move-scale svg{
+	width: 80px;
+	overflow: visible;
+}
+
+#move,
+#scale {
+	cursor: pointer;
+}
+
+#move:hover,
+#scale:hover {
+	transform: rotate(10deg) translateY(-10px);
+}
+
+  /* ====================== */
+ /* ====== Undo Redo ===== */
+/* ====================== */
+
+.undo-redo {
+	position: absolute;
+	top: 525px;
+	left: 80%;
+	width: fit-content;
+	margin: 0;
+}
+
+.undo-redo svg{
+	width: 80px;
+	overflow: visible;
+}
+
+#undo,
+#redo {
+	cursor: pointer;
+}
+
+#undo:hover,
+#redo:hover {
+	transform: rotate(10deg) translateY(-10px);
+}
+
+
+
+  /* ====================== */
+ /* ======= Palette ====== */
+/* ====================== */
+
+#palette {
+	position: absolute;
+	right: 4%;
+	bottom: 0;
+}
+
+#palette img {
+	width: 200px;
+}
+
+#palette svg {
+	left: 15px;
+	top: 15px;
+	width: 170px;
+}
+
+.color {
+	cursor: pointer;
+}
+
+
+  /* ====================== */
+ /* ===== Pen holder ===== */
+/* ====================== */
+
+.pen-holder-group {
+	position: absolute;
+	left: 4%;
+	bottom: -30px;
+}
+
+.pen-holder {
+	position: absolute;
+	bottom: 150px;
+}
+
+#holder-front {
+	position: absolute;
+	top: 25px;
+	z-index: 10;
+}
+
+#btn-brush4,
+#btn-brush3,
+#btn-pencil,
+#btn-getcolor,
+#btn-eraser {
+	position: absolute;
+	z-index: 5;
+	cursor: pointer;
+}
+
+#btn-brush4 {
+	left: 130px;
+	bottom: 0;
+	transform: rotate(25deg);
+}
+
+#btn-brush3 {
+	left: 90px;
+	bottom: 0;
+}
+
+#btn-pencil {
+	left: 120px;
+	bottom: 0;
+}
+
+#btn-getcolor {
+	left: 25px;
+	bottom: 0;
+	transform: rotate(-10deg);
+}
+
+#btn-eraser {
+	left: 60px;
+	bottom: 80px;
+	transform: rotate(-30deg);
+}
+
+#btn-brush4:hover {
+	transform: rotate(25deg) translateY(-20px) translateX(-10px);
+}
+
+#btn-pencil:hover,
+#btn-brush3:hover {
+	transform: translateY(-20px);
+}
+
+#btn-eraser:hover {
+	transform: rotate(-30deg) translateY(-20px) translateX(10px);
+}
+
+#btn-getcolor:hover {
+	transform: rotate(-10deg) translateY(-20px) translateX(5px);
+}
+
+
+  /* ====================== */
+ /* ===== Lower Panel ==== */
+/* ====================== */
+
+.lower-panel {
+	position: absolute;
+	top: 590px;
+}
+
+.lower-panel * {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.lower-panel-box {
+	padding: 6px 10px;
+	border-radius: 5px;
+	box-shadow: 0 0 10px #555;
+	width: fit-content;
+	margin-right: 5px;
+}
+
+.strokeicon {
+	width: 25px;
+	vertical-align: middle;
+	margin-right: 5px;
+}
+
+.lower-panel-box input {
+	width: 45px;
+	height: 22px;
+	padding-left: 10px;
+	background: rgba(255, 255, 255, 0.5);
+	border: none;
+	border-radius: 5px;
+	box-shadow: inset 0 0 10px #555;
+}
+
+.switch {
+	position: relative;
+	display: inline-block;
+	width: 44px;
+	height: 24px;
+  }
+  
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	-webkit-transition: .4s;
+	transition: .4s;
+	box-shadow: inset 0 0 10px #555;
+	border-radius: 5px;
+}
+
+.slider:before {
+	position: absolute;
+	content: "";
+	height: 18px;
+	width: 18px;
+	left: 4px;
+	bottom: 3px;
+	border-radius: 5px;
+	background-color: white;
+	-webkit-transition: .4s;
+	transition: .4s;
+	box-shadow: 0 0 10px #555;
+}
+
+input:checked + .slider {
+	background-color: yellowgreen;
+}
+
+input:focus + .slider {
+	box-shadow: 0 0 1px yellowgreen;
+}
+
+input:checked + .slider:before {
+	-webkit-transform: translateX(18px);
+	-ms-transform: translateX(18px);
+	transform: translateX(18px);
+}

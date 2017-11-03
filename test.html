@@ -96,6 +96,9 @@
             Fill color: 
             <input class="color" value="rgb(255, 255, 255)" data-colormode="rgb" readonly="">
         </div>
+        <div class="colorbackground">
+            <input class="color" value="rgb(255, 255, 255)" data-colormode="rgb" readonly="">
+        </div>
     </div>
 
     <script src="js/canvas-common.js"></script>
@@ -163,6 +166,10 @@
                 // Fill
                 colorfill = $('.colorfill input').val();
                 currentFunction.changeFillColor(colorfill);
+                // Background
+                $('#canvas-real').css({
+                    'background': $('.colorbackground input').val()
+                });
             })
 
             // Change field to either stroke or fill for get color function
@@ -218,6 +225,9 @@
             })
             $("#btn-painter").click(function() {
                 currentFunction = new Painter(contextReal, contextDraft);
+            })
+            $('#btn-resize').click(function(){
+                currentFunction = new Resize(contextReal, contextDraft);
             })
         })
     </script>

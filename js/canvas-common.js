@@ -9,14 +9,15 @@ let dragging = false;
 let hasInput = false;   //tracking if there is input
 let hasScale = false;
 let hasTranslate = false;
+let mobile = false;
 let ml; 
 let mt; 
 
 function desktopMode(){
     $(document).mousemove(function(e){  // For updating ml and mt
-        ml = parseInt($('.canvas-container').css('margin-left'));
-        mt = parseInt($('.canvas-container').css('margin-top'));
-    })
+        ml = parseInt($('.canvas-container-out').css('margin-left'));
+        mt = parseInt($('.canvas-container-out img:first-child').css('height'));
+    });
 
     $('#canvas-draft').mousedown(function(e){
         let mouseX = e.pageX - this.offsetLeft - ml;
@@ -61,6 +62,7 @@ function desktopMode(){
 }
 
 function mobileMode(){
+    mobile = true;
     var hammertime = new Hammer(canvasDraft);
     hammertime.on('drag swipe tap press pan panup pandown', function(ev) {
     //console.log(ev.type);
@@ -72,23 +74,27 @@ function mobileMode(){
             currentFunction.onMouseDown([mouseX,mouseY],ev);
             //console.log(mouseX+":"+mouseY + ":"+ev.center.x + ","+ev.center.y);
         })*/
-    hammertime.on('panstart',function(ev){
-        let mouseX = ev.center.x - canvasDraft.offsetLeft;
-        let mouseY = ev.center.y - canvasDraft.offsetTop;
+
+    hammertime.on('panstart press tap',function(ev){ 
+        ml = parseInt($('.canvas-container-out').css('margin-left'));
+        mt = parseInt($('.canvas-container-out img:first-child').css('height'));
+        let mouseX = ev.center.x - canvasReal.offsetLeft  - ml;
+        let mouseY = ev.center.y - canvasReal.offsetTop  - mt;
         currentFunction.onMouseDown([mouseX,mouseY],ev);
         dragging = true;
-        //console.log(mouseX+":"+mouseY + ":"+ev.center.x + ","+ev.center.y);
+        console.log("ev:" + ev);
+        console.log(mouseX+":"+mouseY + ":"+ev.center.x + ","+ev.center.y);
     })
     hammertime.on('panmove',function(ev){
-        let mouseX = ev.center.x - canvasDraft.offsetLeft;
-        let mouseY = ev.center.y - canvasDraft.offsetTop;
+        let mouseX = ev.center.x - canvasReal.offsetLeft - ml;
+        let mouseY = ev.center.y - canvasReal.offsetTop - mt;
         currentFunction.onDragging([mouseX,mouseY],ev);
     // currentFunction.onMouseMove([mouseX,mouseY],ev);
     // console.log("panmove");
     });
     hammertime.on('panend',function(ev){
-        let mouseX = ev.center.x - canvasDraft.offsetLeft;
-        let mouseY = ev.center.y - canvasDraft.offsetTop;
+        let mouseX = ev.center.x - canvasReal.offsetLeft - ml;
+        let mouseY = ev.center.y - canvasReal.offsetTop - mt;
         currentFunction.onMouseUp([mouseX,mouseY],ev);
     // console.log("panend");
     });

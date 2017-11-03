@@ -62,11 +62,15 @@ class Scale extends PaintFunction {
     }
 
     onMouseMove(e, sub) {
-        let coord = [e.pageX - sub.offsetLeft, e.pageY - sub.offsetTop];
-        if (this.contextDraft.isPointInStroke(coord[0], coord[1])) {
-            document.body.style.cursor = "se-resize";
+        let coord = [e.pageX - sub.offsetLeft - ml, e.pageY - sub.offsetTop - mt];
+        if(this.contextDraft.isPointInStroke(coord[0],coord[1])) {
+            $('.canvas-container').css({
+                'cursor': 'se-resize'
+            }) 
         } else {
-            document.body.style.cursor = "default";
+            $('.canvas-container').css({
+                'cursor': 'crosshair'
+            })
         }
     }
 

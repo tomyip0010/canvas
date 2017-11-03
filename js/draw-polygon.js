@@ -31,7 +31,7 @@ class DrawPolygon extends PaintFunction {
         this.contextReal.setLineDash(this.strokeDash);
         this.contextDraft.setLineDash(this.strokeDash);
         this.contextGuide.lineWidth = this.strokeWidth;
-        this.contextReal.lineWidth = this.strokeWidth;
+        this.contextReal.lineWidth = this.strokeWidth*2;
         this.contextDraft.lineWidth = this.strokeWidth;
         this.contextGuide.strokeStyle = this.colorStroke;
         this.contextReal.strokeStyle = this.colorStroke;
@@ -50,6 +50,17 @@ class DrawPolygon extends PaintFunction {
         if (!(this.finish)) {
             //this.contextDraft.strokeStyle = 'black';   <-- deactivated
             this.draw(coord[0], coord[1], this.contextDraft);
+        }
+        if(mobile) {
+            if(this.index > 0 && !(this.finish)) {
+                let distance = Math.sqrt(Math.pow(this.origX-coord[0],2)+Math.pow(this.origY-coord[1],2));  //allowance for 5px error for closing the polygon
+                if (distance <= 5) {
+                    this.contextDraft.strokeStyle = 'rgb(75,222,99)';   //change to green line when good to complete the polygon
+                    this.draw(coord[0], coord[1], this.contextDraft);
+                } else {
+                    this.draw(coord[0], coord[1], this.contextDraft);
+                }
+            } 
         }
     }
 

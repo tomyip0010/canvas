@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <link href="style/styleGUI.css" rel="stylesheet">
+</head>
+
+<body class="posrel">
+
+    <!-- Background -->
+    <div class="full-wh bg posabs"></div>
+    
+    <!-- Drawing board and canvas -->
+    <div class="canvas-container-out flexbox flex-vc flex-col fit-content m-auto posrel">
+        <img class="drawing-board" src="style/assets/export/drawing-board-top.png" alt="Drawing board top">
+        <div class="canvas-container">
+            <canvas id="canvas-guide" class="canvas posabs" width='594' height='420'></canvas>
+            <canvas id="canvas-draft" class="canvas posabs" width='594' height='420'></canvas>
+            <canvas id="canvas-real" class="canvas" width='594' height='420'>Your browser does not support canvas.</canvas>
+        </div>
+        <img class="drawing-board"  src="style/assets/export/drawing-board-bottom.png" alt="Drawing board bottom">
+        <!-- Import Export -->
+        <div class="import-export">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 137.04 87.04">
+                <g id="export">
+                    <rect x="60.33" y="10.33" width="68" height="68" transform="matrix(-0.95, -0.3, 0.3, -0.95, 170.78, 115.18)" style="fill:#ff6"/>
+                    <path d="M91.55,48.51c.77-2.69,1.51-5.39,2.32-8.06.23-.78.06-1.12-.73-1.3-1.16-.27-2.3-.63-3.44-1-.41-.12-1-.1-1.07-.68s.39-.83.83-1.08l8.79-5c1.71-1,3.45-1.93,5.14-2.94.93-.56,1.47-.35,2,.58,2.54,4.75,5.12,9.48,7.68,14.21.19.35.48.69.16,1.13s-.81.25-1.23.14a31,31,0,0,1-3.08-.9c-1.09-.43-1.54-.19-1.86,1-1.41,5.2-2.93,10.37-4.41,15.55-.43,1.5-.49,1.53-2,1.11-3.48-1-7-2-10.45-3-1-.28-1.29-.71-1-1.75C90.06,53.91,90.79,51.2,91.55,48.51Z" style="fill:#333"/>
+                    <path d="M93.24,67.7,75.31,62.58c-1.62-.46-1.84-.87-1.38-2.49.65-2.3,1.33-4.59,2-6.89.27-1,.82-1.55,1.86-1.3S79,53,78.7,54c-.48,1.75-1,3.5-1.5,5.22-.25.78,0,1.07.73,1.29Q94,65,110.1,69.65c.85.25,1.16,0,1.36-.79.44-1.75,1-3.48,1.47-5.23.26-.93.76-1.49,1.78-1.19s1.16,1,.89,2c-.72,2.45-1.4,4.91-2.11,7.36-.38,1.29-.75,1.49-2.09,1.11Z" style="fill:#333"/>
+                </g>
+                <g id="import" onClick="download()">
+                    <polygon points="0.33 68.33 70.33 72.33 71.33 4.33 3.72 1 0.33 68.33" style="fill:#666"/>
+                    <rect x="1.33" y="1.33" width="68" height="68" transform="translate(69.22 72.05) rotate(-177.71)" style="fill:#ff6"/>
+                    <path d="M41.3,27.35c-.12,2.8-.21,5.59-.36,8.39,0,.77.13,1.12,1,1.11,1.27,0,2.55.08,3.82.14.41,0,.86,0,1,.51s-.14.76-.46,1.06q-5.93,5.58-11.85,11.17a1.15,1.15,0,0,1-1.95-.08c-3.62-4.05-7.26-8.07-10.89-12.11-.27-.3-.6-.6-.37-1.08S21.88,36,22.3,36c1.19.05,2.39,0,3.57.17,1,.1,1.26-.18,1.29-1.17.17-5.43.42-10.85.65-16.28.07-1.65.07-1.65,1.71-1.58,3.62.15,7.23.33,10.85.43,1,0,1.36.35,1.3,1.39C41.5,21.76,41.42,24.55,41.3,27.35Z" style="fill:#333"/>
+                    <path d="M33.07,58.46l-18.63-.77c-1.68-.07-1.88-.3-1.81-2,.1-2.43.22-4.85.29-7.28,0-1,.41-1.7,1.51-1.65s1.31.8,1.26,1.74c-.09,1.68-.08,3.38-.24,5.05-.1,1.1.17,1.47,1.35,1.51,9.21.33,18.42.73,27.63,1.11,1.85.08,3.7.12,5.55.24.75,0,1-.17,1-.93,0-1.77.13-3.54.21-5.3,0-1,.31-1.83,1.51-1.84,1,0,1.45.69,1.4,2q-.14,3.58-.3,7.15c-.06,1.44-.45,1.81-1.89,1.75Z" style="fill:#333"/>
+                </g>
+            </svg>
+            <div class="image-wrap">
+                <input type="file" id="image" accept="image/*">
+            </div>
+            <a id="save" download="image.png"><button id="btn-export" onClick="download()">Save</button></a>
+        </div>
+        <div class="move-scale">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 137.04 87.04">
+                <g id="move">
+                    <rect x="8.71" y="10.33" width="68" height="68" transform="translate(-11.43 15.04) rotate(-17.65)" style="fill:#ff6"/>
+                    <line x1="49.38" y1="65.32" x2="37.32" y2="28.05" style="fill:none;stroke:#333;stroke-miterlimit:10;stroke-width:3.5076549649238724px"/>
+                    <polygon points="53.55 55.23 49 64.15 40.09 59.59 41.94 65.31 50.85 69.86 55.41 60.95 53.55 55.23" style="fill:#333"/>
+                    <polygon points="46.61 33.78 37.7 29.23 33.15 38.15 31.3 32.43 35.85 23.52 44.76 28.07 46.61 33.78" style="fill:#333"/>
+                    <line x1="24.72" y1="52.72" x2="61.99" y2="40.66" style="fill:none;stroke:#333;stroke-miterlimit:10;stroke-width:3.5076549649238724px"/>
+                    <polygon points="34.8 56.9 25.89 52.34 30.45 43.43 24.73 45.28 20.18 54.19 29.09 58.74 34.8 56.9" style="fill:#333"/>
+                    <polygon points="56.26 49.95 60.81 41.04 51.9 36.48 57.61 34.63 66.52 39.19 61.97 48.1 56.26 49.95" style="fill:#333"/>
+                </g>
+                <g id="scale">
+                    <polygon points="136.71 68.33 66.71 72.33 65.71 4.33 133.32 1 136.71 68.33" style="fill:#666"/>
+                    <rect x="67.71" y="1.33" width="68" height="68" transform="translate(-1.33 4.09) rotate(-2.29)" style="fill:#ff6"/><line x1="87.57" y1="52.47" x2="119.85" y2="20.19" style="fill:none;stroke:#333;stroke-miterlimit:10;stroke-width:4.531250000000018px"/>
+                    <polygon points="101.63 51.34 88.69 51.35 88.7 38.41 83.21 43.9 83.21 56.83 96.14 56.83 101.63 51.34" style="fill:#333"/>
+                    <polygon points="118.72 34.25 118.72 21.32 105.79 21.32 111.28 15.83 124.21 15.83 124.21 28.76 118.72 34.25" style="fill:#333"/>
+                </g>
+            </svg>
+        </div>
+        <!-- Undo Redo -->
+        <div class="undo-redo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 137.04 87.04">
+                <g id="undo">
+                    <rect x="8.71" y="10.33" width="68" height="68" transform="translate(-11.43 15.04) rotate(-17.65)" style="fill:#ff6"/>
+                    <path d="M47.46,62.09a10.45,10.45,0,0,0-1.37.63l-.42.15-1.31.52a1.16,1.16,0,0,0-.49.19L42.61,64l-.42.13-.49.12,1-.63a1.06,1.06,0,0,0,.47-.26,9.87,9.87,0,0,0,1.55-1,1.68,1.68,0,0,0,.54-.35A10.14,10.14,0,0,0,47,60.67a3.58,3.58,0,0,0,.72-.64,19.64,19.64,0,0,0,3.92-5.37,11.8,11.8,0,0,0,1.3-4.75,2.08,2.08,0,0,0,0-.75,7.61,7.61,0,0,0-.06-1.84l-.09-.61a5.59,5.59,0,0,0-.31-1.38.88.88,0,0,0-.13-.42A5.16,5.16,0,0,0,52,43.72l-.19-.38a3.87,3.87,0,0,0-.56-1c-.05-.11-.08-.24-.2-.3a3.77,3.77,0,0,0-.58-.83L50.23,41a3.18,3.18,0,0,0-.73-.78.46.46,0,0,0-.23-.21,2.66,2.66,0,0,0-.74-.61.94.94,0,0,0-.38-.27,2.22,2.22,0,0,0-.68-.41.7.7,0,0,0-.34-.18,2.06,2.06,0,0,0-.72-.32A1,1,0,0,0,46,38a2.65,2.65,0,0,0-.92-.23.23.23,0,0,0-.23,0,3,3,0,0,0-1.11-.12l-.39,0a4.49,4.49,0,0,0-1.08.07l-.44.06a4.17,4.17,0,0,0-1.12.29.83.83,0,0,0-.5.17,4.56,4.56,0,0,0-1.37.64,1.41,1.41,0,0,0-.54.33,7.11,7.11,0,0,0-1.83,1.53,10.1,10.1,0,0,0-1.87,2.52c-.35.62-.35.62.34.81a4.13,4.13,0,0,0,.92.29l.15.06a4.51,4.51,0,0,0,1,.32.83.83,0,0,0,.42.14,2.5,2.5,0,0,0,.71.23,1,1,0,0,0,.43.14l.75.3.2.13a4.52,4.52,0,0,1,.64.81l.14.42a2.42,2.42,0,0,1-1.33,2.57,2.51,2.51,0,0,0-.6.44,15.22,15.22,0,0,0-1.66,1.19l-.6.4L34.4,52.71a1.57,1.57,0,0,0-.52.37,16.5,16.5,0,0,0-1.66,1.19,2.55,2.55,0,0,0-.6.42A17.18,17.18,0,0,0,30,55.88a1.57,1.57,0,0,0-.53.36l-1.66,1.18-.48.24a5.24,5.24,0,0,1-1.13.2h-.22l-1-.22-.34-.16-.79-.6-.13-.15-.54-.92L23,55.4l-.39-1.26-.14-.42-.39-1.26L22,52l-.39-1.26-.14-.42L21,49.09l-.14-.42-.39-1.26L20.37,47,20,45.73l-.14-.42L19.44,44l-.14-.42-.39-1.26-.13-.42a2.26,2.26,0,0,1,1.15-2.23l.42-.15a3.11,3.11,0,0,1,1.1,0l.16,0a3.41,3.41,0,0,0,.84.28,1,1,0,0,0,.44.15,3.33,3.33,0,0,0,.83.28l.42.14a2.67,2.67,0,0,0,.71.24,1,1,0,0,0,.43.14c.18.07.34.25.5-.05a26.72,26.72,0,0,1,3-4.57l.82-.88,2-1.86.58-.42,1.54-1,.54-.33,1.43-.73.48-.18,1.25-.48.42-.13,1.18-.34a.82.82,0,0,0,.44-.08l1.13-.2.44-.06,1.09-.1a.5.5,0,0,0,.36,0,3.69,3.69,0,0,0,.9,0,1,1,0,0,0,.5,0l.95.08.22,0,1.15.19.15,0,.94.25.43.14.83.3a.63.63,0,0,0,.33.15l.74.33A.68.68,0,0,0,50,31l.77.41.33.2.8.52.25.17.65.5.34.27.74.65a.68.68,0,0,0,.28.26l.52.56.26.28.67.79a.3.3,0,0,0,.17.22l.56.84.26.39.52.93a.53.53,0,0,0,.18.31l.49,1.14a.5.5,0,0,0,.15.33l.41,1.25.13.42.28,1.41.11.5L59,45.13l0,.71-.18,2.29-.17,1.06a17.66,17.66,0,0,1-2.13,5.27,23.17,23.17,0,0,1-2,2.59l-.77.74L52,59.34a1.64,1.64,0,0,0-.53.37l-1.61,1.06a1.94,1.94,0,0,0-.54.29l-1.43.8A1,1,0,0,0,47.46,62.09Z" style="fill:#333"/>
+                </g>
+                <g id="redo">
+                    <polygon points="136.71 68.33 66.71 72.33 65.71 4.33 133.32 1 136.71 68.33" style="fill:#666"/>
+                    <rect x="67.71" y="1.33" width="68" height="68" transform="translate(-1.33 4.09) rotate(-2.29)" style="fill:#ff6"/>
+                    <path d="M96.18,51.28a9.76,9.76,0,0,1,1.28.59l.39.14,1.23.48a1.08,1.08,0,0,1,.46.17l1.17.4.39.12.45.11-.91-.58a1,1,0,0,1-.44-.24,9.22,9.22,0,0,1-1.44-.89,1.57,1.57,0,0,1-.5-.33,9.46,9.46,0,0,1-1.66-1.3,3.34,3.34,0,0,1-.67-.6,18.34,18.34,0,0,1-3.66-5,11,11,0,0,1-1.21-4.43,1.94,1.94,0,0,1,0-.7,7.1,7.1,0,0,1,.06-1.72l.08-.57a5.22,5.22,0,0,1,.29-1.29.82.82,0,0,1,.12-.39,4.82,4.82,0,0,1,.39-1.1l.18-.36a3.61,3.61,0,0,1,.53-1c0-.1.07-.22.18-.28a3.52,3.52,0,0,1,.54-.77l.19-.21a3,3,0,0,1,.68-.73.43.43,0,0,1,.22-.2,2.48,2.48,0,0,1,.69-.57.88.88,0,0,1,.35-.25,2.07,2.07,0,0,1,.63-.39.66.66,0,0,1,.32-.17,1.93,1.93,0,0,1,.68-.3.93.93,0,0,1,.41-.14,2.47,2.47,0,0,1,.86-.21.22.22,0,0,1,.22,0,2.78,2.78,0,0,1,1-.11l.36,0a4.19,4.19,0,0,1,1,.07l.41.06a3.9,3.9,0,0,1,1.05.27A.77.77,0,0,1,103,29a4.26,4.26,0,0,1,1.28.6,1.32,1.32,0,0,1,.51.3,6.64,6.64,0,0,1,1.71,1.43,9.43,9.43,0,0,1,1.75,2.35c.33.58.33.58-.31.75a3.85,3.85,0,0,1-.86.28l-.14.05a4.21,4.21,0,0,1-.92.3.77.77,0,0,1-.39.13,2.34,2.34,0,0,1-.66.22.89.89,0,0,1-.4.13l-.7.28-.19.12a4.22,4.22,0,0,0-.6.76l-.13.39a2.26,2.26,0,0,0,1.24,2.4,2.34,2.34,0,0,1,.56.41A14.21,14.21,0,0,1,106.26,41l.56.38,1.56,1.14a1.47,1.47,0,0,1,.49.34A15.4,15.4,0,0,1,110.42,44a2.38,2.38,0,0,1,.56.39,16,16,0,0,1,1.55,1.12,1.47,1.47,0,0,1,.5.34l1.55,1.1.45.22a4.89,4.89,0,0,0,1.05.19h.2l.9-.2.31-.15.74-.56.12-.14.5-.86L119,45l.37-1.18.13-.39.37-1.18.13-.39.37-1.18.13-.39.37-1.18.13-.39.37-1.18.13-.39.37-1.18.13-.39.37-1.18.13-.39.37-1.18.12-.4a2.11,2.11,0,0,0-1.07-2.08l-.39-.14a2.9,2.9,0,0,0-1,0l-.15,0a3.19,3.19,0,0,1-.79.26.93.93,0,0,1-.41.14,3.11,3.11,0,0,1-.77.26l-.4.13a2.49,2.49,0,0,1-.67.22.88.88,0,0,1-.4.13c-.16.07-.32.23-.46-.05a24.94,24.94,0,0,0-2.84-4.27l-.77-.82-1.88-1.73-.54-.39-1.44-1-.51-.31-1.34-.69-.45-.17-1.17-.45-.4-.12-1.1-.32a.76.76,0,0,1-.41-.08l-1.05-.19-.41-.06-1-.09a.47.47,0,0,1-.34,0,3.44,3.44,0,0,1-.84,0,1,1,0,0,1-.46,0l-.89.07-.21,0L97.31,21l-.14,0-.88.23-.4.13-.78.28a.58.58,0,0,1-.31.14l-.7.31a.63.63,0,0,1-.31.16l-.72.38-.31.18-.75.48-.23.16-.61.47-.32.25-.69.61a.63.63,0,0,1-.26.24l-.48.52-.25.27-.63.74a.28.28,0,0,1-.16.21l-.52.78-.24.37-.49.87a.5.5,0,0,1-.17.29l-.45,1.06a.47.47,0,0,1-.14.31L86,31.64l-.12.39-.27,1.31-.1.47-.12,1.62,0,.66.17,2.13.16,1a16.49,16.49,0,0,0,2,4.92,21.64,21.64,0,0,0,1.82,2.42l.72.69,1.72,1.45a1.53,1.53,0,0,1,.49.34l1.5,1a1.81,1.81,0,0,1,.5.27l1.33.74A.92.92,0,0,1,96.18,51.28Z" style="fill:#333"/>
+                </g>
+            </svg>
+        </div>
+
+        <!--Stroke options-->
+        <div class="lower-panel">
+            <div class="lower-panel-box">
+                <img class="strokeicon" src="style/assets/export/stroke-width.svg" alt="Stroke width icon">
+                <input name="strokewidth" type="number" min="0" max="50" step="0.5" value="1">
+            </div>
+            <div class="lower-panel-box">
+                <img class="strokeicon" src="style/assets/export/stroke-dash.svg" alt="Stroke dash icon">
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- Glass tiles -->
+    <div id="line-drawing1" class="posabs flexbox flex-col flex-vc">
+        <div class="hang-line hl-short"></div>
+
+        <svg class="glass-tile" id="btn-straight-line"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 75 75"><rect width="75" height="75" rx="12" ry="12" style="fill:#f4f0eb;opacity:0.9"/><path d="M25.08,5.51c-.08-4,37.88-2.45,42.85,0C72,7.51,71,12,69,12c-3,0-2.89-3-5-3.74C59.41,6.58,46.22,7.14,41.1,7.2,37.08,7.25,25.13,8.07,25.08,5.51Z" style="fill:#fff"/><path d="M69.41,49c4.05,0,2.59,17.71,0,20.73-2,2.32-13.41,4-13.41.72,0-3,9.11-2.51,9.89-3.53,1.7-2.22,1.85-7.7,1.79-10.17C67.64,54.8,66.8,49,69.41,49Z" style="fill:#fff"/><path d="M20,6c0,1.38-1.46,2-4.5,2S10,6.88,10,5.5,14,3,17,3,20,4.62,20,6Z" style="fill:#fff"/><line x1="16.5" y1="58.5" x2="58.5" y2="16.5" style="fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:4.71872111220391px"/></svg>
+
+        <div class="hang-line hl-short"></div>
+
+        <svg class="glass-tile" id="btn-curve"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 75 75"><rect width="75" height="75" rx="12" ry="12" style="fill:#f4f0eb;opacity:0.9"/><path d="M25.08,5.51c-.08-4,37.88-2.45,42.85,0C72,7.51,71,12,69,12c-3,0-2.89-3-5-3.74C59.41,6.58,46.22,7.14,41.1,7.2,37.08,7.25,25.13,8.07,25.08,5.51Z" style="fill:#fff"/><path d="M69.41,49c4.05,0,2.59,17.71,0,20.73-2,2.32-13.41,4-13.41.72,0-3,9.11-2.51,9.89-3.53,1.7-2.22,1.85-7.7,1.79-10.17C67.64,54.8,66.8,49,69.41,49Z" style="fill:#fff"/><path d="M20,6c0,1.38-1.46,2-4.5,2S10,6.88,10,5.5,14,3,17,3,20,4.62,20,6Z" style="fill:#fff"/><path d="M16,63.5c0-24.32,19.23-44,43-44" style="fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:4.71872111220391px"/></svg>
+    </div>
+
+    <div id="line-drawing2" class="posabs flexbox flex-col flex-vc">
+        <div class="hang-line hl-long"></div>
+
+        <svg class="glass-tile" id="btn-text" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 75 75"><rect width="75" height="75" rx="12" ry="12" style="fill:#f4f0eb;opacity:0.9"/><path d="M25.08,5.51c-.08-4,37.88-2.45,42.85,0C72,7.51,71,12,69,12c-3,0-2.89-3-5-3.74C59.41,6.58,46.22,7.14,41.1,7.2,37.08,7.25,25.13,8.07,25.08,5.51Z" style="fill:#fff"/><path d="M69.41,49c4.05,0,2.59,17.71,0,20.73-2,2.32-13.41,4-13.41.72,0-3,9.11-2.51,9.89-3.53,1.7-2.22,1.85-7.7,1.79-10.17C67.64,54.8,66.8,49,69.41,49Z" style="fill:#fff"/><path d="M51.4,19.16V29.55h-.83a18.73,18.73,0,0,0-1.64-5.17,6.81,6.81,0,0,0-2.47-2.51,6.58,6.58,0,0,0-3.07-.51H41.05V51a14.74,14.74,0,0,0,.27,3.68,2.74,2.74,0,0,0,1,1.29,3.57,3.57,0,0,0,2.11.55h1v1H29.12v-1h1a3.69,3.69,0,0,0,2.19-.59,2.63,2.63,0,0,0,.95-1.36A14.23,14.23,0,0,0,33.55,51V21.37H31.29q-3.16,0-4.59,1.64a12,12,0,0,0-2.54,6.54h-.88V19.16Z" style="fill:#000"/><path d="M20,6c0,1.38-1.46,2-4.5,2S10,6.88,10,5.5,14,3,17,3,20,4.62,20,6Z" style="fill:#fff"/>></svg>
+
+        <div class="hang-line hl-short"></div>
+
+        <svg class="glass-tile" id="btn-emoji" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 75 75"><rect width="75" height="75" rx="12" ry="12" style="fill:#f4f0eb;opacity:0.9"/><path d="M25.08,5.51c-.08-4,37.88-2.45,42.85,0C72,7.51,71,12,69,12c-3,0-2.89-3-5-3.74C59.41,6.58,46.22,7.14,41.1,7.2,37.08,7.25,25.13,8.07,25.08,5.51Z" style="fill:#fff"/><path d="M69.41,49c4.05,0,2.59,17.71,0,20.73-2,2.32-13.41,4-13.41.72,0-3,9.11-2.51,9.89-3.53,1.7-2.22,1.85-7.7,1.79-10.17C67.64,54.8,66.8,49,69.41,49Z" style="fill:#fff"/><path d="M20,6c0,1.38-1.46,2-4.5,2S10,6.88,10,5.5,14,3,17,3,20,4.62,20,6Z" style="fill:#fff"/><circle cx="37.5" cy="39.5" r="23" style="fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:4px"/><path d="M49,47.37c0,4.49-4.92,8.13-11,8.13s-11-3.64-11-8.13S49,42.88,49,47.37Z"/><rect x="42.33" y="28" width="5.67" height="9.43" rx="2.72" ry="2.72"/><rect x="27.33" y="28" width="5.67" height="9.43" rx="2.72" ry="2.72"/></svg>
+    </div>
+
+    <div id="shape-drawing1" class="posabs flexbox flex-col flex-vc">
+        <div class="hang-line hl-short" ></div>
+
+        <svg class="lg-glass-tile" id="btn-rectangle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 56"><rect width="90" height="56" style="fill:#f4f0eb;opacity:0.9"/><path d="M26,5c-.08-4,57.08-3.92,61,0,1,1,1,10-2,10s-1.89-6.23-4-7c-4.59-1.68-18.78-.86-23.9-.8C53.08,7.25,26.05,7.57,26,5Z" style="fill:#fff"/><path d="M84.41,30c4.05,0,2.59,17.71,0,20.73-2,2.32-13.41,4-13.41.72,0-3,9.11-2.51,9.89-3.53,1.7-2.22,1.85-7.7,1.79-10.17C82.64,35.8,81.8,30,84.41,30Z" style="fill:#fff"/><path d="M17,6c0,1.38-1.46,2-4.5,2S7,6.88,7,5.5,11,3,14,3,17,4.62,17,6Z" style="fill:#fff"/></svg>
+
+        <div class="hang-line hl-Vshort"></div>
+
+        <svg class="lg-glass-tile" id="btn-ellipse"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 98.5 56.76"><ellipse cx="49.25" cy="28.38" rx="49.25" ry="28.38" style="fill:#f4f0eb;opacity:0.9"/><path d="M24.53,8.69c-2-3,11.59-6.26,25-6,14.23.28,29.63,6.42,32,8,15,10,14,18,11,18s-4-9.26-14-16c-4.05-2.73-23-6-32-6S26.53,11.69,24.53,8.69Z" style="fill:#fff"/><path d="M88.74,38.27c1.41,2-3.21,8.42-16.21,13.42-10.14,3.9-26,4-21,0,1.13-.9,16.63-2.18,21-4C84.53,42.69,87.13,36,88.74,38.27Z" style="fill:#fff"/><path d="M22.45,11.15c.42,1.32-.79,2.35-3.68,3.27s-5.58.6-6-.71,3-3.58,5.91-4.5S22,9.84,22.45,11.15Z" style="fill:#fff"/></svg>
+        
+        <div class="hang-line hl-Vshort"></div>
+        
+        <svg class="lg-glass-tile" id="btn-triangle"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 81.13 70.26"><polygon points="40.56 0 0 70.26 81.13 70.26 40.56 0" style="fill:#f4f0eb;opacity:0.9"/><path d="M37.74,12.43c-1.52-.15-9.16,13.4-8.89,14.55s3.32-.52,3.76-1a23.42,23.42,0,0,0,5.81-9.38C38.78,15.37,39.25,12.57,37.74,12.43Z" style="fill:#fff"/><path d="M76.11,65.58C76.9,64.41,44.87,8.93,41.85,8s0,6,1,10c.81,3.25,25,40,25,43,0,5-12,1-16,5C48.85,69,73.85,69,76.11,65.58Z" style="fill:#fff"/></svg>
+    </div>
+    
+    <div id="shape-drawing2" class="posabs flexbox flex-col flex-vc">
+        <div class="hang-line hl-long"></div>
+
+        <svg class="lg-glass-tile" id="btn-polygon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77.25 81.13"><polygon points="77.25 22.75 33.17 0 0 41.94 22.63 81.14 69.43 75.35 60.19 48.34 77.25 22.75" style="fill:#f4f0eb;opacity:0.9"/><path d="M30.45,9C28.23,9,19.06,21,19.61,22.15s4.45-1.57,5-2.15,4.64-5,6-7C31.36,11.93,32.67,9,30.45,9Z" style="fill:#fff"/><path d="M35.62,4c1-1,35,17,36,20s-11,21-13,21-2-4,0-6,8-10,7-13-24-13-27-16S34.62,5,35.62,4Z" style="fill:#fff"/><path d="M59.62,59c2.17-.54,7.47,9.7,5,13-3,4-21.24,5.24-19,3,4-4,14-3,15-6S55.62,60,59.62,59Z" style="fill:#fff"/></svg>
+
+        <div class="hang-line hl-Vshort"></div>
+
+        <svg class="lg-glass-tile" id="btn-roundedRect"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 49"><rect width="90" height="49" rx="10.63" ry="10.63" style="fill:#f4f0eb;opacity:0.9"/><path d="M27,5c-.08-4,53-1.94,57.93.51C89,7.51,88,12,86,12c-3,0-2.89-3-5-3.74C76.41,6.58,63.22,7.14,58.1,7.2,54.08,7.25,27.05,7.57,27,5Z" style="fill:#fff"/><path d="M86.41,23c4.05,0,2.59,17.71,0,20.73-2,2.32-13.41,4-13.41.72,0-3,9.11-2.51,9.89-3.53,1.7-2.22,1.85-7.7,1.79-10.17C84.64,28.8,83.8,23,86.41,23Z" style="fill:#fff"/><path d="M20,6c0,1.38-1.46,2-4.5,2S10,6.88,10,5.5,14,3,17,3,20,4.62,20,6Z" style="fill:#fff"/></svg>
+    </div>
+
+    <!-- Palette -->
+    <div id="palette">
+        <img src="style/assets/export/palette.png" alt="Palette">
+        <svg class="posabs" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 251.46 139.46">
+            <path id="colorstroke" class="color" value="rgb(255, 255, 255)" data-colormode="rgb" readonly="true"d="M146.29,33.75C142.6,44.07,136.65,56.17,126.81,62c-7.19,4.23-17.59,3.77-25.42,3.77-8.89,0-9.93-8.55-14.21-13.92C82.54,46,75.11,43,78.05,33.75c2-6.32,11.13-10.73,16-15.8C103.26,8.46,110.89.5,123.38.5,132,.5,132.49,9,136.8,14,142,20.06,149.86,23.77,146.29,33.75Z" style="fill:red;stroke:#888;stroke-miterlimit:10"/>
+            <path id="colorfill" class="color" value="rgb(255, 255, 255)" data-colormode="rgb" readonly="true"d="M32.46,82.21c10.95-3.06,24.09-5.3,30.68-.28C68,85.61,67.78,94.87,68,101.57c.26,7.54-8.8,13.29-14.29,19.85-5.87,7-8.57,14.61-18.1,17.18-6.4,1.73-11.22-3.2-16.46-4.42C9.41,131.9,1.3,130.06.53,120.12c-.54-6.94,7.67-12,12.36-18.36C18.69,93.88,22,85.13,32.46,82.21Z" style="fill:#fcee21;stroke:#888;stroke-miterlimit:10"/>
+            <path id="colorbackground" class="color" value="rgb(255, 255, 255)" data-colormode="rgb" readonly="true" d="M215.75,21c11.72-3.3,25.62-5.71,31.87-.3,4.57,4,3.29,13.93,2.74,21.14-.61,8.11-10.69,14.3-17.14,21.34-6.9,7.53-10.6,15.69-20.76,18.45-6.84,1.86-11.25-3.44-16.54-4.75-9.85-2.44-18.05-4.42-17.7-15.1.25-7.46,9.34-12.91,14.95-19.75C200.1,33.52,204.59,24.09,215.75,21Z" style="fill:blue;stroke:#888;stroke-miterlimit:10"/>
+            <path d="M120.87,13.2c3.24.64,10.2,10.43,12.28,6.9,2.39-4-5-10-10.52-12.18-3-1.2-17,2.8-14.55,6.14C110.93,18,116,12.24,120.87,13.2Z" style="fill:#fff"/>
+            <path d="M232.74,28.11c6.46-.19,10.74,5.8,12.45,2.38,3.06-6.12-6-6.85-11.61-6.62-2.84.12-13.88,2.17-11.45,4.87C225,31.92,228.45,28.24,232.74,28.11Z" style="fill:#fff"/>
+            <path d="M49.74,89.11c6.46-.19,10.74,5.8,12.45,2.38,3.06-6.12-6-6.85-11.61-6.62C47.74,85,36.69,87,39.12,89.74,42,92.92,45.45,89.24,49.74,89.11Z" style="fill:#fff"/></svg>
+    </div>
+    
+    <!-- Pen holder -->
+    <div class="pen-holder-group">
+        <div class="pen-holder">
+            <img id="holder-back" src="style/assets/export/holder-back.png" alt="Pen holder back">
+            <img id="holder-front" src="style/assets/export/holder-front.png" alt="Pen holder front">
+        </div>
+        <img id="btn-brush4" src="style/assets/export/brush4.png" alt="Brush4">
+        <img id="btn-brush3" src="style/assets/export/brush3.png" alt="Brush3">
+        <img id="btn-pencil" src="style/assets/export/pencil.png" alt="Pencil">
+        <img id="btn-getcolor" src="style/assets/export/dropper.png" alt="Dropper">
+        <img id="btn-eraser" src="style/assets/export/eraser.png" alt="Eraser">
+    </div>
+
+
+    <div class="option-group">
+        
+        <div class="colorstroke">
+            Stroke color:
+            <input class="color" value="rgb(0, 0, 0)" data-colormode="rgb" readonly="">
+        </div>
+        <div class="colorfill">
+            Fill color:
+            <input class="color" value="rgb(255, 255, 255)" data-colormode="rgb" readonly="">
+        </div>
+        <div class="colorbackground">
+            Background color:
+            <input class="color" value="rgb(255, 255, 255)" data-colormode="rgb" readonly="">
+        </div>
+    </div>
+
+    <script src="js/canvas-commonGUI.js"></script>
+    <script src="js/draw-straight-line.js"></script>
+    <script src="js/draw-curve.js"></script>
+    <script src="js/draw-ellipse.js"></script>
+    <script src="js/draw-triangle.js"></script>
+    <script src="js/draw-polygon.js"></script>
+    <script src="js/draw-text.js"></script>
+    <script src="js/draw-rectangle.js"></script>
+    <script src="js/draw-roundedRect.js"></script>
+    <script src="js/undo-redo.js"></script>
+    <script src="js/get-color.js"></script>
+    <script src="js/draw-pencil.js"></script>
+    <script src="js/resize.js"></script>
+    <script src="js/import-export.js"></script>
+    
+    <script src="js/colorpicker/colors.js"></script>
+    <script src="js/colorpicker/colorPicker.js"></script>
+    <script src="js/colorpicker/colorPicker.data.js"></script>
+    <script src="js/colorpicker/jsColorPicker.min.js"></script>
+
+    <script>
+        $(function () {
+
+            // Color picker
+            let colors = jsColorPicker('.color', {
+                customBG: '#222',
+                readOnly: true,
+                // patch: false,
+                init: function (elm, colors) { // colors is a different instance (not connected to colorPicker)
+                    elm.style.backgroundColor = elm.value;
+                    elm.style.color = colors.rgbaMixCustom.luminance > 0.22 ? '#222' : '#ddd';
+                },
+                // appendTo: document.querySelector('.samples')
+            });
+
+
+            //Stroke width selection
+            let strokeWidth = 1;
+            $('.lower-panel-box input').change(function () {
+                strokeWidth = $(this).val();
+                currentFunction.changeStrokeWidth(strokeWidth);
+            })
+
+            // Stroke dash
+            let strokeDash = [];
+            $('.switch input').change(function () {
+                if ($('.switch input').prop('checked')) {
+                    strokeDash = [15,15];
+                } else {
+                    strokeDash = [];
+                }
+                currentFunction.changeStrokeDash(strokeDash);
+            })
+
+            // After option selection
+            let colorStroke = "rgb(0, 0, 0)"
+            let colorFill = "rgb(255, 255, 255)";
+            $(document).click(function(){
+                // Stroke
+                colorStroke = $('.colorstroke input').val();
+                currentFunction.changeStrokeColor(colorStroke);
+                // Fill
+                colorfill = $('.colorfill input').val();
+                currentFunction.changeFillColor(colorfill);
+                // Background
+                $('#canvas-real').css({
+                    'background': $('.colorbackground input').val()
+                })
+            })
+
+            // Import export
+            $('#btn-export').mouseover(function(){
+                $('#import').css({
+                    'transform': 'rotate(-10deg) translateY(10px)'
+                })
+            })
+            $('#btn-export').mouseleave(function(){
+                $('#import').css({
+                    'transform': 'rotate(0deg) translateY(0px)'
+                })
+            })
+            $('.image-wrap').mouseover(function(){
+                $('#export').css({
+                    'transform': 'rotate(-10deg) translateY(10px)'
+                })
+            })
+            $('.image-wrap').mouseleave(function(){
+                $('#export').css({
+                    'transform': 'rotate(0deg) translateY(0px)'
+                })
+            })
+
+            // Change field to either stroke or fill for get color function
+            $('.colorstroke input').click(function(){
+                currentFunction.changeField('stroke');
+            });
+            $('.colorfill input').click(function(){
+                currentFunction.changeField('fill');
+            });
+            $('.colorbackground input').click(function(){
+                currentFunction.changeField('background');
+            });
+            
+            // Default feature: should be pencil
+            currentFunction = new DrawPencil(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+
+            // Feature selection
+            $('#btn-straight-line').click(function () {
+                currentFunction = new DrawStraightLine(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+            $('#btn-ellipse').click(function () {
+                currentFunction = new DrawEllipse(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+            $('#btn-curve').click(function () {
+                currentFunction = new DrawCurve(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+            $('#btn-polygon').click(function () {
+                currentFunction = new DrawPolygon(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+            $('#btn-text').click(function () {
+                currentFunction = new DrawText(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+            $('#btn-triangle').click(function () {
+                currentFunction = new DrawTriangle(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+            $('#btn-rectangle').click(function () {
+                currentFunction = new DrawRectangle(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+            $('#btn-roundedRect').click(function () {
+                currentFunction = new DrawRoundedRect(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+            $('#btn-getcolor').click(function () {
+                currentFunction = new GetColor(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+            $('#btn-pencil').click(function () {
+                currentFunction = new DrawPencil(contextReal, contextDraft, colorStroke, colorFill, strokeWidth, strokeDash);
+            })
+           
+
+        })
+
+    </script>
+
+</body>
+
+</html>

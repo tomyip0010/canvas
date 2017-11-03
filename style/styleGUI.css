@@ -52,9 +52,14 @@ table {
  /* ==== Common style ==== */
 /* ====================== */
 
+html {
+	overflow: hidden;
+}
+
 body {
+	height: 675px;
 	width: 100%;
-	height: 100vh;
+	font-family: Arial, sans-serif
 }
 
 .full-wh {
@@ -64,6 +69,10 @@ body {
 
 .flexbox {
 	display: flex;
+}
+
+.flex-sb {
+	justify-content: space-between;
 }
 
 .flex-vc {
@@ -78,9 +87,14 @@ body {
 	flex-direction: column;
 }
 
+.flex-end {
+	justify-content: flex-end;
+}
+
 .bg {
 	background-image: url('assets/background_gausian8.jpg');
 	background-position: center bottom;
+	background-size: 120%;
 	z-index: -10;
 }
 
@@ -89,12 +103,22 @@ body {
 	top: 0;
 }
 
+.posrel {
+	position: relative;
+}
+
 .m-auto {
 	margin: auto;
 }
 
 .fit-content {
+	width: -webkit-fit-content;
+	width: -moz-fit-content;
+	width: -ms-fit-content;
 	width: fit-content;
+	height: -webkit-fit-content;
+	height: -moz-fit-content;
+	height: -ms-fit-content;
 	height: fit-content;
 }
 
@@ -103,8 +127,7 @@ body {
 /* ====================== */
 
 .drawing-board {
-	height: 100%;
-	margin-top: 15px;
+	width: 550px;
 }
 
   /* ====================== */
@@ -112,19 +135,26 @@ body {
 /* ====================== */
 
 .canvas-container {
-    position: relative;
+	position: relative;
 	cursor: crosshair;
 	margin: 0 auto;
-	margin-top: 105px;
-	width: fit-content;
-	height: fit-content;
+	width: 594px;
+	height: 420px;
 	background: white;
+	/* for mobile version */
+	-webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+	touch-action: none;
+	-ms-touch-action:none;
+	-webkit-touch-action:none;
 }
 
-#canvas-draft,
-#canvas-guide {
-    position: absolute;
-    top: 0;
+.canvas-container-out {
+	width: 594px;
 }
 
   /* ====================== */
@@ -133,7 +163,7 @@ body {
 
 .glass-tile {
 	width: 50px;
-	opacity: 0.7;
+	opacity: 0.8;
 	cursor: pointer;
 }
 
@@ -141,6 +171,11 @@ body {
 	width: 65px;
 	opacity: 0.7;
 	cursor: pointer;
+}
+
+.lg-glass-tile:hover,
+.glass-tile:hover {
+	opacity: 1;
 }
 
 .hang-line {
@@ -177,11 +212,341 @@ body {
 	right: 4%;
 }
 
+#emojibox {
+	display: none;
+}
+
+  /* ====================== */
+ /* ==== Import Export === */
+/* ====================== */
+
+.import-export {
+	position: absolute;
+	top: 525px;
+	left: 7%;
+	width: fit-content;
+	margin: 0;
+}
+
+.import-export svg{
+	width: 80px;
+	overflow: visible;
+}
+
+#import,
+#export {
+	cursor: pointer;
+}
+
+.image-wrap {
+	position: absolute;
+	width: 36px;
+	height: 36px;
+	overflow: hidden;
+	right: 2px;
+	top: 5px;
+	cursor: pointer;
+	opacity: 0;
+}
+
+#image {
+	cursor: pointer;
+}
+
+#btn-export {
+	position: absolute;
+	width: 36px;
+	height: 36px;
+	overflow: hidden;
+	left: 2px;
+	top: 5px;
+	cursor: pointer;
+	opacity: 0;
+}
+
+
+  /* ====================== */
+ /* ===== Move Scale ===== */
+/* ====================== */
+
+.move-scale {
+	position: absolute;
+	top: 525px;
+	left: 43%;
+	width: fit-content;
+	margin: 0;
+}
+
+.move-scale svg{
+	width: 80px;
+	overflow: visible;
+}
+
+#btn-translate,
+#btn-scale {
+	cursor: pointer;
+}
+
+#btn-translate:hover,
+#btn-scale:hover {
+	transform: rotate(10deg) translateY(-10px);
+}
 
   /* ====================== */
  /* ====== Undo Redo ===== */
 /* ====================== */
 
 .undo-redo {
+	position: absolute;
+	top: 525px;
+	left: 80%;
+	width: fit-content;
+	margin: 0;
+}
 
+.undo-redo svg{
+	width: 80px;
+	overflow: visible;
+}
+
+#undo,
+#redo {
+	cursor: pointer;
+}
+
+#undo:hover,
+#redo:hover {
+	transform: rotate(10deg) translateY(-10px);
+}
+
+
+
+  /* ====================== */
+ /* ======= Notepad ====== */
+/* ====================== */
+
+.notepad {
+	position: absolute;
+	right: 4%;
+	bottom: 0;
+}
+
+.font-options {
+	position: absolute;
+	left: 20%;
+	top: 20%;
+	color: #333;
+}
+
+.font-options h3 {
+	font-weight: 700;
+	font-size: 45px;
+	margin-bottom: 10px;
+}
+
+.make-inlineb * {
+	display: inline-block;
+	margin-bottom: 15px;
+}
+
+.font-options h5 {
+	font-weight: 700;
+	font-size: 15px;
+}
+
+
+  /* ====================== */
+ /* ===== Pen holder ===== */
+/* ====================== */
+
+.pen-holder-group {
+	position: absolute;
+	left: 4%;
+	bottom: -30px;
+}
+
+.pen-holder {
+	position: absolute;
+	bottom: 150px;
+}
+
+#holder-front {
+	position: absolute;
+	top: 25px;
+	left: 0;
+	z-index: 10;
+}
+
+#btn-brush,
+#btn-blur-brush,
+#btn-pencil,
+#btn-getcolor,
+#btn-eraser {
+	position: absolute;
+	z-index: 5;
+	cursor: pointer;
+}
+
+#btn-brush {
+	left: 130px;
+	bottom: 0;
+	transform: rotate(25deg);
+}
+
+#btn-blur-brush {
+	left: 80px;
+	bottom: 0;
+}
+
+#btn-pencil {
+	left: 110px;
+	bottom: 0;
+}
+
+#btn-getcolor {
+	left: 25px;
+	bottom: 0;
+	transform: rotate(-10deg);
+}
+
+#btn-eraser {
+	left: 60px;
+	bottom: 80px;
+	transform: rotate(-30deg);
+}
+
+#btn-brush:hover {
+	transform: rotate(25deg) translateY(-20px) translateX(-10px);
+}
+
+#btn-pencil:hover,
+#btn-blur-brush:hover {
+	transform: translateY(-20px);
+}
+
+#btn-eraser:hover {
+	transform: rotate(-30deg) translateY(-20px) translateX(10px);
+}
+
+#btn-getcolor:hover {
+	transform: rotate(-10deg) translateY(-20px) translateX(5px);
+}
+
+
+  /* ====================== */
+ /* ===== Lower Panel ==== */
+/* ====================== */
+
+.lower-panel {
+	position: absolute;
+	top: 590px;
+	box-shadow: 0 0 10px #555;
+	border-radius: 5px;
+}
+
+.lower-panel * {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.lower-panel-box {
+	padding: 6px 10px;
+	width: fit-content;
+	border-right: 1px solid #666;
+}
+
+.lower-panel-box:last-child {
+	border-right: none;
+}
+
+.strokeicon {
+	width: 25px;
+	vertical-align: middle;
+	margin-right: 5px;
+}
+
+.paintericon {
+	width: 26px;
+	vertical-align: middle;
+	margin-right: 5px;
+}
+
+.stroke-option input {
+	width: 45px;
+	height: 22px;
+	padding-left: 10px;
+	background: rgba(255, 255, 255, 0.5);
+	border: none;
+	border-radius: 5px;
+	box-shadow: inset 0 0 10px #555;
+}
+
+.colorstroke input,
+.colorfill input {
+	width: 30px;
+	height: 22px;
+	border: none;
+	border-radius: 5px;
+	box-shadow: inset 0 0 10px #555;
+	color: rgba(0,0,0,0) !important;
+}
+
+.color {
+	cursor: pointer;
+}
+
+.cp-app {
+	top: 415px !important;
+}
+
+.switch {
+	position: relative;
+	display: inline-block;
+	width: 44px;
+	height: 24px;
+  }
+  
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	-webkit-transition: .4s;
+	transition: .4s;
+	box-shadow: inset 0 0 10px #555;
+	border-radius: 5px;
+}
+
+.slider:before {
+	position: absolute;
+	content: "";
+	height: 18px;
+	width: 18px;
+	left: 4px;
+	bottom: 3px;
+	border-radius: 5px;
+	background-color: white;
+	-webkit-transition: .4s;
+	transition: .4s;
+	box-shadow: 0 0 10px #555;
+}
+
+input:checked + .slider {
+	background-color: yellowgreen;
+}
+
+input:focus + .slider {
+	box-shadow: 0 0 1px yellowgreen;
+}
+
+input:checked + .slider:before {
+	-webkit-transform: translateX(18px);
+	-ms-transform: translateX(18px);
+	transform: translateX(18px);
 }

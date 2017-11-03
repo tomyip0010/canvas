@@ -46,10 +46,15 @@ class DrawText extends PaintFunction{
         input.className = "text";
         input.style.position = 'fixed';
         input.style.left = x + 'px';
-        input.style.top = y+ 'px';
+        input.style.top = y - 10 + 'px';
         input.rows = "2";
         input.cols = "10";
-        $(input).css('font-size', Number($('select[name="font-size"]').val()));
+        $(input).css({
+            'font-family': $('select[name="font-family"]').val(),
+            'font-size': Number($('select[name="font-size"]').val()),
+            'font-style': $('select[name="font-style"]').val(),
+            'color': this.colorStroke
+        });
        
         document.body.appendChild(input);
 
@@ -74,7 +79,7 @@ class DrawText extends PaintFunction{
         this.contextReal.textAlign = 'left';
         this.contextReal.font = this.font_style + " " + this.font_size+"px "+this.font_family;
         this.contextReal.fillStyle = this.colorStroke;
-        this.contextReal.fillText(txt, x - 4, y - 4);
+        this.contextReal.fillText(txt, x - ml + 3, y - mt + 3);
         //Add the following code when you draw on canvas real for undo
         saveCanvas();
     }
