@@ -62,6 +62,9 @@ function desktopMode(){
 }
 
 function mobileMode(){
+    //detect broswer view mode
+    window.onorientationchange=updateOrientation();
+
     mobile = true;
     var hammertime = new Hammer(canvasDraft);
     hammertime.on('drag swipe tap press pan panup pandown', function(ev) {
@@ -100,6 +103,30 @@ function mobileMode(){
     });
 }
 
+function updateOrientation() {
+    var orientation = window.screen.orientation.angle;
+    switch(orientation)
+    {
+        case 0:
+            $('#toBeRotate').css({
+                '-webkit-transform' : 'rotate(' + -90 + 'deg)',
+                '-moz-transform'    : 'rotate(' + -90 + 'deg)',
+                '-ms-transform'     : 'rotate(' + -90 + 'deg)',
+                '-o-transform'      : 'rotate(' + -90 + 'deg)',
+                'transform'         : 'rotate(' + -90 + 'deg)',
+            });
+            break;  
+
+        case 90:
+            console.log(orientation);
+            break;
+
+        case -90:   
+            console.log(orientation);
+            break;
+    }
+}
+
 $(document).ready(function(){
     if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || $(window).width()<768) {
         mobileMode();
@@ -108,6 +135,8 @@ $(document).ready(function(){
         desktopMode();
     }
 });
+
+
 
 class PaintFunction{
     constructor(){}
