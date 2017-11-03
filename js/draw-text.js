@@ -89,7 +89,6 @@ $(document).ready(function() {
     $('option[value="18"]').attr('selected',true);
 
     $('select[name="font-size"]').change(function() {
-        console.log("OP");
         $(".text").last().css('font-size', Number($('select[name="font-size"]').val())+"px");
     })
 })

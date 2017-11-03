@@ -63,7 +63,7 @@ class Scale extends PaintFunction {
 
     onMouseMove(e, sub) {
         let coord = [e.pageX - sub.offsetLeft, e.pageY - sub.offsetTop];
-        if(this.contextDraft.isPointInStroke(coord[0],coord[1])) { 
+        if (this.contextDraft.isPointInStroke(coord[0], coord[1])) {
             document.body.style.cursor = "se-resize";
         } else {
             document.body.style.cursor = "default";
@@ -86,8 +86,7 @@ class Scale extends PaintFunction {
 
     drawBox(stx,sty,w,h,context) {
         this.contextDraft.clearRect(-this.contextDraft.canvas.width, -this.contextDraft.canvas.height, this.contextDraft.canvas.width*4, this.contextDraft.canvas.height*4);
-        this.contextDraft.lineWidth = 2;
-        this.contextDraft.setLineDash([15, 10]);   
+        this.contextDraft.lineWidth = 2; 
         context.beginPath();
         this.firstPt = [stx,sty];
         this.secondPt = [stx+w,sty];
