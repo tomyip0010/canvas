@@ -1,4 +1,4 @@
-;(function(window, undefined){
+; (function (window, undefined) {
 	"use strict"
 
 	var _data = window.ColorPicker, // will be deleted in buildView() and holds:
@@ -29,7 +29,7 @@
 		// 	alpha: {alpha: [0, 1]},
 		// 	HEX:   {HEX: [0, 16777215]}
 		// },
-		_bgTypes = {w: 'White', b: 'Black', c: 'Custom'},
+		_bgTypes = { w: 'White', b: 'Black', c: 'Custom' },
 
 		_mouseMoveAction, // current mouseMove handler assigned on mouseDown
 		_action = '', // needed for action callback; needed due to minification of javaScript
@@ -61,8 +61,8 @@
 		requestAnimationFrame = 'request' + animationFrame,
 		cancelAnimationFrame = 'cancel' + animationFrame,
 		vendors = ['ms', 'moz', 'webkit', 'o'],
-		
-		ColorPicker = function(options) { // as tiny as possible...
+
+		ColorPicker = function (options) { // as tiny as possible...
 			this.options = {
 				color: 'rgba(204, 82, 37, 0.8)',
 				mode: 'rgb-b',
@@ -104,7 +104,7 @@
 				// actionCallback: undefined,
 				// convertCallback: undefined,
 			};
-			initInstance(this, options || {});
+			initInstance(this, options || {});
 		};
 
 	window.ColorPicker = ColorPicker; // export differently
@@ -116,7 +116,7 @@
 
 	// ------------------------------------------------------ //
 
-	ColorPicker.prototype.setColor = function(newCol, type, alpha, forceRender) {
+	ColorPicker.prototype.setColor = function (newCol, type, alpha, forceRender) {
 		focusInstance(this);
 		_valueType = true; // right cursor...
 		// https://github.com/petkaantonov/bluebird/wiki/Optimization-killers
@@ -126,17 +126,17 @@
 		}
 	};
 
-	ColorPicker.prototype.saveAsBackground = function() {
+	ColorPicker.prototype.saveAsBackground = function () {
 		focusInstance(this);
 		return saveAsBackground(true);
 	};
 
-	ColorPicker.prototype.setCustomBackground = function(col) {
+	ColorPicker.prototype.setCustomBackground = function (col) {
 		focusInstance(this); // needed???
 		return _colorInstance.setCustomBackground(col);
 	};
 
-	ColorPicker.prototype.startRender = function(oneTime) {
+	ColorPicker.prototype.startRender = function (oneTime) {
 		focusInstance(this);
 		if (oneTime) {
 			_mouseMoveAction = false; // prevents window[requestAnimationFrame] in renderAll()
@@ -148,7 +148,7 @@
 		}
 	};
 
-	ColorPicker.prototype.stopRender = function() {
+	ColorPicker.prototype.stopRender = function () {
 		focusInstance(this); // check again
 		window[cancelAnimationFrame](_renderTimer);
 		if (_valueType) {
@@ -159,24 +159,24 @@
 		}
 	};
 
-	ColorPicker.prototype.setMode = function(mode) { // check again ... right cursor
+	ColorPicker.prototype.setMode = function (mode) { // check again ... right cursor
 		focusInstance(this);
 		setMode(mode);
 		initSliders();
 		renderAll();
 	};
 
-	ColorPicker.prototype.destroyAll = function() { // check this again...
+	ColorPicker.prototype.destroyAll = function () { // check this again...
 		var html = this.nodes.colorPicker,
-			destroyReferences = function(nodes) {
-			for (var n in nodes) {
-				if (nodes[n] && nodes[n].toString() === '[object Object]' || nodes[n] instanceof Array) {
-					destroyReferences(nodes[n]);
+			destroyReferences = function (nodes) {
+				for (var n in nodes) {
+					if (nodes[n] && nodes[n].toString() === '[object Object]' || nodes[n] instanceof Array) {
+						destroyReferences(nodes[n]);
+					}
+					nodes[n] = null;
+					delete nodes[n];
 				}
-				nodes[n] = null;
-				delete nodes[n];
-			}
-		};
+			};
 
 		this.stopRender();
 		installEventListeners(this, true);
@@ -185,20 +185,20 @@
 		html = null;
 	};
 
-	ColorPicker.prototype.renderMemory = function(memory) {
+	ColorPicker.prototype.renderMemory = function (memory) {
 		var memos = this.nodes.memos,
 			tmp = [];
 
 		if (typeof memory === 'string') { // revisit!!!
 			memory = memory.replace(/^'|'$/g, '').replace(/\s*/, '').split('\',\'');
 		}
-		for (var n = memos.length; n--; ) { // check again how to handle alpha...
+		for (var n = memos.length; n--;) { // check again how to handle alpha...
 			if (memory && typeof memory[n] === 'string') {
 				tmp = memory[n].replace('rgba(', '').replace(')', '').split(',');
-				memory[n] = {r: tmp[0], g: tmp[1], b: tmp[2], a: tmp[3]}
+				memory[n] = { r: tmp[0], g: tmp[1], b: tmp[2], a: tmp[3] }
 			}
 			memos[n].style.cssText = 'background-color: ' + (memory && memory[n] !== undefined ?
-				color2string(memory[n]) + ';' + getOpacityCSS(memory[n]['a'] || 1) : 'rgb(0,0,0);');
+				color2string(memory[n]) + ';' + getOpacityCSS(memory[n]['a'] ||  1) : 'rgb(0,0,0);');
 		}
 	};
 
@@ -248,7 +248,7 @@
 		};
 		for (var n in optionButtons) {
 			if (_options[n] !== undefined) {
-				buttonActions({target: optionButtons[n], data: _options[n]});
+				buttonActions({ target: optionButtons[n], data: _options[n] });
 			}
 		}
 		if (_options.noAlpha) {
@@ -258,7 +258,7 @@
 		THIS.renderMemory(_options.memoryColors);
 
 		installEventListeners(THIS);
-		
+
 		_mouseMoveAction = true;
 		stopChange(undefined, 'init');
 
@@ -287,7 +287,7 @@
 		_options.sizes = {};
 		_nodes.testNode.style.cssText = 'position:absolute;left:-1000px;top:-1000px;';
 		document.body.appendChild(_nodes.testNode);
-		for (var n = sizes.length; n--; ) {
+		for (var n = sizes.length; n--;) {
 			_nodes.testNode.className = _options.CSSPrefix + 'app ' + sizes[n];
 			_options.sizes[sizes[n]] = [_nodes.testNode.offsetWidth, _nodes.testNode.offsetHeight];
 		}
@@ -302,7 +302,7 @@
 		var app = document.createElement('div'),
 			prefix = _options.CSSPrefix,
 			urlData = 'data:image/png;base64,',
-			addStyleSheet = function(cssText, id) {
+			addStyleSheet = function (cssText, id) {
 				var style = document.createElement('style');
 
 				style.setAttribute('type', 'text/css');
@@ -314,10 +314,10 @@
 				}
 				document.getElementsByTagName('head')[0].appendChild(style);
 				if (style.styleSheet) { // IE compatible
-					document.styleSheets[document.styleSheets.length-1].cssText = cssText;
+					document.styleSheets[document.styleSheets.length - 1].cssText = cssText;
 				}
 			},
-			processCSS = function(doesBAS64){
+			processCSS = function (doesBAS64) {
 				// CSS - system
 				_data._cssFunc = _data._cssFunc.
 					replace(/§/g, prefix).
@@ -333,10 +333,10 @@
 						replace('_bgs.png', doesBAS64 ? urlData + _data._bgsPng : _options.imagePath + '_bgs.png').
 						replace('_icons.png', doesBAS64 ? urlData + _data._iconsPng : _options.imagePath + '_icons.png').
 						// replace('"Courier New",', !_isIE ? '' : '"Courier New",').
-						replace(/opacity:(\d*\.*(\d+))/g, function($1, $2){
+						replace(/opacity:(\d*\.*(\d+))/g, function ($1, $2) {
 							return !_doesOpacity ? '-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=' +
-							_math.round(+$2 * 100) + ')";filter: alpha(opacity=' + _math.round(+$2 * 100) + ')' :
-							'-moz-opacity: ' + $2 + '; -khtml-opacity: ' + $2 + '; opacity: ' + $2;
+								_math.round(+$2 * 100) + ')";filter: alpha(opacity=' + _math.round(+$2 * 100) + ')' :
+								'-moz-opacity: ' + $2 + '; -khtml-opacity: ' + $2 + '; opacity: ' + $2;
 						});
 					// style.appendChild(document.createTextNode(_data._cssFunc));
 					addStyleSheet(_data._cssMain);
@@ -354,7 +354,7 @@
 
 		// CSS
 		if (!document.getElementById('colorPickerCSS')) { // only once needed
-			test.onload = test.onerror = function(){
+			test.onload = test.onerror = function () {
 				if (_data._cssFunc) {
 					processCSS(this.width === 1 && this.height === 1);
 				}
@@ -377,7 +377,7 @@
 			_colorPicker ? _colorPicker.nodes.colorPicker.outerHTML ||
 				new XMLSerializer().serializeToString(_colorPicker.nodes.colorPicker) : // FF before F11
 				_data._html.replace(/§/g, prefix));
-			// _colorPicker ? _colorPicker.nodes.colorPicker.parentNode.innerHTML : _data._html.replace(/§/g, prefix));
+		// _colorPicker ? _colorPicker.nodes.colorPicker.parentNode.innerHTML : _data._html.replace(/§/g, prefix));
 		// _data._html = null;
 
 		app = app.children[0];
@@ -390,7 +390,7 @@
 
 	function getInstanceNodes(colorPicker, THIS) { // check nodes again... are they all needed?
 		var all = colorPicker.getElementsByTagName('*'),
-			nodes = {colorPicker: colorPicker}, // length ?? // rename nodes.colorPicker
+			nodes = { colorPicker: colorPicker }, // length ?? // rename nodes.colorPicker
 			node,
 			className,
 			memoCounter = 0,
@@ -440,7 +440,7 @@
 	function installEventListeners(THIS, off) {
 		var onOffEvent = off ? removeEvent : addEvent;
 
-		onOffEvent(_nodes.colorPicker, 'mousedown', function(e) {
+		onOffEvent(_nodes.colorPicker, 'mousedown', function (e) {
 			var event = e || window.event,
 				page = getPageXY(event),
 				target = (event.button || event.which) < 2 ?
@@ -471,7 +471,7 @@
 				(target.nextSibling.nodeType === 3 ? target.nextSibling.nextSibling : target.nextSibling).
 					appendChild(_nodes.nsarrow); // nextSibling for better text selection
 				_valueType = className.split('-disp')[0].split('-');
-				_valueType = {type: _valueType[0], z: _valueType[1] || ''};
+				_valueType = { type: _valueType[0], z: _valueType[1] || '' };
 				changeClass(_nodes.panel, 'start-change');
 				_delayState = 0;
 			} else if (target === _nodes.resize && !_options.noResize) {
@@ -486,7 +486,7 @@
 			}
 
 			if (_mouseMoveAction) {
-				_startCoords = {pageX: page.X, pageY: page.Y};
+				_startCoords = { pageX: page.X, pageY: page.Y };
 				_mainTarget.style.display = 'block'; // for resizer...
 				_targetOrigin = getOrigin(_mainTarget);
 				_targetOrigin.width = _nodes.opacity.offsetWidth; // ???????
@@ -508,14 +508,14 @@
 			}
 		});
 
-		onOffEvent(_nodes.colorPicker, 'click', function(e) {
+		onOffEvent(_nodes.colorPicker, 'click', function (e) {
 			focusInstance(THIS);
 			buttonActions(e);
 		});
 
 		onOffEvent(_nodes.colorPicker, 'dblclick', buttonActions);
 
-		onOffEvent(_nodes.colorPicker, 'keydown', function(e) {
+		onOffEvent(_nodes.colorPicker, 'keydown', function (e) {
 			focusInstance(THIS);
 			keyControl(e);
 		});
@@ -524,7 +524,7 @@
 		onOffEvent(_nodes.colorPicker, 'keypress', keyControl);
 		// onOffEvent(_nodes.colorPicker, 'keyup', keyControl);
 
-		onOffEvent(_nodes.colorPicker, 'paste', function(e) {
+		onOffEvent(_nodes.colorPicker, 'paste', function (e) {
 			e.target.firstChild.data = e.clipboardData.getData('Text');
 			return preventDefault(e);
 		});
@@ -547,7 +547,7 @@
 			window[cancelAnimationFrame](_renderTimer);
 			removeEvent(_isIE ? document.body : window, 'mousemove', _mouseMoveAction);
 			if (_delayState) { // hapens on inputs
-				_valueType = {type: 'alpha'};
+				_valueType = { type: 'alpha' };
 				renderAll();
 			}
 			// this is dirty... has to do with M|W|! button
@@ -569,7 +569,7 @@
 			_nodes.memo.className = _nodes.memo.className.replace(/\s+(?:dark|light)/, '') +
 				// (/dark/.test(_nodes.colorPicker.className) ? ' dark' : ' light');
 				(_colors['rgbaMix' + _bgTypes[_options.alphaBG]].luminance < 0.22 ? ' dark' : ' light');
-				// (_colors.rgbaMixCustom.luminance < 0.22 ? ' dark' : ' light')
+			// (_colors.rgbaMixCustom.luminance < 0.22 ? ' dark' : ' light')
 
 			_valueType = undefined;
 
@@ -590,7 +590,7 @@
 			mode = _options.mode;
 
 		_colors[mode.type][mode.x] = limitValue(x / 255, 0, 1);
-		_colors[mode.type][mode.y] = 1 - limitValue(y / 255,  0, 1);
+		_colors[mode.type][mode.y] = 1 - limitValue(y / 255, 0, 1);
 		convertColors();
 		return preventDefault(event);
 	}
@@ -601,7 +601,7 @@
 			z = (page.Y - _targetOrigin.top) * _options.scale,
 			mode = _options.mode;
 
-		_colors[mode.type][mode.z] = 1 - limitValue(z / 255,  0, 1);
+		_colors[mode.type][mode.z] = 1 - limitValue(z / 255, 0, 1);
 		convertColors();
 		return preventDefault(event);
 	}
@@ -662,7 +662,7 @@
 
 	function keyControl(e) { // this is quite big for what it does...
 		var event = e || window.event,
-			keyCode =  event.which || event.keyCode,
+			keyCode = event.which || event.keyCode,
 			key = String.fromCharCode(keyCode),
 			elm = document.activeElement,
 
@@ -672,8 +672,8 @@
 
 			isAlpha = type === 'alpha',
 			isHex = type === 'HEX',
-			arrowKey = {k40: -1, k38: 1, k34: -10, k33: 10}['k' + keyCode] / (isAlpha ? 100 : 1),
-			validKeys = {'HEX': /[0-9a-fA-F]/, 'Lab': /[\-0-9]/, 'alpha': /[\.0-9]/}[type] || /[0-9]/,
+			arrowKey = { k40: -1, k38: 1, k34: -10, k33: 10 }['k' + keyCode] / (isAlpha ? 100 : 1),
+			validKeys = { 'HEX': /[0-9a-fA-F]/, 'Lab': /[\-0-9]/, 'alpha': /[\.0-9]/ }[type] || /[0-9]/,
 			valueRange = _valueRanges[type][type] || _valueRanges[type][mode], // let op!
 
 			textNode = elm.firstChild, // chnge on TAB key
@@ -721,7 +721,7 @@
 		}
 
 		if (isHex && value !== undefined) {
-			value = /^0+/.test(value) ? value : parseInt(''+value, 16) || 0;
+			value = /^0+/.test(value) ? value : parseInt('' + value, 16) || 0;
 		}
 
 		if (value !== undefined && value !== '' && +value >= valueRange[0] && +value <= valueRange[1]) {
@@ -785,12 +785,12 @@
 				alphaBG = options.alphaBG;
 				changeClass(_nodes.colorPicker, 'alpha-bg-' + alphaBG, 'alpha-bg-' +
 					(alphaBG = options.alphaBG = e.data || (alphaBG === 'w' ? (customBG ? 'c' : 'b') :
-					alphaBG === 'c' ? 'b' : 'w')));
+						alphaBG === 'c' ? 'b' : 'w')));
 				target.firstChild.data = alphaBG.toUpperCase();
 				_nodes.ctrl.style.backgroundColor = _nodes.memo.style.backgroundColor =
 					alphaBG !== 'c' ? '' : 'rgb(' + _math.round(customBG.r * 255) + ', ' +
-					_math.round(customBG.g * 255) + ', ' +
-					_math.round(customBG.b * 255) + ')';
+						_math.round(customBG.g * 255) + ', ' +
+						_math.round(customBG.b * 255) + ')';
 				_nodes.raster.style.cssText = _nodes.raster_bg.previousSibling.style.cssText =
 					alphaBG !== 'c' ? '' : getOpacityCSS(customBG.luminance < 0.22 ? 0.5 : 0.4);
 				buttonAction = 'alphaBackground';
@@ -843,10 +843,10 @@
 			_colorPicker.setColor(target.style.backgroundColor, 'rgb', _colors.background.alpha);
 			buttonAction = 'setSavedColor';
 		} else if (parent === _nodes.memo) { // MEMORIES // revisit...
-			var resetBlink = function() {
-					if (_nodes.memos.blinker) _nodes.memos.blinker.style.cssText = _nodes.memos.cssText;
-				},
-				doBlink = function(elm) {
+			var resetBlink = function () {
+				if (_nodes.memos.blinker) _nodes.memos.blinker.style.cssText = _nodes.memos.cssText;
+			},
+				doBlink = function (elm) {
 					_nodes.memos.blinker = elm;
 					elm.style.cssText = 'background-color:' + (_colors.RGBLuminance > 0.22 ? '#333' : '#DDD');
 					window.setTimeout(resetBlink, 200);
@@ -857,14 +857,14 @@
 				_nodes.memos.blinker = undefined;
 				_nodes.testNode.style.cssText = _nodes.memo_store.style.cssText;
 				_nodes.memos.cssText = _nodes.testNode.style.cssText; // ...how browser sees css
-				for (var n = _nodes.memos.length - 1; n--; ) { // check if color already exists
+				for (var n = _nodes.memos.length - 1; n--;) { // check if color already exists
 					if (_nodes.memos.cssText === _nodes.memos[n].style.cssText) {
 						doBlink(_nodes.memos[n]); // sets _nodes.memos.blinker
 						break;
 					}
 				}
 				if (!_nodes.memos.blinker) { // right shift colors
-					for (var n = _nodes.memos.length - 1; n--; ) {
+					for (var n = _nodes.memos.length - 1; n--;) {
 						_nodes.memos[n + 1].style.cssText = _nodes.memos[n].style.cssText;
 					}
 					_nodes.memos[0].style.cssText = _nodes.memo_store.style.cssText;
@@ -884,7 +884,7 @@
 		// think this over again, does this need to be like this??
 		if (buttonAction) {
 			preRenderAll(_colors);
-			_mouseMoveAction = _mouseMoveAction || true; // !!!! search for: // this is dirty...
+			_mouseMoveAction = _mouseMoveAction ||  true; // !!!! search for: // this is dirty...
 			stopChange(e, buttonAction);
 		}
 	}
@@ -899,8 +899,8 @@
 			sizes = _options.sizes, // from getUISizes();
 			currentSize = isSize ? size :
 				y < sizes.XXS[1] + 25 ? 0 :
-				x < sizes.XS[0] + 25 ? 1 :
-				x < sizes.S[0] + 25 || y < sizes.S[1] + 25 ? 2 : 3,
+					x < sizes.XS[0] + 25 ? 1 :
+						x < sizes.S[0] + 25 || y < sizes.S[1] + 25 ? 2 : 3,
 			value = values[currentSize],
 			isXXS = false,
 			mode,
@@ -912,7 +912,7 @@
 
 			if (isXXS && (!/hs/.test(mode.type) || mode.z === 'h')) {
 				tmp = mode.type + '-' + mode.z;
-				_colorPicker.setMode(/hs/.test(mode.type) ? mode.type + '-s': 'hsv-s');
+				_colorPicker.setMode(/hs/.test(mode.type) ? mode.type + '-s' : 'hsv-s');
 				_options.mode.original = tmp;
 			} else if (mode.original) {
 				// setMode(mode) creates a new object so mode.original gets deleted automatically
@@ -932,7 +932,7 @@
 		}
 
 		_nodes.resizer.style.cssText = 'display: block;' +
-			'width: '  + (x > 10 ? x : 10) + 'px;' +
+			'width: ' + (x > 10 ? x : 10) + 'px;' +
 			'height: ' + (y > 10 ? y : 10) + 'px;';
 	}
 
@@ -942,20 +942,20 @@
 
 	function setMode(mode) {
 		var ModeMatrix = {
-			rgb_r : {x: 'b', y: 'g'},
-			rgb_g : {x: 'b', y: 'r'},
-			rgb_b : {x: 'r', y: 'g'},
+			rgb_r: { x: 'b', y: 'g' },
+			rgb_g: { x: 'b', y: 'r' },
+			rgb_b: { x: 'r', y: 'g' },
 
-			hsv_h : {x: 's', y: 'v'},
-			hsv_s : {x: 'h', y: 'v'},
-			hsv_v : {x: 'h', y: 's'},
+			hsv_h: { x: 's', y: 'v' },
+			hsv_s: { x: 'h', y: 'v' },
+			hsv_v: { x: 'h', y: 's' },
 
-			hsl_h : {x: 's', y: 'l'},
-			hsl_s : {x: 'h', y: 'l'},
-			hsl_l : {x: 'h', y: 's'}
+			hsl_h: { x: 's', y: 'l' },
+			hsl_s: { x: 'h', y: 'l' },
+			hsl_l: { x: 'h', y: 's' }
 		},
-		key = mode.replace('-', '_'),
-		regex = '\\b(?:rg|hs)\\w\\-\\w\\b'; // \\b\\w{3}\\-\\w\\b';
+			key = mode.replace('-', '_'),
+			regex = '\\b(?:rg|hs)\\w\\-\\w\\b'; // \\b\\w{3}\\-\\w\\b';
 
 		// changeClass(_nodes.colorPicker, '(?:.*?)$', mode);
 		// changeClass(_nodes.colorPicker, '\\b\\w{3}\\-\\w\\b', mode);
@@ -997,7 +997,7 @@
 		// _renderVars.isNoRGB = undefined;
 		_nodes.styles.curr.cssText = _nodes.styles.curl.cssText; // only coordinates
 		_nodes.curl.className = _options.CSSPrefix + 'curl' + (
-			_renderVars.noRGBZ ? ' ' + _options.CSSPrefix + 'curl-' +_renderVars.noRGBZ: '');
+			_renderVars.noRGBZ ? ' ' + _options.CSSPrefix + 'curl-' + _renderVars.noRGBZ : '');
 		_nodes.curr.className = _options.CSSPrefix + 'curr ' + _options.CSSPrefix + 'curr-' +
 			(_options.mode.z === 'h' ? _renderVars.HUEContrast : _renderVars.noRGBZ ?
 				_renderVars.noRGBZ : _renderVars.RGBLuminance);
@@ -1012,7 +1012,7 @@
 		_colorInstance.saveAsBackground();
 		_nodes.styles.col2.cssText = 'background-color: ' + color2string(_colors.background.RGB) + ';' +
 			getOpacityCSS(_colors.background.alpha);
-		
+
 		if (refresh) {
 			preRenderAll(_colors);
 			// renderAll();
@@ -1034,10 +1034,10 @@
 		renderVars.contrast = renderVars.luminanceDelta > renderVars.hueDelta ? 'contrast' : '';
 		renderVars.readabiltiy =
 			colors['rgbaMixBGMix' + bgType].WCAG2Ratio >= 7 ? 'green' :
-			colors['rgbaMixBGMix' + bgType].WCAG2Ratio >= 4.5 ? 'orange': '';
+				colors['rgbaMixBGMix' + bgType].WCAG2Ratio >= 4.5 ? 'orange' : '';
 		renderVars.noRGBZ = _options['no' + _options.mode.type.toUpperCase() + _options.mode.z] ?
-			(_options.mode.z === 'g' && colors.rgb.g < 0.59 || _options.mode.z === 'b' || _options.mode.z === 'r' ?
-			'dark' : 'light') : undefined;
+			(_options.mode.z === 'g' && colors.rgb.g < 0.59 || _options.mode.z === 'b' ||  _options.mode.z === 'r' ?
+				'dark' : 'light') : undefined;
 	}
 
 	function renderAll() { // maybe render alpha seperately...
@@ -1066,12 +1066,12 @@
 
 			a = 0,
 			b = 0,
-			x  = colors[mode.type][mode.x],
+			x = colors[mode.type][mode.x],
 			X = _Math.round(x * 255 / (scale === 4 ? 2 : scale)),
 			y_ = colors[mode.type][mode.y],
 			y = 1 - y_,
 			Y = _Math.round(y * 255 / scale),
-			z  = 1 - colors[mode.type][mode.z],
+			z = 1 - colors[mode.type][mode.z],
 			Z = _Math.round(z * 255 / scale),
 			coords = (1 === 1) ? [x, y_] : [0, 0], // (1 === 2) button label up
 
@@ -1080,7 +1080,7 @@
 			isHSL = mode.type === 'hsl',
 			isHSL_S = isHSL && mode.z === 's',
 			moveXY = _mouseMoveAction === changeXYValue,
-			moveZ  = _mouseMoveAction === changeZValue,
+			moveZ = _mouseMoveAction === changeZValue,
 			display, tmp, value, slider;
 
 		if (isRGB) {
@@ -1095,7 +1095,7 @@
 				isRGB ? _getOpacityCSS((coords[a] - coords[b]) / (1 - (coords[b]) || 0)) : _color2string(colors.hueRGB);
 		}
 		if (!isHue) {
-			if (!moveZ)  CSS.sldr_4.cssText = _getOpacityCSS(isRGB ? coords[b] : isHSL_S ? _Math.abs(1 - y * 2) : y);
+			if (!moveZ) CSS.sldr_4.cssText = _getOpacityCSS(isRGB ? coords[b] : isHSL_S ? _Math.abs(1 - y * 2) : y);
 			if (!moveXY) CSS.sldl_3.cssText = _getOpacityCSS(isHSL && mode.z === 'l' ? _Math.abs(1 - z * 2) : z);
 			if (isHSL) { // switch slider class name for black/white color half way through in HSL(S|L) mode(s)
 				slider = isHSL_S ? 'sldr_4' : 'sldl_3';
@@ -1160,7 +1160,7 @@
 		if (renderVars.noRGBZ) {
 			if (cashedVars.noRGBZ !== renderVars.noRGBZ) {
 				nodes.curl.className = prefix + 'curl ' + prefix + 'curl-' + renderVars.noRGBZ;
-					
+
 				if (!moveZ) {
 					nodes.curr.className = prefix + 'curr ' + prefix + 'curr-' + renderVars.noRGBZ;
 				}
@@ -1238,7 +1238,7 @@
 			t = (type || 'rgb').split(''),
 			n = t.length;
 
-		for ( ; n--; ) {
+		for (; n--;) {
 			out = ', ' + color[t[n]] + out;
 		}
 		return (type || 'rgb') + '(' + out.substr(2) + ')';
@@ -1269,23 +1269,23 @@
 	}
 
 	function changeClass(elm, cln, newCln) {
-		return  !elm ? false : elm.className = (newCln !== undefined ?
+		return !elm ? false : elm.className = (newCln !== undefined ?
 			elm.className.replace(new RegExp('\\s+?' + cln, 'g'), newCln ? ' ' + newCln : '') :
 			elm.className + ' ' + cln);
 	}
 
 	function getOrigin(elm) {
-		var box = (elm.getBoundingClientRect) ? elm.getBoundingClientRect() : {top: 0, left: 0},
+		var box = (elm.getBoundingClientRect) ? elm.getBoundingClientRect() : { top: 0, left: 0 },
 			doc = elm && elm.ownerDocument,
 			body = doc.body,
 			win = doc.defaultView || doc.parentWindow || window,
 			docElem = doc.documentElement || body.parentNode,
-			clientTop  = docElem.clientTop  || body.clientTop  || 0, // border on html or body or both
-			clientLeft =  docElem.clientLeft || body.clientLeft || 0;
+			clientTop = docElem.clientTop || body.clientTop || 0, // border on html or body or both
+			clientLeft = docElem.clientLeft || body.clientLeft || 0;
 
 		return {
 			left: box.left + (win.pageXOffset || docElem.scrollLeft) - clientLeft,
-			top:  box.top  + (win.pageYOffset || docElem.scrollTop)  - clientTop
+			top: box.top + (win.pageYOffset || docElem.scrollTop) - clientTop
 		};
 	}
 
@@ -1299,11 +1299,11 @@
 	}
 
 	function addEvent(obj, type, func) {
-		addEvent.cache = addEvent.cache || {
-			_get: function(obj, type, func, checkOnly) {
+		addEvent.cache = addEvent.cache ||  {
+			_get: function (obj, type, func, checkOnly) {
 				var cache = addEvent.cache[type] || [];
 
-				for (var n = cache.length; n--; ) {
+				for (var n = cache.length; n--;) {
 					if (obj === cache[n].obj && '' + func === '' + cache[n].func) {
 						func = cache[n].func;
 						if (!checkOnly) {
@@ -1314,9 +1314,9 @@
 					}
 				}
 			},
-			_set: function(obj, type, func) {
+			_set: function (obj, type, func) {
 				var cache = addEvent.cache[type] = addEvent.cache[type] || [];
-				
+
 				if (addEvent.cache._get(obj, type, func, true)) {
 					return true;
 				} else {
@@ -1376,7 +1376,7 @@
 		}
 		// set
 		if (pos == -1) pos = target['text']().length;
-		
+
 		if (window.getSelection) { // HTML5
 			target.focus();
 			window.getSelection().collapse(target.firstChild, pos);
@@ -1393,19 +1393,19 @@
 	// ------------- requestAnimationFrame shim ------------- //
 	// ---------- quite optimized for minification ---------- //
 
-	for(var n = vendors.length; n-- && !window[requestAnimationFrame]; ) {
+	for (var n = vendors.length; n-- && !window[requestAnimationFrame];) {
 		window[requestAnimationFrame] = window[vendors[n] + 'Request' + animationFrame];
-		window[cancelAnimationFrame]  = window[vendors[n] + 'Cancel'  + animationFrame] ||
+		window[cancelAnimationFrame] = window[vendors[n] + 'Cancel' + animationFrame] ||
 			window[vendors[n] + 'CancelRequest' + animationFrame];
 	}
 
-	window[requestAnimationFrame] = window[requestAnimationFrame] || function(callback) {
+	window[requestAnimationFrame] = window[requestAnimationFrame] || function (callback) {
 		// this is good enough... and better than setTimeout
-			return window.setTimeout(callback, 1000 / _options.fps);
+		return window.setTimeout(callback, 1000 / _options.fps);
 		// return _renderTimer ? _renderTimer : window.setInterval(callback, 1000 / _options.fps);
 	};
 
-	window[cancelAnimationFrame] = window[cancelAnimationFrame] || function(id) {
+	window[cancelAnimationFrame] = window[cancelAnimationFrame] || function (id) {
 		// console.log('OFF-', id + '-' + _renderTimer)
 		window.clearTimeout(id);
 		return _renderTimer = null;

@@ -82,8 +82,8 @@ function mobileMode(){
         let mouseY = ev.center.y - canvasReal.offsetTop  - mt;
         currentFunction.onMouseDown([mouseX,mouseY],ev);
         dragging = true;
-        console.log("ev:" + ev);
-        console.log(mouseX+":"+mouseY + ":"+ev.center.x + ","+ev.center.y);
+        // console.log("ev:" + ev);
+        // console.log(mouseX+":"+mouseY + ":"+ev.center.x + ","+ev.center.y);
     })
     hammertime.on('panmove',function(ev){
         let mouseX = ev.center.x - canvasReal.offsetLeft - ml;
